@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'UI/splash/splash_ui.dart';
 
 void main() {
