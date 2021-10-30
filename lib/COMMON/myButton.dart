@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:etkinlik_kafasi/extensions/size_extension.dart';
+import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
 
 class MyButton extends StatelessWidget {
-  final String text;
+  final String? text;
   final VoidCallback onPressed;
   final double fontSize;
   final Color butonColor;
@@ -11,14 +11,14 @@ class MyButton extends StatelessWidget {
   final double height;
 
    const MyButton(
-      {Key key,
+      {Key ?key,
         @required this.text,
         this.butonColor : const Color(0xfff7cb15),
-        @required this.onPressed,
-        this.textColor,
-        this.fontSize,
-        @required this.width,
-        @required this.height,
+        required this.onPressed,
+        required this.textColor,
+        required this.fontSize,
+        required this.width,
+        required this.height,
       })
       : assert(text != null ),
         super(key: key);
@@ -36,7 +36,7 @@ class MyButton extends StatelessWidget {
         onPressed: onPressed,
         elevation: 8.3,
         child: Text(
-          this.text,
+          this.text!,
           style: TextStyle(
               color: textColor ?? Colors.black,
               fontWeight: FontWeight.w600,

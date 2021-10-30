@@ -1,13 +1,13 @@
-import 'package:etkinlik_kafasi/extensions/color_data.dart';
-import 'package:etkinlik_kafasi/widgets/myButton.dart';
+import 'package:yardimfeneri/COMMON/myButton.dart';
+import 'package:yardimfeneri/EXTENSIONS/appcolors.dart';
+import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:etkinlik_kafasi/extensions/size_extension.dart';
 
 
 class CustomAlertDialog extends StatelessWidget {
   final Color bgColor;
-  final Color positiveButonColor = Renkler.onayButonColor;
-  final Color negativeButonColor = Renkler.reddetButonColor;
+  final Color positiveButonColor = Appcolors.onayButonColor;
+  final Color negativeButonColor = Appcolors.reddetButonColor;
   final String title;
   final String message;
   final String positiveBtnText;
@@ -16,19 +16,7 @@ class CustomAlertDialog extends StatelessWidget {
   final Function onNegativePressed;
   final double circularBorderRadius;
 
-  CustomAlertDialog({
-    this.title,
-    this.message,
-    this.circularBorderRadius = 15.0,
-    this.bgColor = Colors.white,
-//    this.positiveButonColor = const Color(0xfff7cb15),
-//    this.negativeButonColor = const Color(0xff91c4f2),
-    this.positiveBtnText,
-    this.negativeBtnText,
-    this.onPostivePressed,
-    this.onNegativePressed,
-  })  : assert(bgColor != null),
-        assert(circularBorderRadius != null);
+  CustomAlertDialog(this.bgColor, this.title, this.message, this.positiveBtnText, this.negativeBtnText, this.onPostivePressed, this.onNegativePressed, this.circularBorderRadius);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +52,7 @@ class CustomAlertDialog extends StatelessWidget {
                 Center(
                   child: MyButton(
                       text: positiveBtnText,
-                      onPressed: onPostivePressed,
+                      onPressed: onPostivePressed(),
                       butonColor: positiveButonColor,
                       textColor: Colors.black,
                       fontSize: 12.3.spByWidth,
@@ -84,7 +72,7 @@ class CustomAlertDialog extends StatelessWidget {
                       },
                       fontSize: 12.3.spByWidth,
                       width: 83.0.w,
-                      height: 29.0.h,)
+                      height: 29.0.h, textColor: Appcolors.appbarButonColor,)
                 ),
               ],
             ),
