@@ -16,7 +16,7 @@ class SizeConfig{
   static double setWidth(double value) => value / 3.6 * blockWidth!;
   static double setHeight(double value) => value / 6.40 * blockHeight!;
   static double setTextSp(double value) => blockWidth! > .6? value / 6.40 * blockHeight!: value/3.60*blockWidth!;
-  static double setTextSpWithWidth (double value) => value*screenWidth!;
+  static double setTextSpWithWidth (double value) => value * screenWidth!;
 
 
 
