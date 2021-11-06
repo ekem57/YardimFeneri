@@ -22,7 +22,7 @@ class _SignInPageState extends State<SignInPage> {
         Center(
             child: Column(
               children: [
-                SizedBox(height: 250,),
+                SizedBox(height: 50,),
                 Container(
                   child: Text("LOGO",style: TextStyle(color:Colors.black),),
                 ),

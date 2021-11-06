@@ -21,19 +21,19 @@ class _CommonSignUpState extends State<CommonSignUp> {
         child: Column(
           children: [
             SizedBox(
-              height: 100,
+              height: 30,
             ),
             widget.getButtonText == "kurulus" ? Text("Yardım Kuruşları Kayıt Sayfası",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),) : Container(),
             widget.getButtonText == "yardımsever" ? Text("Yardım Sever Kayıt Sayfası",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),) : Container(),
             widget.getButtonText == "ihtiyac" ? Text("İhtiyaç Sahibi Kayıt Sayfası",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),) : Container(),
             Padding(
-              padding: const EdgeInsets.all(50.0),
+              padding: const EdgeInsets.all(20.0),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 100,
+                      height: 50,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

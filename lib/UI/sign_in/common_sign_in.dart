@@ -28,7 +28,7 @@ class _CommonSignInState extends State<CommonSignIn> {
         child: Column(
           children: [
             SizedBox(
-              height: 100,
+              height: 50,
             ),
             widget.getButtonText == "kurulus" ? Text("Yardım Kuruşları Girişine Hoşgeldiniz!",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),) : Container(),
             widget.getButtonText == "yardımsever" ? Text("Yardım-Sever Girişine Hoşgeldiniz!",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),) : Container(),
@@ -40,7 +40,7 @@ class _CommonSignInState extends State<CommonSignIn> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 300,
+                      height: 50,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
