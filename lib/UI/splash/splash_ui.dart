@@ -19,14 +19,13 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Future.microtask(() => imageOpacity=1);
-    Future.delayed(Duration(milliseconds: 4000)).then((value) {
+    Future.delayed(Duration(milliseconds: 3300)).then((value) {
      nagigateToHome();
     });
   }
   @override
   Widget build(BuildContext context) {
     SizeConfig(context).init();
-    initialSetup();
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -48,11 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-  Future<bool> initialSetup() async {
-    //await Firebase.initializeApp();
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    return true;
-  }
+
 
 
 

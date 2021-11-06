@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/emre/Documents/GitHub/YardimFeneri/build/flutter_plugin_android_lifecycle/intermediates/res/merged/debug/layout/notification_action_tombstone.xml",
+        "source": "/Users/emre/.gradle/caches/transforms-2/files-2.1/af76990d3d6bef6e40e94314fb3bdfdb/core-1.1.0/res/layout/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/emre/Documents/GitHub/YardimFeneri/build/flutter_plugin_android_lifecycle/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/emre/.gradle/caches/transforms-2/files-2.1/af76990d3d6bef6e40e94314fb3bdfdb/core-1.1.0/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/emre/Documents/GitHub/YardimFeneri/build/flutter_plugin_android_lifecycle/intermediates/res/merged/debug/layout/notification_template_icon_group.xml",
+        "source": "/Users/emre/.gradle/caches/transforms-2/files-2.1/af76990d3d6bef6e40e94314fb3bdfdb/core-1.1.0/res/layout/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/emre/Documents/GitHub/YardimFeneri/build/flutter_plugin_android_lifecycle/intermediates/res/merged/debug/layout/custom_dialog.xml",
+        "source": "/Users/emre/.gradle/caches/transforms-2/files-2.1/af76990d3d6bef6e40e94314fb3bdfdb/core-1.1.0/res/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "/Users/emre/Documents/GitHub/YardimFeneri/build/flutter_plugin_android_lifecycle/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
+        "source": "/Users/emre/.gradle/caches/transforms-2/files-2.1/af76990d3d6bef6e40e94314fb3bdfdb/core-1.1.0/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/emre/Documents/GitHub/YardimFeneri/build/flutter_plugin_android_lifecycle/intermediates/res/merged/debug/layout/notification_action.xml",
+        "source": "/Users/emre/.gradle/caches/transforms-2/files-2.1/af76990d3d6bef6e40e94314fb3bdfdb/core-1.1.0/res/layout/notification_action.xml"
+    }
+]

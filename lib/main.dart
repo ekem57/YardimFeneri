@@ -1,52 +1,52 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:yardimfeneri/UI/sign_in/sign_in_page.dart';
-import 'UI/splash/splash_ui.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:yardimfeneri/EXTENSIONS/theme.dart';
+import 'package:yardimfeneri/ROUTING/navigation/navigator_route_service.dart';
+import 'package:yardimfeneri/SERVICE/charities_service.dart';
+import 'package:yardimfeneri/SERVICE/helpful_service.dart';
+import 'package:yardimfeneri/SERVICE/needy_service.dart';
+import 'package:yardimfeneri/locator.dart';
+import 'ROUTING/navigation/navigation_service.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  setupLocator();
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp( MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CharitiesService()),
+        ChangeNotifierProvider(create: (_) => NeedyService()),
+        ChangeNotifierProvider(create: (_) => HelpfulService()),
+      ],
+      child: MyApp(),
+    ));
+  });
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      title: 'Etkinlik Kafası',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color(0xFFED4C67),
-        //accentColor: const Color(0xffffd400),
-        backgroundColor: const Color(0xffffffff),
-        //buttonColor: const Color(0xff3ecf8e),
-        canvasColor: const Color(0xffffffff),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        sliderTheme: SliderThemeData(
-          thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
-          disabledActiveTrackColor: Colors.red[700],
-        ),
-        textTheme: TextTheme(
-          button: TextStyle(
-            fontSize: 18.0,
-            color: const Color(0xff8b1afe),
-            fontFamily: "OpenSans",
-            fontWeight: FontWeight.w500,
-            letterSpacing: 1.0,
-          ),
-          headline1: TextStyle(
-              color: const Color(0xFFFFFFFF),
-              fontSize: 20.0,
-              fontFamily: "OpenSans"),
-          caption: TextStyle(
-              color: const Color(0xff343633),
-              fontSize: 20.0,
-              fontFamily: "OpenSans"),
-        ),
-        iconTheme: IconThemeData(
-          color: const Color(0xff8b1afe),
-        ),
-      ),
-      locale: const Locale('tr', "TR"),
-      home: Scaffold(body: SignInPage()),
+      title: 'YardımFeneri',
+      initialRoute: '/splash',
+      theme: myTheme,
+      onGenerateRoute: (settings) =>
+          NavigationRouteManager.onRouteGenerate(settings),
+      navigatorKey: NavigationService.instance.navigatorKey,
     );
   }
 }

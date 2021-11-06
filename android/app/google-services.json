@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "952267230024",
+    "project_id": "yardimfeneri",
+    "storage_bucket": "yardimfeneri.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952267230024:android:b1fb5c23cdaa2f1378c17d",
+        "android_client_info": {
+          "package_name": "com.yardimfeneri.yardimfeneri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "952267230024-tkqcnvgl1iee56k7rr4ml0qp36tnhupr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5iG0JVXWqkkvkBBRb3vbd6E0Fpbk_35s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "952267230024-tkqcnvgl1iee56k7rr4ml0qp36tnhupr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "952267230024-rm3fld6bt5ignd415r96l1gpai2jr0gt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yardimfeneri.yardimfeneri"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
