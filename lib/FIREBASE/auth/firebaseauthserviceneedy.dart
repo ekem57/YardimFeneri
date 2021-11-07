@@ -34,7 +34,7 @@ class FirebaseAuthServiceNeedy implements AuthBaseNeedy {
     if (user == null) {
       return null;
     } else {
-      return NeedyModel(user.uid);
+      return NeedyModel(userId: user.uid);
     }
   }
 

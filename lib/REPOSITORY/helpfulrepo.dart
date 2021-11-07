@@ -34,7 +34,8 @@ class HelpfulRepo implements AuthBaseHelpful {
   @override
   Future<HelpfulModel?> createUserWithEmailandPasswordHelpful(String email, String sifre,HelpfulModel users) async {
     HelpfulModel? _user = await _firebaseAuthService.createUserWithEmailandPasswordHelpful(email, sifre,users);
-    bool _sonuc = await _firestoreDBService.saveHelpful(HelpfulModel(_user!.userId));
+    users.userId = _user!.userId;
+    bool _sonuc = await _firestoreDBService.saveHelpful(users);
     if (_sonuc) {
       return await _firestoreDBService.readHelpful(_user.userId,email);
     }

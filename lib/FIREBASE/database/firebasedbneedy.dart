@@ -10,17 +10,18 @@ class FirestoreDBServiceNeedy {
   @override
   Future<bool> saveNeedy(NeedyModel user) async {
     await _firebaseDB
-        .collection("ogrenci")
+        .collection("needy")
         .doc(user.userId)
         .set(user.toMap());
     return true;
   }
 
   @override
-  Future<NeedyModel> readNeedy(String userID, String email) async {
-    DocumentSnapshot _okunanUser = await _firebaseDB.collection("ogrenci").doc(userID).get();
-    Map<String, dynamic>? _okunanUserBilgileriMap = _okunanUser.data() as Map<String, dynamic>?;
-    if(_okunanUser.data!=null){
+  Future<NeedyModel> readNeedy(String? userID, String? email) async {
+    DocumentSnapshot<Map<String, dynamic>> _okunanUser = await _firebaseDB.collection("needy").doc(userID).get();
+    Map<String, dynamic>? _okunanUserBilgileriMap = _okunanUser.data();
+    print("okunan user: "+_okunanUserBilgileriMap.toString());
+    if(_okunanUser.data != null){
       NeedyModel _okunanUserNesnesi;
       _okunanUserNesnesi = NeedyModel.fromMap(_okunanUserBilgileriMap!);
       print("Okunan user nesnesi :" + _okunanUserNesnesi.toString());
@@ -28,7 +29,6 @@ class FirestoreDBServiceNeedy {
     }else{
       return null!;
     }
-
   }
 
 

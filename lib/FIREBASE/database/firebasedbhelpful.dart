@@ -9,16 +9,16 @@ class FirestoreDBServiceHelpful {
   @override
   Future<bool> saveHelpful(HelpfulModel user) async {
     await _firebaseDB
-        .collection("ogrenci")
+        .collection("helpful")
         .doc(user.userId)
         .set(user.toMap());
     return true;
   }
 
   @override
-  Future<HelpfulModel> readHelpful(String userID, String email) async {
-    DocumentSnapshot _okunanUser = await _firebaseDB.collection("ogrenci").doc(userID).get();
-    Map<String, dynamic>? _okunanUserBilgileriMap = _okunanUser.data() as Map<String, dynamic>?;
+  Future<HelpfulModel> readHelpful(String? userID, String? email) async {
+    DocumentSnapshot<Map<String, dynamic>> _okunanUser = await _firebaseDB.collection("helpful").doc(userID).get();
+    Map<String, dynamic>? _okunanUserBilgileriMap = _okunanUser.data();
     if(_okunanUser.data!=null){
       HelpfulModel _okunanUserNesnesi;
       _okunanUserNesnesi = HelpfulModel.fromMap(_okunanUserBilgileriMap!);

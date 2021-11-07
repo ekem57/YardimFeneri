@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 class HelpfulModel extends ChangeNotifier {
   final String? email;
   final String? password;
-  final String userId;
+  late  String? userId;
   String? telefon;
   String? isim;
   String? soyisim;
+  String? adres;
+  String? il;
   String? foto;
   DateTime? dogumTarihi;
-  bool? hesaponay;
 
-  HelpfulModel(this.userId, {this.email, this.password,this.isim,this.soyisim,this.foto,this.dogumTarihi,this.telefon,this.hesaponay});
+  HelpfulModel({this.userId,this.email, this.password,this.isim,this.soyisim,this.adres,this.il,this.foto,this.dogumTarihi,this.telefon});
 
   Map<String, dynamic> toMap() {
     return {
@@ -22,9 +23,10 @@ class HelpfulModel extends ChangeNotifier {
       'telefon': telefon ?? '00000000000',
       'isim': isim,
       'soyisim': soyisim,
+      'il': il,
+      'adres': adres,
       'foto': foto,
       'dogumTarihi': dogumTarihi,
-      'hesapOnay':hesaponay ?? false,
     };
   }
 
@@ -32,12 +34,13 @@ class HelpfulModel extends ChangeNotifier {
       : userId = map['userId'],
         telefon = map['telefon'],
         email = map['email'],
+        password = null,
         isim = map['isim'],
         soyisim = map['soyisim'],
-        password = null,
+        il = map['il'],
+        adres = map['adres'],
         dogumTarihi = (map['dogumTarihi'] as Timestamp).toDate(),
-        foto = map['avatarImageUrl'],
-        hesaponay = map['hesapOnay'];
+        foto = map['foto'];
 
 
 

@@ -4,6 +4,7 @@ import 'package:yardimfeneri/SERVICE/charities_service.dart';
 import 'package:yardimfeneri/SERVICE/helpful_service.dart';
 import 'package:yardimfeneri/SERVICE/needy_service.dart';
 import 'package:yardimfeneri/UI/charities/homepage.dart';
+import 'package:yardimfeneri/UI/sign_in/sign_in_select_page.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
@@ -33,7 +34,7 @@ class _LandingPageState extends State<LandingPage> {
     {
       if (_needyService.user == null) {
         if (_charitiesService.user == null) {
-          return CharitiesMainNavigation(user: _charitiesService.user!);
+          return SignInPage();
         } else {
           return CharitiesMainNavigation(user: _charitiesService.user!);
         }
@@ -44,8 +45,7 @@ class _LandingPageState extends State<LandingPage> {
     }else{
       return HelpfulMainNavigation(user: _helpfulService.user!,);
     }
-
-
+    
 
   }
 

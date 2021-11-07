@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class CharitiesModel extends ChangeNotifier {
   final String? email;
   final String? password;
-  final String userId;
+  late  String? userId;
   String? telefon;
   String? isim;
   String? logo;
@@ -13,8 +13,9 @@ class CharitiesModel extends ChangeNotifier {
   DateTime? kurulusTarihi;
   bool? hesaponay;
 
-  CharitiesModel(this.userId,
-      {this.email, this.password, this.isim, this.logo, this.faaliyetalani, this.kurulusTarihi, this.telefon, this.hesaponay});
+  //CharitiesModel( this.userId ,{this.email, this.password, this.isim, this.logo, this.faaliyetalani, this.kurulusTarihi, this.telefon, this.hesaponay});
+
+  CharitiesModel({this.userId,this.email, this.password, this.isim, this.logo, this.faaliyetalani, this.kurulusTarihi, this.telefon, this.hesaponay});
 
   Map<String, dynamic> toMap() {
     return {
@@ -30,13 +31,13 @@ class CharitiesModel extends ChangeNotifier {
   }
 
   CharitiesModel.fromMap(Map<String, dynamic> map)
-      : userId = map['userId'],
+      : userId = map['userID'],
         telefon = map['telefon'],
         email = map['email'],
         password = null,
-        isim = map['adSoyad'],
-        kurulusTarihi = (map['dogumTarihi'] as Timestamp).toDate(),
-        logo = map['avatarImageUrl'],
+        isim = map['isim'],
+        kurulusTarihi = (map['kurulusTarihi'] as Timestamp).toDate(),
+        logo = map['logo'],
         hesaponay = map['hesapOnay'];
 
 }

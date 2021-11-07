@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 final ThemeData myTheme = ThemeData(
   primarySwatch: Colors.purple,
   brightness: Brightness.light,
-  primaryColor: Color(0xff9c27b0),
+  primaryColor: Color(0xff04023b),
   primaryColorBrightness: Brightness.dark,
   primaryColorLight: Color(0xffe1bee7),
-  primaryColorDark: Color(0xff7b1fa2),
+  primaryColorDark: Colors.blue,
   accentColor: Color(0xff9c27b0),
   accentColorBrightness: Brightness.dark,
   canvasColor: Color(0xfffafafa),

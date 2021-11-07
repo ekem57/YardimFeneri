@@ -60,7 +60,7 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
       child: Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           extendBody: true,
-          body: _helpfulService.user!.hesaponay == true ? Center(child: _getBody(index)) : NotApprovedPageCharities(),
+          body:  _getBody(index),
           bottomNavigationBar:  CurvedNavigationBar(
             key: _bottomNavigationKey,
             index: 0,

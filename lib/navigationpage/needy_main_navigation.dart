@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/EXTENSIONS/size_config.dart';
 import 'package:yardimfeneri/SERVICE/helpful_service.dart';
+import 'package:yardimfeneri/SERVICE/needy_service.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
 import 'package:yardimfeneri/UI/helpful/homepage.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
@@ -36,7 +37,7 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
     SizeConfig(context).init();
 
 
-    final _helpfulService = Provider.of<HelpfulService>(context, listen: true);
+    final _needyService = Provider.of<NeedyService>(context, listen: true);
 
     return WillPopScope(
       onWillPop: () async {
@@ -61,7 +62,7 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
       child: Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           extendBody: true,
-          body: _helpfulService.user!.hesaponay == true ? Center(child: _getBody(index)) : NotApprovedPageCharities(),
+          body: _needyService.user!.hesaponay == true ? Center(child: _getBody(index)) : NotApprovedPageCharities(),
           bottomNavigationBar:  CurvedNavigationBar(
             key: _bottomNavigationKey,
             index: 0,

@@ -36,7 +36,8 @@ class CharitiesRepo implements AuthBaseCharities {
   @override
   Future<CharitiesModel?> createUserWithEmailandPasswordCharities(String email, String sifre,CharitiesModel users) async {
     CharitiesModel? _user = await _firebaseAuthService.createUserWithEmailandPasswordCharities(email, sifre,users);
-    bool _sonuc = await _firestoreDBService.saveCharities(CharitiesModel(_user!.userId));
+    users.userId = _user!.userId;
+    bool _sonuc = await _firestoreDBService.saveCharities(users);
     if (_sonuc) {
       return await _firestoreDBService.readCharities(_user.userId,email);
     }

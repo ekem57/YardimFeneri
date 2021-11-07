@@ -32,7 +32,7 @@ class FirebaseAuthServiceCharities implements AuthBaseCharities {
     if (user == null) {
       return null;
     } else {
-      return CharitiesModel(user.uid);
+      return CharitiesModel(userId: user.uid);
     }
   }
 

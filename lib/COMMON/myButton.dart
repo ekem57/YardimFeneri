@@ -4,9 +4,9 @@ import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
 class MyButton extends StatelessWidget {
   final String? text;
   final VoidCallback onPressed;
-  final double fontSize;
+  final double? fontSize;
   final Color butonColor;
-  final Color textColor;
+  final Color? textColor;
   final double width;
   final double height;
 
@@ -42,7 +42,7 @@ class MyButton extends StatelessWidget {
               fontWeight: FontWeight.w600,
               fontFamily: "OpenSans",
               fontStyle: FontStyle.normal,
-              fontSize: fontSize?? 14.0),
+              fontSize: fontSize ?? 14.0),
         ),
       ),
     );

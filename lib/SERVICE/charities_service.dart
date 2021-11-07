@@ -59,11 +59,12 @@ class CharitiesService with ChangeNotifier implements AuthBaseCharities {
       if (_user != null)
         return _user!;
     } catch (e) {
-      return null!;
+      return null;
     } finally {
       state = CharitiesViewState.Idle;
     }
   }
+
 
   @override
   Future<CharitiesModel?> signInWithEmailandPasswordCharities(String email, String sifre) async {

@@ -62,7 +62,7 @@ class HelpfulService with ChangeNotifier implements AuthBaseHelpful {
       if (_user != null)
         return _user!;
     } catch (e) {
-      return null!;
+      return null;
     } finally {
       state = HelpfulViewState.Idle;
     }
@@ -79,8 +79,6 @@ class HelpfulService with ChangeNotifier implements AuthBaseHelpful {
       state = HelpfulViewState.Idle;
     }
   }
-
-
 
 
 }

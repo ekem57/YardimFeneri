@@ -32,7 +32,7 @@ class FirebaseAuthServiceHelpful implements AuthBaseHelpful {
     if (user == null) {
       return null;
     } else {
-      return HelpfulModel(user.uid);
+      return HelpfulModel(userId: user.uid);
     }
   }
 

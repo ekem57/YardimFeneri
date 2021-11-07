@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yardimfeneri/EXTENSIONS/appcolors.dart';
 import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
+
 class FormTextFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? textInputType;
@@ -28,7 +29,6 @@ class FormTextFieldWidget extends StatelessWidget {
             controller: controller,
             keyboardType: textInputType,
             autocorrect: false,
-            autovalidateMode: AutovalidateMode.disabled,
             validator:validator,
             textInputAction: textInputAction,
             // onSaved: (value) => onSave = value,

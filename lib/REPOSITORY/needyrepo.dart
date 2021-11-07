@@ -40,7 +40,8 @@ class NeedyRepo implements AuthBaseNeedy {
   @override
   Future<NeedyModel?> createUserWithEmailandPasswordNeedy(String email, String sifre,NeedyModel users) async {
     NeedyModel? _user = await _firebaseAuthService.createUserWithEmailandPasswordNeedy(email, sifre,users);
-    bool _sonuc = await _firestoreDBService.saveNeedy(NeedyModel(_user!.userId));
+    users.userId = _user!.userId;
+    bool _sonuc = await _firestoreDBService.saveNeedy(users);
     if (_sonuc) {
       return await _firestoreDBService.readNeedy(_user.userId,email);
     }

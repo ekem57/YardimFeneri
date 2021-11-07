@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/EXTENSIONS/size_config.dart';
 import 'package:yardimfeneri/SERVICE/charities_service.dart';
+import 'package:yardimfeneri/UI/charities/bagisislemleri.dart';
+import 'package:yardimfeneri/UI/charities/bildirimler.dart';
+import 'package:yardimfeneri/UI/charities/bilgilendirmeicerikleri.dart';
 import 'package:yardimfeneri/UI/charities/homepage.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
+import 'package:yardimfeneri/UI/charities/profil.dart';
+import 'package:yardimfeneri/UI/charities/uyeler.dart';
+import 'package:yardimfeneri/UI/charities/yardimkampanyasiacma.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
 
 class CharitiesMainNavigation extends StatefulWidget {
@@ -33,7 +39,6 @@ class _CharitiesMainNavigationState extends State<CharitiesMainNavigation> {
   Widget build(BuildContext context) {
     SizeConfig(context).init();
 
-
     final _charitiesService = Provider.of<CharitiesService>(context, listen: true);
 
     return WillPopScope(
@@ -57,28 +62,29 @@ class _CharitiesMainNavigationState extends State<CharitiesMainNavigation> {
         return false;
       },
       child: Scaffold(
-          backgroundColor: Theme.of(context).backgroundColor,
           extendBody: true,
-          body: _charitiesService.user!.hesaponay == true ? Center(child: _getBody(index)) : NotApprovedPageCharities(),
           bottomNavigationBar:  CurvedNavigationBar(
-            key: _bottomNavigationKey,
-            index: 0,
-            height: 75.0,
-            items: <Widget>[
-              Icon(Icons.home, size: 40, color: Theme.of(context).backgroundColor),
-              Icon(Icons.date_range, size: 30, color: Theme.of(context).backgroundColor),
-              Icon(Icons.info, size: 30, color: Theme.of(context).backgroundColor),
-              Icon(Icons.message, size: 30, color: Theme.of(context).backgroundColor),
-              Icon(Icons.person, size: 30, color: Theme.of(context).backgroundColor),
-            ],
-            color: Theme.of(context).primaryColor,
-            buttonBackgroundColor: Theme.of(context).primaryColor,
-            backgroundColor: Colors.transparent,
-            animationCurve: Curves.easeInOut,
-            animationDuration: Duration(milliseconds: 300),
-            onTap: onTapped ? onNavButtonTapped: changeNavButtonAnimation,
-            letIndexChange: (index) => true,
-          )),
+          key: _bottomNavigationKey,
+          index: 0,
+          height: 75.0,
+          items: <Widget>[
+            Icon(Icons.home, size: 40, color: Colors.white),
+            Icon(Icons.money, size: 30, color: Colors.white),
+            Icon(Icons.person, size: 30, color: Colors.white),
+            Icon(Icons.campaign_sharp, size: 30, color: Colors.white),
+            Icon(Icons.add_box_sharp, size: 30, color:Colors.white),
+            Icon(Icons.notifications_active, size: 30, color:Colors.white),
+          ],
+          color: Colors.blue,
+          buttonBackgroundColor: Colors.blue,
+          animationCurve: Curves.easeInOut,
+          animationDuration: Duration(milliseconds: 300),
+          onTap: onTapped ? onNavButtonTapped: changeNavButtonAnimation,
+          letIndexChange: (index) => true,
+        ),
+          backgroundColor: Colors.white,
+          body: _charitiesService.user!.hesaponay == true ?  _getBody(index) : NotApprovedPageCharities(),
+          ),
     );
   }
   @override
@@ -89,6 +95,7 @@ class _CharitiesMainNavigationState extends State<CharitiesMainNavigation> {
 
 
   void onNavButtonTapped(int _index){
+    print(_index.toString());
     if (index != _index) {
       _navigationQueue.removeWhere((element) => element == _index);
       _navigationQueue.addLast(_index);
@@ -104,18 +111,20 @@ class _CharitiesMainNavigationState extends State<CharitiesMainNavigation> {
     });
   }
 
-  Widget? _getBody(int index) {
+ static Widget? _getBody(int index) {
     switch (index) {
       case 0:
         return HomePageCharities();
       case 1:
-        return HomePageCharities();
+        return BagisIslemleriCharities();
       case 2:
-        return HomePageCharities();
+        return UyelerCharities();
       case 3:
-        return HomePageCharities();
+        return YardimKampanyasiAcmaCharities();
       case 4:
-        return HomePageCharities();
+        return BilgilendirmeIcerikleri();
+      case 5:
+        return BildirimlerCharities();
     }
 
   }
