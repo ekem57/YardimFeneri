@@ -41,12 +41,10 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
   final TextEditingController? _meslekcontroller = TextEditingController();
   final TextEditingController? _telefoncontroller = TextEditingController();
   final TextEditingController? _adrescontroller = TextEditingController();
-  final TextEditingController? _sehircontroller = TextEditingController();
   var controllertel = new MaskTextInputFormatter(mask: '### - ### - ## - ##');
   var controller = new MaskTextInputFormatter(mask: '000-000-00-00');
   String il = "İl Seçiniz";
   final _formKey1 = GlobalKey<FormState>();
-  bool _validate = false;
   bool _loadingVisible = false;
   PickedFile? _image;
   var imageUrl;
@@ -227,7 +225,7 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
                       SizedBox(height: 10.0.h,),
 
                       Center(
-                        child: MyButton(text: "Kayıt", fontSize: 18.0.spByWidth,butonColor: Colors.yellowAccent,width: 300.0.w,height: 50.0.h,
+                        child: MyButton(text: "Kayıt", fontSize: 18.0.spByWidth,butonColor: Colors.green,width: 300.0.w,height: 50.0.h,
                           onPressed: (){
                             _validateInputsRegister(context);
                           }, textColor: Colors.green,),
@@ -407,7 +405,6 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
   }
 
   Future<String> uploadDuyuruImage(String id) async {
-    //final _modelYonetici = Provider.of<YoneticiModel>(context, listen: false);
     if(_image == null)
       return "";
     String filePath = _image!.path;
@@ -420,9 +417,7 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
       await firebase_storage.FirebaseStorage.instance.ref('duyuru/$fileName').getDownloadURL();
       return downloadURL;
     } on FirebaseException catch (e) {
-      // e.g, e.code == 'canceled'
       return "error";
-      print("Error on uploading image file ${e.code}");
     }
   }
 

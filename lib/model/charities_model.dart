@@ -13,7 +13,6 @@ class CharitiesModel extends ChangeNotifier {
   DateTime? kurulusTarihi;
   bool? hesaponay;
 
-  //CharitiesModel( this.userId ,{this.email, this.password, this.isim, this.logo, this.faaliyetalani, this.kurulusTarihi, this.telefon, this.hesaponay});
 
   CharitiesModel({this.userId,this.email, this.password, this.isim, this.logo, this.faaliyetalani, this.kurulusTarihi, this.telefon, this.hesaponay});
 

@@ -13,16 +13,11 @@ import 'package:yardimfeneri/COMMON/multilinetextfield.dart';
 import 'package:yardimfeneri/COMMON/myButton.dart';
 import 'package:yardimfeneri/COMMON/myinput.dart';
 import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
-import 'package:yardimfeneri/FIREBASE/auth/errortext.dart';
 import 'package:yardimfeneri/ROUTING/navigation/navigation_service.dart';
 import 'package:yardimfeneri/ROUTING/routeconstants.dart';
 import 'package:yardimfeneri/SERVICE/charities_service.dart';
-import 'package:yardimfeneri/SERVICE/helpful_service.dart';
-import 'package:yardimfeneri/SERVICE/needy_service.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:yardimfeneri/model/charities_model.dart';
-import 'package:yardimfeneri/model/helpful_model.dart';
-import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 
@@ -115,17 +110,18 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
                                   validator: validateTelefon,
                                   autocorrect: false,
                                   keyboardType: TextInputType.number,
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                     color: const Color(0xff343633),
                                     fontWeight: FontWeight.w600,
                                     fontFamily: "OpenSans",
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 25.0,
+                                    fontSize: 20.0.spByWidth,
                                   ),
                                   cursorColor: Colors.blue,
                                   decoration: InputDecoration(
                                     errorStyle: TextStyle(fontSize: 15),
                                     focusedBorder: InputBorder.none,
+                                    focusedErrorBorder: InputBorder.none,
                                     enabledBorder: InputBorder.none,
                                     errorBorder: InputBorder.none,
                                     disabledBorder: InputBorder.none,
@@ -135,6 +131,7 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
                                     hintStyle: TextStyle(
                                       color: Colors.black87,
                                     ),
+                                    icon: Icon(Icons.phone,color: Colors.green,size:24,),
                                   ),
                                 ),
                               ),
@@ -293,7 +290,7 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
 
 
                       Center(
-                        child: MyButton(text: "Kayıt", fontSize: 18.0.spByWidth,butonColor: Colors.yellowAccent,width: 300.0.w,height: 50.0.h,
+                        child: MyButton(text: "Kayıt", fontSize: 18.0.spByWidth,butonColor: Colors.green,width: 300.0.w,height: 50.0.h,
                           onPressed: (){
                             _validateInputsRegister(context);
                           }, textColor: Colors.green,),

@@ -68,6 +68,7 @@ class Myinput extends StatelessWidget {
                     child: icon,
                   ),
                   focusedBorder: InputBorder.none,
+                  focusedErrorBorder: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,

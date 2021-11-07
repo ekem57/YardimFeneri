@@ -11,13 +11,10 @@ import 'package:yardimfeneri/COMMON/myinput.dart';
 import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
 import 'package:yardimfeneri/FIREBASE/auth/errortext.dart';
 import 'package:yardimfeneri/ROUTING/navigation/navigation_service.dart';
-import 'package:yardimfeneri/ROUTING/navigation/navigator_route_service.dart';
 import 'package:yardimfeneri/ROUTING/routeconstants.dart';
 import 'package:yardimfeneri/SERVICE/charities_service.dart';
 import 'package:yardimfeneri/SERVICE/helpful_service.dart';
 import 'package:yardimfeneri/SERVICE/needy_service.dart';
-import 'package:yardimfeneri/UI/sign_in/sign_up_charities.dart';
-import 'package:yardimfeneri/UI/sign_in/sign_in_select_page.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
@@ -81,10 +78,10 @@ class _CommonSignInState extends State<CommonSignIn> {
                       Myinput(hintText:"Şifre" ,icon: Icon(Icons.lock,color: Colors.green,),onSaved: validateSifre,controller: _sifrecontroller!,keybordType: TextInputType.emailAddress,passwordVisible: true, satir: null,validate: validateSifre,),
                       SizedBox(height: 10.0.h,),
                       Center(
-                        child: MyButton(text: "Giriş", fontSize: 18.0.spByWidth,butonColor: Colors.yellowAccent,width: 300.0.w,height: 50.0.h,
+                        child: MyButton(text: "Giriş", fontSize: 18.0.spByWidth,butonColor: Colors.green,width: 240.0.w,height: 50.0.h,
                           onPressed: (){
                             _validateInputs(context);
-                          }, textColor: Colors.green,),
+                          }, textColor: Colors.white,),
                       ),
 
                       SizedBox(

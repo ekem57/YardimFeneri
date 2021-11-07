@@ -88,7 +88,7 @@ Widget specialButton(String buttonName){
     height: 60.0.h,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(14),
-      color: Color(0xFFED4C67),
+      color: Colors.green,
 
     ),
     child: Center(

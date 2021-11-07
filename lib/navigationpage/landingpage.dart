@@ -45,7 +45,7 @@ class _LandingPageState extends State<LandingPage> {
     }else{
       return HelpfulMainNavigation(user: _helpfulService.user!,);
     }
-    
+
 
   }
 

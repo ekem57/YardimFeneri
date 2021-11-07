@@ -8,8 +8,8 @@ class AlertBilgilendirme extends StatefulWidget {
   final String? baslik;
   final String? icerik;
   final String? BtnText;
-   VoidCallback Pressed;
-  final double? circularBorderRadius;
+  VoidCallback Pressed;
+   double? circularBorderRadius;
 
   AlertBilgilendirme({
     this.baslik,
@@ -40,7 +40,7 @@ class _AlertBilgilendirmeState extends State<AlertBilgilendirme> {
           child: Text(
             widget.icerik!,
             style: TextStyle(
-              fontSize: 15.0.spByWidth,
+              fontSize: 18.0.spByWidth,
               fontWeight: FontWeight.w600,
               fontFamily: "OpenSans",
               height: 2,
@@ -55,7 +55,7 @@ class _AlertBilgilendirmeState extends State<AlertBilgilendirme> {
         actions: <Widget>[
 
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 90.0.w,vertical: 20.0.h),
+            padding:  EdgeInsets.symmetric(horizontal: 50.0.w,vertical: 4.0.h),
             child: Center(
               child: MyButton(
                   text: "Tamam",
@@ -63,7 +63,7 @@ class _AlertBilgilendirmeState extends State<AlertBilgilendirme> {
                   butonColor: positiveButonColor,
                   textColor: Colors.black,
                   fontSize: 12.3.spByWidth,
-                  width: 120.0.w,
+                  width: 180.0.w,
                   height: 29.0.h),
             ),
           ),
