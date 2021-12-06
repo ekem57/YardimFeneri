@@ -32,7 +32,9 @@ class CitySearch extends SearchDelegate<String>{
     return IconButton(
       icon: Icon(Icons.arrow_back_ios_rounded, color: Theme.of(context).primaryColor),
       onPressed: () {
-        close(context, result!);
+        print("result:"+result.toString());
+
+        close(context, result ?? "İl Seçiniz");
       },
     );
   }

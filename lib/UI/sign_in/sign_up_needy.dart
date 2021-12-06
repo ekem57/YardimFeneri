@@ -228,7 +228,7 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
                         child: MyButton(text: "Kayıt", fontSize: 18.0.spByWidth,butonColor: Colors.green,width: 300.0.w,height: 50.0.h,
                           onPressed: (){
                             _validateInputsRegister(context);
-                          }, textColor: Colors.green,),
+                          }, textColor: Colors.white,),
                       ),
                       SizedBox(height: 30.0.h,),
                       SizedBox(

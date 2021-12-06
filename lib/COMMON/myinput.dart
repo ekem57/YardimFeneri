@@ -34,7 +34,7 @@ class Myinput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.all(16.0.w),
+      padding:  EdgeInsets.all(16.0.h),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -64,7 +64,7 @@ class Myinput extends StatelessWidget {
               decoration:InputDecoration(
                   helperText: "   ",
                   icon: Padding(
-                    padding:  EdgeInsets.only(top: 13.0.h,left: 10.0.w),
+                    padding:  EdgeInsets.only(top: 15.0.h,left: 10.0.w),
                     child: icon,
                   ),
                   focusedBorder: InputBorder.none,
@@ -73,9 +73,9 @@ class Myinput extends StatelessWidget {
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
                   border: InputBorder.none,
-                  contentPadding:  const EdgeInsets.only(),
+                  contentPadding:   EdgeInsets.only(top: 15.0.h),
                   errorStyle: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
-                  hintText: hintText,hintStyle: TextStyle(color: Colors.black87)),
+                  hintText: hintText,hintStyle: TextStyle(color: Colors.black87,)),
             ),
           ),
         ),
