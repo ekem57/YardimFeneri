@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/service/needy_service.dart';
 
-class HomePageNeedy extends StatefulWidget {
-  const HomePageNeedy({Key? key}) : super(key: key);
+class YardimTalebindeBulunma extends StatefulWidget {
+  const YardimTalebindeBulunma({Key? key}) : super(key: key);
 
   @override
-  _HomePageNeedyState createState() => _HomePageNeedyState();
+  _YardimTalebindeBulunmaState createState() => _YardimTalebindeBulunmaState();
 }
 
-class _HomePageNeedyState extends State<HomePageNeedy> {
+class _YardimTalebindeBulunmaState extends State<YardimTalebindeBulunma> {
   @override
   Widget build(BuildContext context) {
     final _needyService = Provider.of<NeedyService>(context, listen: true);

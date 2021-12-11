@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:yardimfeneri/EXTENSIONS/size_config.dart';
 import 'package:yardimfeneri/SERVICE/helpful_service.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
+import 'package:yardimfeneri/UI/helpful/profilpage.dart';
 import 'package:yardimfeneri/UI/helpful/homepage.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 
@@ -35,7 +36,6 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
     SizeConfig(context).init();
 
 
-    final _helpfulService = Provider.of<HelpfulService>(context, listen: true);
 
     return WillPopScope(
       onWillPop: () async {
@@ -116,7 +116,7 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
       case 3:
         return HomePageHelpful();
       case 4:
-        return HomePageHelpful();
+        return ProfilPageHelpful();
     }
 
   }
