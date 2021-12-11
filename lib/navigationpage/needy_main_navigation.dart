@@ -12,7 +12,6 @@ import 'package:yardimfeneri/UI/needy/homepage.dart';
 import 'package:yardimfeneri/UI/needy/needy_chat.dart';
 import 'package:yardimfeneri/UI/needy/profil.dart';
 import 'package:yardimfeneri/UI/needy/yardim_talebinde_bulunma.dart';
-import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
 
 class NeedyMainNavigation extends StatefulWidget {
@@ -42,7 +41,7 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
 
 
     final _needyService = Provider.of<NeedyService>(context, listen: true);
-    print(_needyService.user.toString());
+    print("needy service main navigation "+_needyService.user.toString());
     return WillPopScope(
       onWillPop: () async {
         if (_navigationQueue.isEmpty){

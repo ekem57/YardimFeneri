@@ -17,7 +17,7 @@ class CharitiesRepo implements AuthBaseCharities {
   AppMode appMode = AppMode.RELEASE;
   @override
   Future<CharitiesModel?> currentCharities() async {
-
+    print("current charities repo");
     CharitiesModel? _user = await _firebaseAuthService.currentCharities();
 
     return await _firestoreDBService.readCharities(_user!.userId, _user.email.toString());

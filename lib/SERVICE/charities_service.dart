@@ -54,6 +54,7 @@ class CharitiesService with ChangeNotifier implements AuthBaseCharities {
   @override
   Future<CharitiesModel?> currentCharities() async {
     try {
+      print("service charities");
       state = CharitiesViewState.Busy;
       _user = await _userRepository.currentCharities();
       if (_user != null)

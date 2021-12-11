@@ -27,7 +27,7 @@ class NeedyService with ChangeNotifier implements AuthBaseNeedy {
     notifyListeners();
   }
 
-  HelpfulService() {
+  NeedyService() {
     currentNeedy();
   }
 
