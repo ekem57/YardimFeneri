@@ -27,6 +27,7 @@ class _SignInPageState extends State<SignInPage> {
     return LoadingScreen(
       inAsyncCall: _loadingVisible,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             arkaPlan(context),
