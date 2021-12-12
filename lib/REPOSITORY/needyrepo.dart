@@ -1,14 +1,13 @@
-
-
-import 'package:yardimfeneri/BASE/authbasecharities.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:yardimfeneri/BASE/authbaseneedy.dart';
-import 'package:yardimfeneri/FIREBASE/auth/firebaseauthservicecharities.dart';
 import 'package:yardimfeneri/FIREBASE/auth/firebaseauthserviceneedy.dart';
-import 'package:yardimfeneri/FIREBASE/database/firebasedbcharities.dart';
 import 'package:yardimfeneri/FIREBASE/database/firebasedbneedy.dart';
 import 'package:yardimfeneri/locator.dart';
-import 'package:yardimfeneri/model/charities_model.dart';
+import 'package:yardimfeneri/model/konusma.dart';
+import 'package:yardimfeneri/model/mesaj.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
 
 enum AppMode { DEBUG, RELEASE }
 
@@ -16,6 +15,10 @@ class NeedyRepo implements AuthBaseNeedy {
   FirebaseAuthServiceNeedy _firebaseAuthService = locator<FirebaseAuthServiceNeedy>();
 
   FirestoreDBServiceNeedy _firestoreDBService = locator<FirestoreDBServiceNeedy>();
+
+ // FirestoreDBServiceHelpful _firestoreDBServiceHelpful = locator<FirestoreDBServiceHelpful>();
+
+  List<NeedyModel> tumKullaniciListesi = [];
 
 
   AppMode appMode = AppMode.RELEASE;
@@ -56,5 +59,89 @@ class NeedyRepo implements AuthBaseNeedy {
 
   }
 
+  ///Mesajlaşma kısmı
+///
+
+  Stream<List<Mesaj>> getMessages(
+      String currentUserID, String sohbetEdilenUserID) {
+    if (appMode == AppMode.DEBUG) {
+      return Stream.empty();
+    } else {
+      return _firestoreDBService.getMessages(currentUserID, sohbetEdilenUserID);
+    }
+  }
+
+  Stream<List<DocumentSnapshot>> getMessagesDoc(String? currentUserID, String? sohbetEdilenUserID) {
+    if (appMode == AppMode.DEBUG) {
+      return Stream.empty();
+    } else {
+      return _firestoreDBService.getMessagesDoc(currentUserID!, sohbetEdilenUserID!);
+    }
+  }
+
+  Future<bool> mesajguncelle(String? currentUserID, String? sohbetEdilenUserID,String? Docid) async {
+    if (appMode == AppMode.DEBUG) {
+      return true;
+    } else {
+      var dbGuncellemeIslemi = await _firestoreDBService.mesajguncelle(currentUserID!, sohbetEdilenUserID! ,Docid!);
+      return dbGuncellemeIslemi;
+    }
+  }
+
+  Future<bool> saveMessage(Mesaj kaydedilecekMesaj, NeedyModel? currentUser) async {
+    if (appMode == AppMode.DEBUG) {
+      return true;
+    } else {
+      var dbYazmaIslemi = await _firestoreDBService.saveMessage(kaydedilecekMesaj,currentUser!.userId.toString());
+      return true;
+    }
+  }
+
+
+
+
+  Stream<List<Konusma>> getAllConversations(String userID)  {
+    if (appMode == AppMode.DEBUG) {
+      return Stream.empty();
+    } else {
+      var konusmaListesi =  _firestoreDBService.getAllConversations(userID);
+      return konusmaListesi;
+    }
+  }
+
+
+  void timeagoHesapla(Konusma oankiKonusma, Timestamp zaman) {
+    oankiKonusma.sonOkunmaZamani = zaman;
+
+    timeago.setLocaleMessages("tr", timeago.TrMessages());
+
+    var _duration = zaman.toDate().difference(oankiKonusma.olusturulma_tarihi!.toDate());
+    oankiKonusma.aradakiFark = timeago.format(zaman.toDate().subtract(_duration), locale: "tr");
+  }
+
+
+  Future<List<NeedyModel>> getUserwithPagination(NeedyModel enSonGetirilenUser, int getirilecekElemanSayisi) async {
+    if (appMode == AppMode.DEBUG) {
+      return [];
+    } else {
+      List<NeedyModel> _userList = await _firestoreDBService.getUserwithPagination(enSonGetirilenUser, getirilecekElemanSayisi);
+      tumKullaniciListesi.addAll(_userList);
+      return _userList;
+    }
+  }
+
+
+
+
+
+  NeedyModel? listedeUserBul(String userID) {
+    for (int i = 0; i < tumKullaniciListesi.length; i++) {
+      if (tumKullaniciListesi[i].userId == userID) {
+        return tumKullaniciListesi[i];
+      }
+    }
+
+    return null;
+  }
 
 }

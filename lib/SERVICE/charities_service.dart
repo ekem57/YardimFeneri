@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yardimfeneri/BASE/authbasecharities.dart';
-import 'package:yardimfeneri/REPOSITORY/charities_repo.dart';
+import 'package:yardimfeneri/base/authbasecharities.dart';
 import 'package:yardimfeneri/locator.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
+import 'package:yardimfeneri/repository/charities_repo.dart';
 
 
 enum CharitiesViewState { Idle, Busy }

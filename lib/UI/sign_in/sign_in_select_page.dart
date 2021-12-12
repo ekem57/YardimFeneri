@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yardimfeneri/COMMON/loginscreenindicator.dart';
-import 'package:yardimfeneri/CONSTANTS/background_color.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
 import 'package:yardimfeneri/UI/sign_in/common_sign_in.dart';
+import 'package:yardimfeneri/common/loginscreenindicator.dart';
+import 'package:yardimfeneri/constants/background_color.dart';
+import 'package:yardimfeneri/extensions/size_extension.dart';
 
 
 class SignInPage extends StatefulWidget {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yardimfeneri/UI/sign_in/sign_up_charities.dart';
-import 'package:yardimfeneri/UI/sign_in/sign_in_select_page.dart';
 import 'package:yardimfeneri/UI/sign_in/sign_up_needy.dart';
 import 'package:yardimfeneri/UI/sign_in/signuphelpful.dart';
 import 'package:yardimfeneri/UI/splash/splash_ui.dart';

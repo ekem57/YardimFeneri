@@ -4,10 +4,9 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/EXTENSIONS/size_config.dart';
-import 'package:yardimfeneri/SERVICE/helpful_service.dart';
 import 'package:yardimfeneri/SERVICE/needy_service.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
-import 'package:yardimfeneri/UI/helpful/homepage.dart';
+import 'package:yardimfeneri/UI/helpful/chat.dart';
 import 'package:yardimfeneri/UI/needy/homepage.dart';
 import 'package:yardimfeneri/UI/needy/needy_chat.dart';
 import 'package:yardimfeneri/UI/needy/profil.dart';
@@ -116,7 +115,7 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
       case 1:
         return YardimTalebindeBulunma();
       case 2:
-        return NeedyChat();
+        return MesajlarAnasayfa();
       case 3:
         return ProfilNeedy();
     }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_config.dart';
-import 'package:yardimfeneri/ROUTING/navigation/navigation_service.dart';
-import 'package:yardimfeneri/ROUTING/routeconstants.dart';
+import 'package:yardimfeneri/extensions/size_config.dart';
+import 'package:yardimfeneri/routing/navigation/navigation_service.dart';
+import 'package:yardimfeneri/routing/routeconstants.dart';
 import 'package:yardimfeneri/SERVICE/charities_service.dart';
 import 'package:yardimfeneri/SERVICE/helpful_service.dart';
 import 'package:yardimfeneri/SERVICE/needy_service.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -28,9 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig(context).init();
-    final _needyService = Provider.of<NeedyService>(context, listen: true);
-    final _charitiesService = Provider.of<CharitiesService>(context, listen: true);
-    final _helpfulService = Provider.of<HelpfulService>(context, listen: true);
+  //  final _needyService = Provider.of<NeedyService>(context, listen: true);
+  //  final _charitiesService = Provider.of<CharitiesService>(context, listen: true);
+  //  final _helpfulService = Provider.of<HelpfulService>(context, listen: true);
 
     return Scaffold(
       body: Column(

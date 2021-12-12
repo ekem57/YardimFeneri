@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:yardimfeneri/COMMON/alertinfo.dart';
-import 'package:yardimfeneri/COMMON/loginscreenindicator.dart';
+import 'package:yardimfeneri/common/alertinfo.dart';
+import 'package:yardimfeneri/common/loginscreenindicator.dart';
+import 'package:yardimfeneri/common/multilinetextfield.dart';
+import 'package:yardimfeneri/common/myButton.dart';
+import 'package:yardimfeneri/common/myinput.dart';
 import 'package:yardimfeneri/data/cities.dart';
 import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -10,17 +13,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/COMMON/multilinetextfield.dart';
-import 'package:yardimfeneri/COMMON/myButton.dart';
-import 'package:yardimfeneri/COMMON/myinput.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
-import 'package:yardimfeneri/ROUTING/navigation/navigation_service.dart';
-import 'package:yardimfeneri/ROUTING/routeconstants.dart';
-import 'package:yardimfeneri/SERVICE/needy_service.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:yardimfeneri/UI/helpful/ilsearch.dart';
+import 'package:yardimfeneri/extensions/size_extension.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:yardimfeneri/routing/navigation/navigation_service.dart';
+import 'package:yardimfeneri/routing/routeconstants.dart';
+import 'package:yardimfeneri/service/needy_service.dart';
 
 
 class SignUpNeedy extends StatefulWidget {

@@ -6,12 +6,13 @@ import 'package:provider/provider.dart';
 import 'package:yardimfeneri/EXTENSIONS/size_config.dart';
 import 'package:yardimfeneri/SERVICE/helpful_service.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
+import 'package:yardimfeneri/UI/helpful/chat.dart';
 import 'package:yardimfeneri/UI/helpful/profilpage.dart';
 import 'package:yardimfeneri/UI/helpful/homepage.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 
 class HelpfulMainNavigation extends StatefulWidget {
-  final HelpfulModel user;
+  final HelpfulModel? user;
 
   HelpfulMainNavigation({Key? key, required this.user}) : super(key: key);
 
@@ -114,7 +115,7 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
       case 2:
         return HomePageHelpful();
       case 3:
-        return HomePageHelpful();
+        return MesajlarAnasayfa();
       case 4:
         return ProfilPageHelpful();
     }

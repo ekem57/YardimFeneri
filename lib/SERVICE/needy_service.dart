@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yardimfeneri/BASE/authbasecharities.dart';
-import 'package:yardimfeneri/BASE/authbasehelpful.dart';
-import 'package:yardimfeneri/BASE/authbaseneedy.dart';
-import 'package:yardimfeneri/REPOSITORY/charities_repo.dart';
-import 'package:yardimfeneri/REPOSITORY/helpfulrepo.dart';
-import 'package:yardimfeneri/REPOSITORY/needyrepo.dart';
+import 'package:yardimfeneri/base/authbaseneedy.dart';
 import 'package:yardimfeneri/locator.dart';
-import 'package:yardimfeneri/model/charities_model.dart';
-import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
+import 'package:yardimfeneri/REPOSITORY/needyrepo.dart';
 
 
 enum NeedyViewState { Idle, Busy }

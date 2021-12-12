@@ -4,20 +4,20 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/COMMON/alertinfo.dart';
-import 'package:yardimfeneri/COMMON/loginscreenindicator.dart';
-import 'package:yardimfeneri/COMMON/myButton.dart';
-import 'package:yardimfeneri/COMMON/myinput.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
-import 'package:yardimfeneri/FIREBASE/auth/errortext.dart';
-import 'package:yardimfeneri/ROUTING/navigation/navigation_service.dart';
-import 'package:yardimfeneri/ROUTING/routeconstants.dart';
-import 'package:yardimfeneri/SERVICE/charities_service.dart';
-import 'package:yardimfeneri/SERVICE/helpful_service.dart';
-import 'package:yardimfeneri/SERVICE/needy_service.dart';
+import 'package:yardimfeneri/common/alertinfo.dart';
+import 'package:yardimfeneri/common/loginscreenindicator.dart';
+import 'package:yardimfeneri/common/myButton.dart';
+import 'package:yardimfeneri/common/myinput.dart';
+import 'package:yardimfeneri/extensions/size_extension.dart';
+import 'package:yardimfeneri/firebase/auth/errortext.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
+import 'package:yardimfeneri/routing/navigation/navigation_service.dart';
+import 'package:yardimfeneri/routing/routeconstants.dart';
+import 'package:yardimfeneri/service/charities_service.dart';
+import 'package:yardimfeneri/service/helpful_service.dart';
+import 'package:yardimfeneri/service/needy_service.dart';
 
 
 class CommonSignIn extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/service/needy_service.dart';
+import 'package:yardimfeneri/SERVICE/needy_service.dart';
 
 class ProfilNeedy extends StatefulWidget {
   const ProfilNeedy({Key? key}) : super(key: key);
