@@ -107,39 +107,39 @@ Widget charityCard({String? charityName, String? campaign, String? imagePath, St
             padding: const EdgeInsets.all(15.0),
             child: ClipOval(
               child: Image.asset(imagePath!,
-                  height: 100,
-                  width: 100,
+                  height: 100.0.h,
+                  width: 100.0.w,
                   fit: BoxFit.cover
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left:10.0,),
+            padding:  EdgeInsets.only(left:10.0.w,),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:  [
                 Text(charityName!, style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 20.0.spByWidth,
                 ),
                 ),
                 Text(campaign!, style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 15.0.spByWidth,
                 ),
                   textAlign: TextAlign.left,
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 10.0.h,),
                 ElevatedButton(
                   onPressed: (){},
                   style: ElevatedButton.styleFrom(
                     shape: StadiumBorder(),
                     onPrimary: Colors.white,
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 8.0.h),
                   ),
                   child: Text(donation!, style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 15.0.spByWidth,
                     fontWeight: FontWeight.bold,
                   ),),
 

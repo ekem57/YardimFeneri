@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/service/needy_service.dart';
+import 'package:yardimfeneri/SERVICE/needy_service.dart';
 
 class NeedyChat extends StatefulWidget {
   const NeedyChat({Key? key}) : super(key: key);
