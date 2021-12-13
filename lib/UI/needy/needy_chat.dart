@@ -10,7 +10,7 @@ import 'package:yardimfeneri/ChattApp/alluserModel.dart';
 import 'package:yardimfeneri/ChattApp/alluserModelYonetici.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
 import 'package:yardimfeneri/ChattApp/mesajkisiSec.dart';
-import 'package:yardimfeneri/extensions/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/konusma.dart';
 

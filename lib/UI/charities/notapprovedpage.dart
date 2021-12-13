@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
-import 'package:yardimfeneri/SERVICE/charities_service.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
+import 'package:yardimfeneri/servis/charities_service.dart';
 
 class NotApprovedPageCharities extends StatelessWidget {
   const NotApprovedPageCharities({Key? key}) : super(key: key);

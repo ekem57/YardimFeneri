@@ -5,10 +5,9 @@ import 'package:yardimfeneri/model/konusma.dart';
 import 'package:yardimfeneri/model/mesaj.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:yardimfeneri/repository/helpfulrepo.dart';
 
 
-class FirestoreDBServiceNeedy {
+class FirestoreDBServiceNeedy2 {
 
 
   final FirebaseFirestore _firebaseDB = FirebaseFirestore.instance;

@@ -2,13 +2,11 @@ import 'dart:collection';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_config.dart';
-import 'package:yardimfeneri/SERVICE/helpful_service.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
 import 'package:yardimfeneri/UI/helpful/chat.dart';
 import 'package:yardimfeneri/UI/helpful/profilpage.dart';
 import 'package:yardimfeneri/UI/helpful/homepage.dart';
+import 'package:yardimfeneri/extantion/size_config.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 
 class HelpfulMainNavigation extends StatefulWidget {

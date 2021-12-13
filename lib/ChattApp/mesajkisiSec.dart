@@ -6,9 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
 import 'package:yardimfeneri/ChattApp/sohbetPage.dart';
 import 'package:yardimfeneri/common/resimlicard.dart';
-import 'package:yardimfeneri/extensions/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
-import 'package:yardimfeneri/service/helpful_service.dart';
 
 class ChattKisiSec extends StatefulWidget {
   @override

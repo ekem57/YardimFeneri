@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:yardimfeneri/BASE/authbaseneedy.dart';
-import 'package:yardimfeneri/FIREBASE/auth/firebaseauthserviceneedy.dart';
-import 'package:yardimfeneri/FIREBASE/database/firebasedbneedy.dart';
+import 'package:yardimfeneri/base_class/authbaseneedy.dart';
+import 'package:yardimfeneri/firebasedb/auth/firebaseauthserviceneedy.dart';
+import 'package:yardimfeneri/firebasedb/database/firebasedbhelpful.dart';
+import 'package:yardimfeneri/firebasedb/database/firebasedbneedy.dart';
 import 'package:yardimfeneri/locator.dart';
 import 'package:yardimfeneri/model/konusma.dart';
 import 'package:yardimfeneri/model/mesaj.dart';
@@ -16,7 +17,7 @@ class NeedyRepo implements AuthBaseNeedy {
 
   FirestoreDBServiceNeedy _firestoreDBService = locator<FirestoreDBServiceNeedy>();
 
- // FirestoreDBServiceHelpful _firestoreDBServiceHelpful = locator<FirestoreDBServiceHelpful>();
+  FirestoreDBServiceHelpful _firestoreDBServiceHelpful = locator<FirestoreDBServiceHelpful>();
 
   List<NeedyModel> tumKullaniciListesi = [];
 
@@ -120,7 +121,7 @@ class NeedyRepo implements AuthBaseNeedy {
   }
 
 
-  Future<List<NeedyModel>> getUserwithPagination(NeedyModel enSonGetirilenUser, int getirilecekElemanSayisi) async {
+  Future<List<NeedyModel>> getUserwithPagination(NeedyModel? enSonGetirilenUser, int getirilecekElemanSayisi) async {
     if (appMode == AppMode.DEBUG) {
       return [];
     } else {

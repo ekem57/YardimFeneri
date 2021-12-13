@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:yardimfeneri/BASE/authbaseneedy.dart';
+import 'package:yardimfeneri/base_class/authbaseneedy.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
 
 class FirebaseAuthServiceNeedy implements AuthBaseNeedy {

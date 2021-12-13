@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yardimfeneri/locator.dart';
 import 'package:yardimfeneri/model/konusma.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
-import 'package:yardimfeneri/REPOSITORY/needyrepo.dart';
+import 'package:yardimfeneri/repo/needyrepo.dart';
 
 
 enum AllUserViewState { Idle, Loaded, Busy }
@@ -33,7 +33,7 @@ class AllUserViewModel with ChangeNotifier {
     _tumKullanicilar = [];
     tumKonusma=[];
     _enSonGetirilenUser = null;
-    getUserWithPagination(_enSonGetirilenUser!, false,FirebaseAuth.instance.currentUser!.uid);
+    getUserWithPagination(_enSonGetirilenUser, false,FirebaseAuth.instance.currentUser!.uid);
   }
 
 
@@ -46,7 +46,7 @@ class AllUserViewModel with ChangeNotifier {
   //refresh ve sayfalama için
   //yenielemanlar getir true yapılır
   //ilk açılıs için yenielemanlar için false deger verilir.
-  getUserWithPagination(NeedyModel enSonGetirilenUser, bool yeniElemanlarGetiriliyor,String userid) async {
+  getUserWithPagination(NeedyModel? enSonGetirilenUser, bool yeniElemanlarGetiriliyor,String userid) async {
     if (_tumKullanicilar!.length > 0) {
       _enSonGetirilenUser = _tumKullanicilar!.last;
     }
@@ -56,7 +56,7 @@ class AllUserViewModel with ChangeNotifier {
       state = AllUserViewState.Busy;
     }
 
-    var yeniListe = await _userRepository.getUserwithPagination(_enSonGetirilenUser!, sayfaBasinaGonderiSayisi);
+    var yeniListe = await _userRepository.getUserwithPagination(_enSonGetirilenUser, sayfaBasinaGonderiSayisi);
 
     if (yeniListe.length < sayfaBasinaGonderiSayisi) {
       _hasMore = false;

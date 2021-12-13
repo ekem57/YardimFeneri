@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yardimfeneri/base/authbaseneedy.dart';
+import 'package:yardimfeneri/base_class/authbaseneedy.dart';
 import 'package:yardimfeneri/locator.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
-import 'package:yardimfeneri/REPOSITORY/needyrepo.dart';
+import 'package:yardimfeneri/repo/needyrepo.dart';
 
 
 enum NeedyViewState { Idle, Busy }
@@ -59,7 +59,7 @@ class NeedyService with ChangeNotifier implements AuthBaseNeedy {
       if (_user != null)
         return _user!;
     } catch (e) {
-      return null!;
+      return null;
     } finally {
       state = NeedyViewState.Idle;
     }

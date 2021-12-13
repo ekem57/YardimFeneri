@@ -13,12 +13,12 @@ import 'package:yardimfeneri/common/loginscreenindicator.dart';
 import 'package:yardimfeneri/common/multilinetextfield.dart';
 import 'package:yardimfeneri/common/myButton.dart';
 import 'package:yardimfeneri/common/myinput.dart';
-import 'package:yardimfeneri/extensions/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:yardimfeneri/routing/navigation/navigation_service.dart';
 import 'package:yardimfeneri/routing/routeconstants.dart';
-import 'package:yardimfeneri/service/charities_service.dart';
+import 'package:yardimfeneri/servis/charities_service.dart';
 
 
 class SignUpCharities extends StatefulWidget {

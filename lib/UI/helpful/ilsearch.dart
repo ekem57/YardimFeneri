@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 
 
 class CitySearch extends SearchDelegate<String>{

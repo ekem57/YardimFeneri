@@ -5,8 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/ChattApp/alluserModel.dart';
 import 'package:yardimfeneri/ChattApp/mesajKisiSecYonetici.dart';
-import 'package:yardimfeneri/ChattApp/sohbetPage.dart';
-import 'package:yardimfeneri/extensions/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/konusma.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -45,7 +44,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
         _isyenikullanici=true;
       });
     }
-    return Consumer<AllUserViewModel?>(
+    return Consumer<AllUserViewModel>(
       builder: (context, AllUserViewModel? model, child) {
         if (model!.state == AllUserViewState.Busy || _isLoading) {
           return Center(

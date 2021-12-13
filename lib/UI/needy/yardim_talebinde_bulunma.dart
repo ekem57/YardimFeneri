@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/SERVICE/needy_service.dart';
+import 'package:yardimfeneri/servis/needy_service.dart';
 
 class YardimTalebindeBulunma extends StatefulWidget {
   const YardimTalebindeBulunma({Key? key}) : super(key: key);

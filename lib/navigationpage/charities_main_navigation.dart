@@ -2,19 +2,17 @@ import 'dart:collection';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_config.dart';
-import 'package:yardimfeneri/SERVICE/charities_service.dart';
 import 'package:yardimfeneri/UI/charities/bagisislemleri.dart';
 import 'package:yardimfeneri/UI/charities/bildirimler.dart';
 import 'package:yardimfeneri/UI/charities/bilgilendirmeicerikleri.dart';
 import 'package:yardimfeneri/UI/charities/homepage.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
-import 'package:yardimfeneri/UI/charities/profil.dart';
 import 'package:yardimfeneri/UI/charities/uyeler.dart';
 import 'package:yardimfeneri/UI/charities/yardimkampanyasiacma.dart';
+import 'package:yardimfeneri/extantion/size_config.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
-import 'package:yardimfeneri/service/helpful_service.dart';
-import 'package:yardimfeneri/service/needy_service.dart';
+import 'package:yardimfeneri/servis/charities_service.dart';
+
 
 class CharitiesMainNavigation extends StatefulWidget {
   final CharitiesModel user;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yardimfeneri/COMMON/resimsizcard.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 
 class BagisIslemleriCharities extends StatefulWidget {
   const BagisIslemleriCharities({Key? key}) : super(key: key);

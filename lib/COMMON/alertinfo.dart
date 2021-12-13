@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'myButton.dart';
 
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/COMMON/myButton.dart';
-import 'package:yardimfeneri/SERVICE/helpful_service.dart';
+import 'package:yardimfeneri/servis/helpful_service.dart';
 
 class HomePageHelpful extends StatefulWidget {
   const HomePageHelpful({Key? key}) : super(key: key);

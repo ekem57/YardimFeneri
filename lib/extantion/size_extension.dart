@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_config.dart';
+import 'package:yardimfeneri/extantion/size_config.dart';
 
 extension ResponsiveSize on double{
   double get w => SizeConfig.setWidth(this);

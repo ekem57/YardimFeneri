@@ -4,7 +4,7 @@ import 'package:yardimfeneri/locator.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/mesaj.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
-import 'package:yardimfeneri/repository/needyrepo.dart';
+import 'package:yardimfeneri/repo/needyrepo.dart';
 
 
 enum ChatViewStateYonetici { Idle, Loaded, Busy }
@@ -14,8 +14,8 @@ class ChatViewModelYonetici with ChangeNotifier {
   ChatViewStateYonetici? _state = ChatViewStateYonetici.Idle;
   static final sayfaBasinaGonderiSayisi = 20;
   NeedyRepo _userRepository = locator<NeedyRepo>();
-  final NeedyModel currentUser;
-  final HelpfulModel sohbetEdilenUser;
+  final NeedyModel? currentUser;
+  final HelpfulModel? sohbetEdilenUser;
   Mesaj? _enSonGetirilenMesaj;
   Mesaj? _listeyeEklenenIlkMesaj;
   bool _hasMore = true;
@@ -46,7 +46,7 @@ class ChatViewModelYonetici with ChangeNotifier {
     super.dispose();
   }
 
-  Future<bool> saveMessage(Mesaj kaydedilecekMesaj, NeedyModel currentUser) async {
+  Future<bool> saveMessage(Mesaj kaydedilecekMesaj, NeedyModel? currentUser) async {
     return await _userRepository.saveMessage(kaydedilecekMesaj, currentUser);
   }
 

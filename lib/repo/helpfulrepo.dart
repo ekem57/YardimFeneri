@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:yardimfeneri/BASE/authbasehelpful.dart';
-import 'package:yardimfeneri/FIREBASE/auth/firebaseauthservicehelpful.dart';
-import 'package:yardimfeneri/FIREBASE/database/firebasedbhelpful.dart';
+import 'package:yardimfeneri/base_class/authbasehelpful.dart';
+import 'package:yardimfeneri/firebasedb/auth/firebaseauthservicehelpful.dart';
+import 'package:yardimfeneri/firebasedb/database/firebasedbhelpful.dart';
 import 'package:yardimfeneri/locator.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/konusma.dart';

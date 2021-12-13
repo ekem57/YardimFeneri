@@ -4,7 +4,7 @@ import 'package:yardimfeneri/locator.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/mesaj.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
-import 'package:yardimfeneri/repository/helpfulrepo.dart';
+import 'package:yardimfeneri/repo/helpfulrepo.dart';
 
 
 enum ChatViewState { Idle, Loaded, Busy }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yardimfeneri/locator.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/konusma.dart';
-import 'package:yardimfeneri/repository/helpfulrepo.dart';
+import 'package:yardimfeneri/repo/helpfulrepo.dart';
 
 
 enum AllUserViewStateYonetici { Idle, Loaded, Busy }

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model_Yonetici.dart';
-import 'package:yardimfeneri/extensions/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:yardimfeneri/model/mesaj.dart';
 
@@ -147,11 +147,11 @@ class _SohbetPageState extends State<SohbetPage> {
 
               if (_mesajController.text.trim().length > 0) {
                 Mesaj _kaydedilecekMesaj = Mesaj(
-                  kimden: _chatModel.currentUser.userId,
-                  kime: _chatModel.sohbetEdilenUser.userId,
+                  kimden: _chatModel.currentUser!.userId,
+                  kime: _chatModel.sohbetEdilenUser!.userId,
                   bendenMi: true,
                   goruldumu: false,
-                  konusmaSahibi: _chatModel.currentUser.userId,
+                  konusmaSahibi: _chatModel.currentUser!.userId,
                   mesaj: _mesajController.text, date: Timestamp.now(),
                 );
                 _mesajController.clear();

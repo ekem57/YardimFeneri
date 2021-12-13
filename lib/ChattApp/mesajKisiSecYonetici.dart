@@ -6,10 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model_Yonetici.dart';
 import 'package:yardimfeneri/ChattApp/sohbetPage.dart';
 import 'package:yardimfeneri/common/resimlicard.dart';
-import 'package:yardimfeneri/extensions/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
-import 'package:yardimfeneri/service/helpful_service.dart';
+import 'package:yardimfeneri/servis/needy_service.dart';
 
 class ChattKisiSecYonetici extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class _ChattKisiSecYoneticiState extends State<ChattKisiSecYonetici> {
 
   @override
   Widget build(BuildContext context) {
-    final _ogretmenModel = Provider.of<NeedyModel>(context, listen: false);
+    final _ogretmenModel = Provider.of<NeedyService>(context, listen: false);
 
     return  Scaffold(
       backgroundColor: Colors.green,
@@ -89,7 +89,7 @@ class _ChattKisiSecYoneticiState extends State<ChattKisiSecYonetici> {
                     Navigator.of(context, rootNavigator: true).push(
                       MaterialPageRoute(
                         builder: (context) => ChangeNotifierProvider(
-                          create: (context) => ChatViewModelYonetici(currentUser: _ogretmenModel, sohbetEdilenUser: HelpfulModel.fromMap(_card.data() as Map<String, dynamic>)),
+                          create: (context) => ChatViewModelYonetici(currentUser: _ogretmenModel.user, sohbetEdilenUser: HelpfulModel.fromMap(_card.data() as Map<String, dynamic>)),
                           child: SohbetPage(fotourl:  "_card['avatarImageUrl'].toString()",userad:  _card['adSoyad'].toString(),userid: _card['userId']),
                         ),
                       ),

@@ -15,12 +15,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:yardimfeneri/UI/helpful/ilsearch.dart';
-import 'package:yardimfeneri/extensions/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:yardimfeneri/routing/navigation/navigation_service.dart';
 import 'package:yardimfeneri/routing/routeconstants.dart';
-import 'package:yardimfeneri/service/needy_service.dart';
+import 'package:yardimfeneri/servis/needy_service.dart';
 
 
 class SignUpNeedy extends StatefulWidget {

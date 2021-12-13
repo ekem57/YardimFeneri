@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 
 class ResimsizCard extends StatelessWidget {
   final String isim;

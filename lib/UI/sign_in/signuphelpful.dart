@@ -15,17 +15,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:yardimfeneri/UI/helpful/ilsearch.dart';
-import 'package:yardimfeneri/extensions/size_extension.dart';
-import 'package:yardimfeneri/firebase/auth/errortext.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
+import 'package:yardimfeneri/firebasedb/auth/errortext.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:yardimfeneri/routing/navigation/navigation_service.dart';
 import 'package:yardimfeneri/routing/routeconstants.dart';
-import 'package:yardimfeneri/service/charities_service.dart';
-import 'package:yardimfeneri/service/helpful_service.dart';
-import 'package:yardimfeneri/service/needy_service.dart';
+import 'package:yardimfeneri/servis/charities_service.dart';
+import 'package:yardimfeneri/servis/helpful_service.dart';
+import 'package:yardimfeneri/servis/needy_service.dart';
 
 
 class SignUpHelpful extends StatefulWidget {

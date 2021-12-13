@@ -1,8 +1,7 @@
 
-
-import 'package:yardimfeneri/BASE/authbasecharities.dart';
-import 'package:yardimfeneri/FIREBASE/auth/firebaseauthservicecharities.dart';
-import 'package:yardimfeneri/FIREBASE/database/firebasedbcharities.dart';
+import 'package:yardimfeneri/base_class/authbasecharities.dart';
+import 'package:yardimfeneri/firebasedb/auth/firebaseauthservicecharities.dart';
+import 'package:yardimfeneri/firebasedb/database/firebasedbcharities.dart';
 import 'package:yardimfeneri/locator.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
 

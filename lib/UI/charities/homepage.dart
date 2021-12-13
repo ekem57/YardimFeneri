@@ -6,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/COMMON/fullresim.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
-import 'package:yardimfeneri/SERVICE/charities_service.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
+import 'package:yardimfeneri/servis/charities_service.dart';
 
 enum FormType { Register }
 

@@ -8,8 +8,9 @@ import 'package:provider/provider.dart';
 import 'package:yardimfeneri/COMMON/alertinfo.dart';
 import 'package:yardimfeneri/COMMON/loginscreenindicator.dart';
 import 'package:yardimfeneri/COMMON/myButton.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
-import 'package:yardimfeneri/SERVICE/charities_service.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
+import 'package:yardimfeneri/servis/charities_service.dart';
+
 
 class BilgilendirmeIcerikleri extends StatefulWidget {
   const BilgilendirmeIcerikleri({Key? key}) : super(key: key);

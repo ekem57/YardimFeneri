@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
-import 'package:yardimfeneri/SERVICE/charities_service.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
+import 'package:yardimfeneri/servis/charities_service.dart';
+
 
 class BildirimlerCharities extends StatefulWidget {
   const BildirimlerCharities({Key? key}) : super(key: key);
