@@ -21,7 +21,7 @@ class NeedyRepo implements AuthBaseNeedy {
   AppMode appMode = AppMode.RELEASE;
   @override
   Future<NeedyModel?> currentNeedy() async {
-
+    print("object needy");
     NeedyModel? _user = await _firebaseAuthService.currentNeedy();
 
     return await _firestoreDBService.readNeedy(_user!.userId, _user.email.toString());

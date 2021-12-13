@@ -27,7 +27,7 @@ class NeedyService with ChangeNotifier implements AuthBaseNeedy {
     notifyListeners();
   }
 
-  HelpfulService() {
+  NeedyService() {
     currentNeedy();
   }
 
@@ -74,11 +74,11 @@ class NeedyService with ChangeNotifier implements AuthBaseNeedy {
   @override
   Future<NeedyModel?> signInWithEmailandPasswordNeedy(String email, String sifre) async {
     try {
-
       _user = await _userRepository.signInWithEmailandPasswordNeedy(email, sifre);
       return _user!;
 
     } finally {
+      print("needy state changed");
       state = NeedyViewState.Idle;
     }
   }

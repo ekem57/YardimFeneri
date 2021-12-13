@@ -15,7 +15,7 @@ class NotApprovedPageNeedy extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(child: Text("HESAP ONAYLANMADI"),),
+          Center(child: Text("HESAP ONAYLANMADI Needy"),),
           SizedBox(height: 30.0.h,),
           InkWell(
             onTap: (){

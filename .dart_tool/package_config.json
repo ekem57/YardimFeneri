@@ -321,7 +321,7 @@
     },
     {
       "name": "photo_view",
-      "rootUri": "file:///Users/emre/development/flutter/.pub-cache/hosted/pub.dartlang.org/photo_view-0.11.1",
+      "rootUri": "file:///Users/emre/development/flutter/.pub-cache/hosted/pub.dartlang.org/photo_view-0.12.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -422,7 +422,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-11-08T17:38:18.982592Z",
+  "generated": "2021-12-12T14:39:14.803967Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }

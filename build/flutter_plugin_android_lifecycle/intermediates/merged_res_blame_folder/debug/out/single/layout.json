@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\uygulamam\\YardimFeneri\\build\\flutter_plugin_android_lifecycle\\intermediates\\res\\merged\\debug\\layout\\custom_dialog.xml",
+        "source": "C:\\Users\\ALİCAN\\.gradle\\caches\\transforms-2\\files-2.1\\af76990d3d6bef6e40e94314fb3bdfdb\\core-1.1.0\\res\\layout\\custom_dialog.xml"
+    },
+    {
+        "merged": "C:\\uygulamam\\YardimFeneri\\build\\flutter_plugin_android_lifecycle\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "C:\\Users\\ALİCAN\\.gradle\\caches\\transforms-2\\files-2.1\\af76990d3d6bef6e40e94314fb3bdfdb\\core-1.1.0\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "C:\\uygulamam\\YardimFeneri\\build\\flutter_plugin_android_lifecycle\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
+        "source": "C:\\Users\\ALİCAN\\.gradle\\caches\\transforms-2\\files-2.1\\af76990d3d6bef6e40e94314fb3bdfdb\\core-1.1.0\\res\\layout\\notification_action.xml"
+    },
+    {
+        "merged": "C:\\uygulamam\\YardimFeneri\\build\\flutter_plugin_android_lifecycle\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\ALİCAN\\.gradle\\caches\\transforms-2\\files-2.1\\af76990d3d6bef6e40e94314fb3bdfdb\\core-1.1.0\\res\\layout\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "C:\\uygulamam\\YardimFeneri\\build\\flutter_plugin_android_lifecycle\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\ALİCAN\\.gradle\\caches\\transforms-2\\files-2.1\\af76990d3d6bef6e40e94314fb3bdfdb\\core-1.1.0\\res\\layout\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "C:\\uygulamam\\YardimFeneri\\build\\flutter_plugin_android_lifecycle\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "C:\\Users\\ALİCAN\\.gradle\\caches\\transforms-2\\files-2.1\\af76990d3d6bef6e40e94314fb3bdfdb\\core-1.1.0\\res\\layout\\notification_template_part_time.xml"
+    }
+]

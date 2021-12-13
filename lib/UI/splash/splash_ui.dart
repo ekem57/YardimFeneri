@@ -28,9 +28,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig(context).init();
+    final _needyService = Provider.of<NeedyService>(context, listen: true);
     final _charitiesService = Provider.of<CharitiesService>(context, listen: true);
     final _helpfulService = Provider.of<HelpfulService>(context, listen: true);
-    final _needyService = Provider.of<NeedyService>(context, listen: true);
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

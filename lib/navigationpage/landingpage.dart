@@ -23,10 +23,10 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
 
-
+    final _needyService = Provider.of<NeedyService>(context, listen: true);
     final _charitiesService = Provider.of<CharitiesService>(context, listen: true);
     final _helpfulService = Provider.of<HelpfulService>(context, listen: true);
-    final _needyService = Provider.of<NeedyService>(context, listen: true);
+
     print("charities gelen: "+_charitiesService.user.toString());
     print("needy gelen: "+_needyService.user.toString());
     print("helpful gelen: "+_helpfulService.user.toString());

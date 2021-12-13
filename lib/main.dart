@@ -20,9 +20,9 @@ Future<void> main() async {
       .then((_) {
     runApp( MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => CharitiesService()),
         ChangeNotifierProvider(create: (_) => NeedyService()),
         ChangeNotifierProvider(create: (_) => HelpfulService()),
+        ChangeNotifierProvider(create: (_) => CharitiesService()),
       ],
       child: MyApp(),
     ));

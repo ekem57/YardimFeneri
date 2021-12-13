@@ -51,6 +51,7 @@ class _CommonSignInState extends State<CommonSignIn> {
     return LoadingScreen(
       inAsyncCall: _loadingVisible,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,

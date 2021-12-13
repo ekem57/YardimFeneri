@@ -8,7 +8,10 @@ import 'package:yardimfeneri/SERVICE/helpful_service.dart';
 import 'package:yardimfeneri/SERVICE/needy_service.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
 import 'package:yardimfeneri/UI/helpful/homepage.dart';
-import 'package:yardimfeneri/model/helpful_model.dart';
+import 'package:yardimfeneri/UI/needy/homepage.dart';
+import 'package:yardimfeneri/UI/needy/needy_chat.dart';
+import 'package:yardimfeneri/UI/needy/profil.dart';
+import 'package:yardimfeneri/UI/needy/yardim_talebinde_bulunma.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
 
 class NeedyMainNavigation extends StatefulWidget {
@@ -38,7 +41,7 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
 
 
     final _needyService = Provider.of<NeedyService>(context, listen: true);
-
+    print("needy service main navigation "+_needyService.user.toString());
     return WillPopScope(
       onWillPop: () async {
         if (_navigationQueue.isEmpty){
@@ -69,8 +72,7 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
             height: 75.0,
             items: <Widget>[
               Icon(Icons.home, size: 40, color: Theme.of(context).backgroundColor),
-              Icon(Icons.date_range, size: 30, color: Theme.of(context).backgroundColor),
-              Icon(Icons.info, size: 30, color: Theme.of(context).backgroundColor),
+              Icon(Icons.supervised_user_circle_sharp, size: 30, color: Theme.of(context).backgroundColor),
               Icon(Icons.message, size: 30, color: Theme.of(context).backgroundColor),
               Icon(Icons.person, size: 30, color: Theme.of(context).backgroundColor),
             ],
@@ -110,15 +112,13 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
   Widget? _getBody(int index) {
     switch (index) {
       case 0:
-        return HomePageHelpful();
+        return HomePageNeedy();
       case 1:
-        return HomePageHelpful();
+        return YardimTalebindeBulunma();
       case 2:
-        return HomePageHelpful();
+        return NeedyChat();
       case 3:
-        return HomePageHelpful();
-      case 4:
-        return HomePageHelpful();
+        return ProfilNeedy();
     }
 
   }

@@ -13,6 +13,8 @@ import 'package:yardimfeneri/UI/charities/profil.dart';
 import 'package:yardimfeneri/UI/charities/uyeler.dart';
 import 'package:yardimfeneri/UI/charities/yardimkampanyasiacma.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
+import 'package:yardimfeneri/service/helpful_service.dart';
+import 'package:yardimfeneri/service/needy_service.dart';
 
 class CharitiesMainNavigation extends StatefulWidget {
   final CharitiesModel user;

@@ -6,7 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:yardimfeneri/EXTENSIONS/size_config.dart';
 import 'package:yardimfeneri/SERVICE/helpful_service.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
+import 'package:yardimfeneri/UI/helpful/profile_page/profilpage.dart';
 import 'package:yardimfeneri/UI/helpful/homepage.dart';
+import 'package:yardimfeneri/UI/helpful/yardimettigiinsanlar.dart';
+import 'package:yardimfeneri/UI/helpful/yardimettigiprojeler.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 
 class HelpfulMainNavigation extends StatefulWidget {
@@ -35,7 +38,6 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
     SizeConfig(context).init();
 
 
-    final _helpfulService = Provider.of<HelpfulService>(context, listen: true);
 
     return WillPopScope(
       onWillPop: () async {
@@ -110,13 +112,13 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
       case 0:
         return HomePageHelpful();
       case 1:
-        return HomePageHelpful();
+        return YardimEttigiProjeler();
       case 2:
-        return HomePageHelpful();
+        return YardimEttigiInsanlar();
       case 3:
         return HomePageHelpful();
       case 4:
-        return HomePageHelpful();
+        return ProfilPageHelpful();
     }
 
   }
