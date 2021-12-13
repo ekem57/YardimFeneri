@@ -1,7 +1,7 @@
 import 'package:yardimfeneri/COMMON/myButton.dart';
-import 'package:yardimfeneri/EXTENSIONS/appcolors.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:yardimfeneri/extantion/application_colors.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 
 
 class CustomAlertDialog extends StatelessWidget {

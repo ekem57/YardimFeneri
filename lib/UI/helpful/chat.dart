@@ -1,14 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/ChattApp/alluserModel.dart';
+import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
+import 'package:yardimfeneri/ChattApp/chat_view_model_Yonetici.dart';
 import 'package:yardimfeneri/ChattApp/mesajKisiSecYonetici.dart';
+import 'package:yardimfeneri/ChattApp/sohbetPage.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
+import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/konusma.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:yardimfeneri/servis/helpful_service.dart';
 
 
 class MesajlarAnasayfa extends StatefulWidget {
@@ -34,19 +40,20 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
   }
 
 
-  Widget? usersWidget() {
+  Widget usersWidget() {
 
     final _kullanicilarModel = Provider.of<AllUserViewModel>(context);
 
-    if (_kullanicilarModel.tumKonusma!.length> _kullanicilarModel.kullanicilarListesi!.length) {
+    if (_kullanicilarModel.tumKonusma.length> _kullanicilarModel.kullanicilarListesi.length) {
       _kullanicilarModel.refresh();
       setState(() {
         _isyenikullanici=true;
       });
     }
+
     return Consumer<AllUserViewModel>(
-      builder: (context, AllUserViewModel? model, child) {
-        if (model!.state == AllUserViewState.Busy || _isLoading) {
+      builder: (context, AllUserViewModel model, child) {
+        if (model.state == AllUserViewState.Busy || _isLoading) {
           return Center(
             child: CircularProgressIndicator(),
           );
@@ -58,21 +65,21 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
               controller: _scrollController,
               itemBuilder: (context, index) {
 
-                if (model.kullanicilarListesi!.length == 0) {
+                if (model.kullanicilarListesi.length == 0) {
                   return _kullaniciYokUi();
-                } else if (model.hasMoreLoading && index == model.kullanicilarListesi!.length) {
+                } else if (model.hasMoreLoading && index == model.kullanicilarListesi.length) {
                   return _yeniElemanlarYukleniyorIndicator();
                 }
-                else if (model.tumKonusma!.isEmpty) {
+                else if (model.tumKonusma.isEmpty) {
                   return _yeniElemanlarYukleniyorIndicator();
                 }
 
                 else {
 
-                  return _userListeElemaniOlustur(index, model.tumKonusma!);
+                  return _userListeElemaniOlustur(index, model.tumKonusma);
                 }
               },
-              itemCount: model.tumKonusma!.length,
+              itemCount: model.tumKonusma.length,
             ),
           );
         } else {
@@ -84,14 +91,13 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
 
 
 
-
-  Widget _userListeElemaniOlustur(int? index ,List<Konusma> konusmalar) {
-    final _ogretmenModel = Provider.of<NeedyModel>(context, listen: true);
+  Widget _userListeElemaniOlustur(int index ,List<Konusma> konusmalar) {
+    final _ogretmenModel = Provider.of<HelpfulService>(context, listen: true);
     final _tumKullanicilarViewModel = Provider.of<AllUserViewModel>(context);
-    var _oankiUser = _tumKullanicilarViewModel.kullanicilarListesi![index!];
+    var _oankiUser = _tumKullanicilarViewModel.kullanicilarListesi[index];
+    print("emree");
 
-
-    return  _ogretmenModel.userId == _oankiUser.userId ? Container() :
+    return  _ogretmenModel.user.userId == _oankiUser.userId ? Container() :
 
     Slidable(
       actionPane: SlidableDrawerActionPane(),
@@ -102,14 +108,14 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
         child: GestureDetector(
           onTap: () {
 
-         //   Navigator.of(context, rootNavigator: true).push(
-          //    MaterialPageRoute(
-         //       builder: (context) => ChangeNotifierProvider(
-           //       create: (context) => ChatViewModelYonetici(currentUser: _ogretmenModel, sohbetEdilenUser: _oankiUser),
-             //     child: SohbetPage(fotourl: "_oankiUser.avatarImageUrl",userad: _oankiUser.isim,userid: _oankiUser.userId,),
-             //   ),
-             // ),
-           // );
+           Navigator.of(context, rootNavigator: true).push(
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider(
+                  create: (context) => ChatViewModel(currentUser: _ogretmenModel.user, sohbetEdilenUser: _oankiUser),
+                  child: SohbetPage(fotourl: _oankiUser.foto,userad: _oankiUser.isim,userid: _oankiUser.userId,),
+                ),
+              ),
+            );
           },
           child: Container(
             width: 323.3333333333333.w,
@@ -137,10 +143,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
                 overflow: TextOverflow.visible,
                 maxLines: 1,
               ),
-              leading: CircleAvatar(
-                backgroundImage:  AssetImage("assets/image/userprofil.png") ,
-                radius: 26.0,
-              ),
+
 
               trailing: Padding(
                 padding: EdgeInsets.only(top: 4.0.h),
@@ -148,7 +151,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      konusmalar[index].sonOkunmaZamani != null ?  _saatDakikaGoster(konusmalar[index].sonOkunmaZamani!):"",
+                      konusmalar[index].sonOkunmaZamani != null ?  _saatDakikaGoster(konusmalar[index].sonOkunmaZamani):"",
 
                       style: TextStyle(
                           color: const Color(0xff343633),
@@ -162,7 +165,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
               ),
 
 
-              subtitle:  konusmalar[index].goruldu! ? Text(
+              subtitle:  konusmalar[index].goruldu ? Text(
                 konusmalar[index].son_yollanan_mesaj.toString(),
                 style: TextStyle(
                     color: const Color(0xff343633),
@@ -198,7 +201,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
               color: Colors.red,
               icon: Icons.delete,
               onTap: () async {
-                FirebaseFirestore.instance.collection("ogretmen").doc(_ogretmenModel.userId).collection("sohbetler").doc(_oankiUser.userId).delete();
+                FirebaseFirestore.instance.collection("needy").doc(_ogretmenModel.user.userId).collection("sohbetler").doc(_oankiUser.userId).delete();
               }
           ),
         ),
@@ -206,6 +209,8 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
     );
 
   }
+
+
 
   _yeniElemanlarYukleniyorIndicator() {
     return Padding(
@@ -228,7 +233,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
   void _listeScrollListener() {
     if (_scrollController.offset >= _scrollController.position.maxScrollExtent && !_scrollController.position.outOfRange) {
       print("Listenin en altındayız");
-      dahaFazlaKullaniciGetir();
+      // dahaFazlaKullaniciGetir();
     }
   }
 
@@ -259,6 +264,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
   }
 
   String _saatDakikaGoster(Timestamp date) {
+    initializeDateFormatting();
     var _formatterTime = DateFormat.Hm('tr_TR');
     var _formatterDate = DateFormat.yMd('tr_TR');
     var _formatlanmisTarih="";
@@ -279,7 +285,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
       backgroundColor: Colors.green,
       appBar: AppBar(
         backgroundColor:  Colors.white,
-        title: Text("Mesajlarım",
+        title: Text("Mesajlarım Helpful",
           style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w700,

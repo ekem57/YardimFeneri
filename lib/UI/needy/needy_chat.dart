@@ -9,6 +9,7 @@ import 'package:yardimfeneri/ChattApp/SohbetPageYonetici.dart';
 import 'package:yardimfeneri/ChattApp/alluserModel.dart';
 import 'package:yardimfeneri/ChattApp/alluserModelYonetici.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
+import 'package:yardimfeneri/ChattApp/mesajKisiSecYonetici.dart';
 import 'package:yardimfeneri/ChattApp/mesajkisiSec.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
@@ -45,7 +46,7 @@ class _NeedyChatState extends State<NeedyChat> {
 
     final _kullanicilarModel = Provider.of<AllUserViewModel>(context);
 
-    if (_kullanicilarModel.tumKonusma!.length> _kullanicilarModel.kullanicilarListesi!.length) {
+    if (_kullanicilarModel.tumKonusma.length> _kullanicilarModel.kullanicilarListesi.length) {
       _kullanicilarModel.refresh();
       setState(() {
         _isyenikullanici=true;
@@ -65,12 +66,12 @@ class _NeedyChatState extends State<NeedyChat> {
               controller: _scrollController,
               itemBuilder: (context, index) {
 
-                if (model.kullanicilarListesi!.length == 0) {
+                if (model.kullanicilarListesi.length == 0) {
                   return _kullaniciYokUi();
-                } else if (model.hasMoreLoading && index == model.kullanicilarListesi!.length) {
+                } else if (model.hasMoreLoading && index == model.kullanicilarListesi.length) {
                   return _yeniElemanlarYukleniyorIndicator();
                 }
-                else if (model.tumKonusma!.isEmpty) {
+                else if (model.tumKonusma.isEmpty) {
                   return _yeniElemanlarYukleniyorIndicator();
                 }
 
@@ -79,7 +80,7 @@ class _NeedyChatState extends State<NeedyChat> {
                   return _userListeElemaniOlustur(index, model.tumKonusma);
                 }
               },
-              itemCount: model.tumKonusma!.length,
+              itemCount: model.tumKonusma.length,
             ),
           );
         } else {
@@ -92,10 +93,10 @@ class _NeedyChatState extends State<NeedyChat> {
 
 
 
-  Widget _userListeElemaniOlustur(int index ,List<Konusma>? konusmalar) {
+  Widget _userListeElemaniOlustur(int index ,List<Konusma> konusmalar) {
     final _ogretmenModel = Provider.of<HelpfulModel>(context, listen: true);
     final _tumKullanicilarViewModel = Provider.of<AllUserViewModel>(context);
-    var _oankiUser = _tumKullanicilarViewModel.kullanicilarListesi![index];
+    var _oankiUser = _tumKullanicilarViewModel.kullanicilarListesi[index];
 
 
 
@@ -158,7 +159,7 @@ class _NeedyChatState extends State<NeedyChat> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      konusmalar![index].sonOkunmaZamani != null ?  _saatDakikaGoster(konusmalar[index].sonOkunmaZamani!):"",
+                      konusmalar[index].sonOkunmaZamani != null ?  _saatDakikaGoster(konusmalar[index].sonOkunmaZamani):"",
 
                       style: TextStyle(
                           color: const Color(0xff343633),
@@ -172,7 +173,7 @@ class _NeedyChatState extends State<NeedyChat> {
               ),
 
 
-              subtitle:  konusmalar[index].goruldu! ? Text(
+              subtitle:  konusmalar[index].goruldu ? Text(
                 konusmalar[index].son_yollanan_mesaj.toString(),
                 style: TextStyle(
                     color: const Color(0xff343633),

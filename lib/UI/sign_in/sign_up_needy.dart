@@ -24,7 +24,7 @@ import 'package:yardimfeneri/servis/needy_service.dart';
 
 
 class SignUpNeedy extends StatefulWidget {
-  final String? getButtonText;
+  final String getButtonText;
   SignUpNeedy(
       {
         this.getButtonText,
@@ -34,21 +34,21 @@ class SignUpNeedy extends StatefulWidget {
 }
 
 class _SignUpNeedyState extends State<SignUpNeedy> {
-  final TextEditingController? _emailcontroller = TextEditingController();
-  final TextEditingController? _sifrecontroller = TextEditingController();
-  final TextEditingController? _isimcontroller = TextEditingController();
-  final TextEditingController? _soyisimcontroller = TextEditingController();
-  final TextEditingController? _meslekcontroller = TextEditingController();
-  final TextEditingController? _telefoncontroller = TextEditingController();
-  final TextEditingController? _adrescontroller = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _sifrecontroller = TextEditingController();
+  final TextEditingController _isimcontroller = TextEditingController();
+  final TextEditingController _soyisimcontroller = TextEditingController();
+  final TextEditingController _meslekcontroller = TextEditingController();
+  final TextEditingController _telefoncontroller = TextEditingController();
+  final TextEditingController _adrescontroller = TextEditingController();
   var controllertel = new MaskTextInputFormatter(mask: '### - ### - ## - ##');
   var controller = new MaskTextInputFormatter(mask: '000-000-00-00');
   String il = "İl Seçiniz";
   final _formKey1 = GlobalKey<FormState>();
   bool _loadingVisible = false;
-  PickedFile? _image;
+  PickedFile _image;
   var imageUrl;
-  DateTime? _dateTime;
+  DateTime _dateTime;
   final f = new DateFormat('yyyy-MM-dd');
 
   final picker = ImagePicker();
@@ -78,8 +78,8 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
                         height: 10.0.h,
                       ),
 
-                      Myinput(hintText:"İsim" ,icon: Icon(Icons.person,color: Colors.green,),onSaved: validateEmail,controller: _isimcontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateName,),
-                      Myinput(hintText:"Soyisim" ,icon: Icon(Icons.person,color: Colors.green,),onSaved: validateEmail,controller: _soyisimcontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateSurname,),
+                      Myinput(hintText:"İsim" ,icon: Icon(Icons.person,color: Colors.green,),onSaved: validateEmail,controller: _isimcontroller,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateName,),
+                      Myinput(hintText:"Soyisim" ,icon: Icon(Icons.person,color: Colors.green,),onSaved: validateEmail,controller: _soyisimcontroller,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateSurname,),
                       Padding(
                         padding:  EdgeInsets.all(16.0.w),
                         child: Container(
@@ -129,9 +129,9 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
                           ),
                         ),
                       ),
-                      Myinput(hintText:"E-mail" ,icon: Icon(Icons.email,color: Colors.green,),onSaved: validateEmail,controller: _emailcontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateEmail,),
-                      Myinput(hintText:"Şifre" ,icon: Icon(Icons.lock,color: Colors.green,),onSaved: validateSifre,controller: _sifrecontroller!,keybordType: TextInputType.emailAddress,passwordVisible: true,validate: validateSifre,),
-                      Myinput(hintText:"Meslek" ,icon: Icon(Icons.work,color: Colors.green,),onSaved: validateSifre,controller: _meslekcontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false),
+                      Myinput(hintText:"E-mail" ,icon: Icon(Icons.email,color: Colors.green,),onSaved: validateEmail,controller: _emailcontroller,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateEmail,),
+                      Myinput(hintText:"Şifre" ,icon: Icon(Icons.lock,color: Colors.green,),onSaved: validateSifre,controller: _sifrecontroller,keybordType: TextInputType.emailAddress,passwordVisible: true,validate: validateSifre,),
+                      Myinput(hintText:"Meslek" ,icon: Icon(Icons.work,color: Colors.green,),onSaved: validateSifre,controller: _meslekcontroller,keybordType: TextInputType.emailAddress,passwordVisible: false),
                       InkWell(
                         onTap: () {
                           var result = showSearch<String>(
@@ -159,7 +159,7 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
                           ),
                         ),
                       ),
-                      MultilineTextField(hintText:"Adres" ,icon: Icon(Icons.home_filled,color: Colors.green,),satir:4,onSaved: validateEmail,controller: _adrescontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateAdres,),
+                      MultilineTextField(hintText:"Adres" ,icon: Icon(Icons.home_filled,color: Colors.green,),satir:4,onSaved: validateEmail,controller: _adrescontroller,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateAdres,),
                       InkWell(
                         onTap: () {
                           showCupertinoDatePicker(context);
@@ -199,7 +199,7 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
                                 height: 55.0.h,
                                 child: DropdownButtonFormField(
                                   items: [],
-                                  hint: Text( _dateTime == null ? "Doğum Tarihinizi Seçiniz" : formatTheDate(_dateTime!, format: DateFormat("dd.MM.y")),),
+                                  hint: Text( _dateTime == null ? "Doğum Tarihinizi Seçiniz" : formatTheDate(_dateTime, format: DateFormat("dd.MM.y")),),
                                   decoration:InputDecoration(
                                     helperText: "   ",
                                     icon: Padding(
@@ -267,51 +267,51 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
     );
   }
 
-  String? validateEmail(String? value) {
+  String validateEmail(String value) {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value!))
+    if (!regex.hasMatch(value))
       return 'Email Geçersiz';
     else
       return null;
   }
 
-  String? validateSifre(String? value) {
-    if (value!.length<6)
+  String validateSifre(String value) {
+    if (value.length<6)
       return 'Şifre Geçersiz';
     else
       return null;
   }
 
-  String? validateName(String? value) {
-    if (value!.length < 3)
+  String validateName(String value) {
+    if (value.length < 3)
       return 'İsminiz en az 3 karakter olmalıdır.';
     else
       return null;
   }
 
-  String? validateSurname(String? value) {
-    if (value!.length < 3)
+  String validateSurname(String value) {
+    if (value.length < 3)
       return 'Soyisminiz en az 3 karakter olmalıdır.';
     else
       return null;
   }
 
-  String? validateAdres(String? value) {
-    if (value!.length < 6)
+  String validateAdres(String value) {
+    if (value.length < 6)
       return 'Adres en az 5 karakter olmalıdır.';
     else
       return null;
   }
-  String? validateFaaliyet(String? value) {
-    if (value!.length < 6)
+  String validateFaaliyet(String value) {
+    if (value.length < 6)
       return 'Faaliyet Alanı en az 3 karakter olmalıdır.';
     else
       return null;
   }
-  String? validateTelefon(String? value) {
-    if (value!.length < 11)
+  String validateTelefon(String value) {
+    if (value.length < 11)
       return 'Lütfen Geçerli bir telefon numarası giriniz';
     else
       return null;
@@ -342,7 +342,7 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
   }
 
   void _validateInputsRegister(BuildContext context) async {
-    if (_formKey1.currentState!.validate()) {
+    if (_formKey1.currentState.validate()) {
       if(il=="İl Seçiniz")
       {
         var dialogBilgi = AlertBilgilendirme(
@@ -371,19 +371,19 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
         final _userModel = Provider.of<NeedyService>(context, listen: false);
         NeedyModel needyModel =
         new NeedyModel(userId: "userid",
-            email: _emailcontroller!.text,
-            password: _sifrecontroller!.text,
-            isim: _isimcontroller!.text,
-            soyisim: _soyisimcontroller!.text,
-            meslek: _meslekcontroller!.text,
+            email: _emailcontroller.text,
+            password: _sifrecontroller.text,
+            isim: _isimcontroller.text,
+            soyisim: _soyisimcontroller.text,
+            meslek: _meslekcontroller.text,
             il: il,
-            adres: _adrescontroller!.text,
-            dogumTarihi: _dateTime!,
-            telefon: _telefoncontroller!.text,
+            adres: _adrescontroller.text,
+            dogumTarihi: _dateTime,
+            telefon: _telefoncontroller.text,
             hesaponay: false);
-        NeedyModel? createuser = await _userModel
+        NeedyModel createuser = await _userModel
             .createUserWithEmailandPasswordNeedy(
-            _emailcontroller!.text, _sifrecontroller!.text, needyModel);
+            _emailcontroller.text, _sifrecontroller.text, needyModel);
         if (createuser != null) {
           NavigationService.instance.navigateToReset(
               RouteConstants.LANDINGPAGE);
@@ -396,7 +396,7 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
 
 
 
-  String formatTheDate(DateTime selectedDate, {DateFormat? format}) {
+  String formatTheDate(DateTime selectedDate, {DateFormat format}) {
     final DateTime now = selectedDate;
     final DateFormat formatter = format ?? DateFormat('dd.MM.y', "tr_TR");
     final String formatted = formatter.format(now);
@@ -407,7 +407,7 @@ class _SignUpNeedyState extends State<SignUpNeedy> {
   Future<String> uploadDuyuruImage(String id) async {
     if(_image == null)
       return "";
-    String filePath = _image!.path;
+    String filePath = _image.path;
     String userId = "_modelYonetici.user.userId";
     String fileName = "${userId}-${id}}.jpg";
     File file = File(filePath);

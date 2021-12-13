@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yardimfeneri/common/resimlicard.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 
 class Mesaj_Kisi_Sec extends StatefulWidget {
   final DocumentSnapshot card;

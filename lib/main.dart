@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/ChattApp/alluserModelYonetici.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
+import 'package:yardimfeneri/ChattApp/chat_view_model_Yonetici.dart';
 import 'package:yardimfeneri/extantion/theme_color.dart';
 import 'package:yardimfeneri/locator.dart';
 import 'package:yardimfeneri/servis/charities_service.dart';
@@ -29,6 +30,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => AllUserViewModel()),
         ChangeNotifierProvider(create: (_) => AllUserViewModelYonetici()),
         ChangeNotifierProvider(create: (_) => ChatViewModel()),
+        ChangeNotifierProvider(create: (_) => ChatViewModelYonetici()),
       ],
       child: MyApp(),
     ));

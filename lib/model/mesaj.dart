@@ -1,21 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Mesaj {
-  final String? kimden;
-  final String? kime;
-  final bool? bendenMi;
-  final String? mesaj;
-  final String? konusmaSahibi;
+  final String kimden;
+  final String kime;
+  final bool bendenMi;
+  final String mesaj;
+  final String konusmaSahibi;
   bool goruldumu;
-  Timestamp date= FieldValue.serverTimestamp() as Timestamp;
+  Timestamp date= Timestamp.now();
 
   Mesaj(
       {this.kimden,
         this.kime,
         this.bendenMi,
         this.mesaj,
-        required this.date,
-        required this.goruldumu,
+         this.date,
+         this.goruldumu,
         this.konusmaSahibi});
 
   Map<String, dynamic> toMap() {

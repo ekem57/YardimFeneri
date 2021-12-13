@@ -18,17 +18,17 @@ class FirebaseAuthServiceCharities implements AuthBaseCharities {
 
 
   @override
-  Future<CharitiesModel?> currentCharities() async {
+  Future<CharitiesModel> currentCharities() async {
     try {
-      User? user = await _firebaseAuth.currentUser;
-      return _userFromFirebaseCharities(user!);
+      User user = await _firebaseAuth.currentUser;
+      return _userFromFirebaseCharities(user);
     } catch (e) {
       print("HATA CURRENT USER" + e.toString());
       return null;
     }
   }
 
-  CharitiesModel? _userFromFirebaseCharities(User? user) {
+  CharitiesModel _userFromFirebaseCharities(User user) {
     if (user == null) {
       return null;
     } else {
@@ -38,19 +38,19 @@ class FirebaseAuthServiceCharities implements AuthBaseCharities {
 
 
   @override
-  Future<CharitiesModel?> createUserWithEmailandPasswordCharities(String email, String sifre, CharitiesModel users) async
+  Future<CharitiesModel> createUserWithEmailandPasswordCharities(String email, String sifre, CharitiesModel users) async
   {
     UserCredential sonuc = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: sifre);
-    return _userFromFirebaseCharities(sonuc.user!);
+    return _userFromFirebaseCharities(sonuc.user);
   }
 
   @override
-  Future<CharitiesModel?> signInWithEmailandPasswordCharities(String email, String sifre) async {
+  Future<CharitiesModel> signInWithEmailandPasswordCharities(String email, String sifre) async {
     print("sign girdi");
     UserCredential sonuc = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: sifre);
     print("giris yapıldı");
-    return _userFromFirebaseCharities(sonuc.user!);
+    return _userFromFirebaseCharities(sonuc.user);
   }
 
 }

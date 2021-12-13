@@ -15,11 +15,11 @@ class CharitiesRepo implements AuthBaseCharities {
 
   AppMode appMode = AppMode.RELEASE;
   @override
-  Future<CharitiesModel?> currentCharities() async {
+  Future<CharitiesModel> currentCharities() async {
     print("current charities repo");
-    CharitiesModel? _user = await _firebaseAuthService.currentCharities();
+    CharitiesModel _user = await _firebaseAuthService.currentCharities();
 
-    return await _firestoreDBService.readCharities(_user!.userId, _user.email.toString());
+    return await _firestoreDBService.readCharities(_user.userId, _user.email.toString());
 
   }
 
@@ -33,9 +33,9 @@ class CharitiesRepo implements AuthBaseCharities {
 
 
   @override
-  Future<CharitiesModel?> createUserWithEmailandPasswordCharities(String email, String sifre,CharitiesModel users) async {
-    CharitiesModel? _user = await _firebaseAuthService.createUserWithEmailandPasswordCharities(email, sifre,users);
-    users.userId = _user!.userId;
+  Future<CharitiesModel> createUserWithEmailandPasswordCharities(String email, String sifre,CharitiesModel users) async {
+    CharitiesModel _user = await _firebaseAuthService.createUserWithEmailandPasswordCharities(email, sifre,users);
+    users.userId = _user.userId;
     bool _sonuc = await _firestoreDBService.saveCharities(users);
     if (_sonuc) {
       return await _firestoreDBService.readCharities(_user.userId,email);
@@ -43,11 +43,11 @@ class CharitiesRepo implements AuthBaseCharities {
   }
 
   @override
-  Future<CharitiesModel?> signInWithEmailandPasswordCharities(String email, String sifre) async {
+  Future<CharitiesModel> signInWithEmailandPasswordCharities(String email, String sifre) async {
 
-    CharitiesModel? _user = await _firebaseAuthService.signInWithEmailandPasswordCharities(email, sifre);
+    CharitiesModel _user = await _firebaseAuthService.signInWithEmailandPasswordCharities(email, sifre);
 
-    return await _firestoreDBService.readCharities(_user!.userId,email);
+    return await _firestoreDBService.readCharities(_user.userId,email);
 
   }
 

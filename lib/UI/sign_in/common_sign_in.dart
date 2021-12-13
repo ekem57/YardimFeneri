@@ -21,7 +21,7 @@ import 'package:yardimfeneri/servis/needy_service.dart';
 
 
 class CommonSignIn extends StatefulWidget {
-  final String? getButtonText;
+  final String getButtonText;
   CommonSignIn({
     this.getButtonText,
 });
@@ -30,8 +30,8 @@ class CommonSignIn extends StatefulWidget {
 }
 
 class _CommonSignInState extends State<CommonSignIn> {
-  final TextEditingController? _emailcontroller = TextEditingController();
-  final TextEditingController? _sifrecontroller = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _sifrecontroller = TextEditingController();
   final _formKey1 = GlobalKey<FormState>();
   bool _validate = false;
   bool _loadingVisible = false;  @override
@@ -74,8 +74,8 @@ class _CommonSignInState extends State<CommonSignIn> {
                       SizedBox(
                         height: 50.0.h,
                       ),
-                      Myinput(hintText:"E-mail" ,icon: Icon(Icons.email,color: Colors.green,),onSaved: validateEmail,controller: _emailcontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateEmail,),
-                      Myinput(hintText:"Şifre" ,icon: Icon(Icons.lock,color: Colors.green,),onSaved: validateSifre,controller: _sifrecontroller!,keybordType: TextInputType.emailAddress,passwordVisible: true, satir: null,validate: validateSifre,),
+                      Myinput(hintText:"E-mail" ,icon: Icon(Icons.email,color: Colors.green,),onSaved: validateEmail,controller: _emailcontroller,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateEmail,),
+                      Myinput(hintText:"Şifre" ,icon: Icon(Icons.lock,color: Colors.green,),onSaved: validateSifre,controller: _sifrecontroller,keybordType: TextInputType.emailAddress,passwordVisible: true, satir: null,validate: validateSifre,),
                       SizedBox(height: 10.0.h,),
                       Center(
                         child: MyButton(text: "Giriş", fontSize: 18.0.spByWidth,butonColor: Colors.green,width: 240.0.w,height: 50.0.h,
@@ -127,18 +127,18 @@ class _CommonSignInState extends State<CommonSignIn> {
       ),
     );
   }
-  String? validateEmail(String? value) {
+  String validateEmail(String value) {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value!))
+    if (!regex.hasMatch(value))
       return 'Email Geçersiz';
     else
       return null;
   }
 
-  String? validateSifre(String? value) {
-    if (value!.length<6)
+  String validateSifre(String value) {
+    if (value.length<6)
       return 'Şifre Geçersiz';
     else
       return null;
@@ -147,7 +147,7 @@ class _CommonSignInState extends State<CommonSignIn> {
 
   void _validateInputs(BuildContext context) async {
 
-    if (_formKey1.currentState!.validate()) {
+    if (_formKey1.currentState.validate()) {
       var _userModel;
 
       if (widget.getButtonText == "kurulus") {
@@ -162,20 +162,20 @@ class _CommonSignInState extends State<CommonSignIn> {
       SystemChannels.textInput.invokeMethod('TextInput.hide');
       await _changeLoadingVisible();
       try {
-        CharitiesModel? _usercharities;
-        NeedyModel? _userneedy;
-        HelpfulModel? _userhelpful;
+        CharitiesModel _usercharities;
+        NeedyModel _userneedy;
+        HelpfulModel _userhelpful;
 
         if (widget.getButtonText == "kurulus") {
           _usercharities =
           (await _userModel.signInWithEmailandPasswordCharities(
-              _emailcontroller!.text, _sifrecontroller!.text))!;
+              _emailcontroller.text, _sifrecontroller.text));
         } else if (widget.getButtonText == "yardımsever") {
           _userhelpful = (await _userModel.signInWithEmailandPasswordHelpful(
-              _emailcontroller!.text, _sifrecontroller!.text))!;
+              _emailcontroller.text, _sifrecontroller.text));
         } else {
           _userneedy = (await _userModel.signInWithEmailandPasswordNeedy(
-              _emailcontroller!.text, _sifrecontroller!.text))!;
+              _emailcontroller.text, _sifrecontroller.text));
         }
 
 

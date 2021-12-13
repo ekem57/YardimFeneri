@@ -21,17 +21,16 @@ class FirestoreDBServiceHelpful {
 
 
   @override
-  Future<HelpfulModel> readHelpful(String? userID, String? email) async {
-    DocumentSnapshot<Map<String, dynamic>> _okunanUser = await _firebaseDB
-        .collection("helpful").doc(userID).get();
-    Map<String, dynamic>? _okunanUserBilgileriMap = _okunanUser.data();
+  Future<HelpfulModel> readHelpful(String userID, String email) async {
+    DocumentSnapshot _okunanUser = await _firebaseDB.collection("helpful").doc(userID).get();
+    Map<String, dynamic> _okunanUserBilgileriMap = _okunanUser.data();
     if (_okunanUser.data != null) {
       HelpfulModel _okunanUserNesnesi;
-      _okunanUserNesnesi = HelpfulModel.fromMap(_okunanUserBilgileriMap!);
-      print("Okunan user nesnesi :" + _okunanUserNesnesi.toString());
+      _okunanUserNesnesi = HelpfulModel.fromMap(_okunanUserBilgileriMap);
+      print("Okunan user nesnesi :" + _okunanUserNesnesi.userId.toString());
       return _okunanUserNesnesi;
     } else {
-      return null!;
+      return null;
     }
   }
 
@@ -191,7 +190,7 @@ class FirestoreDBServiceHelpful {
     if (enSonGetirilenUser == null) {
       _querySnapshot = await FirebaseFirestore.instance
           .collection("sohbetler")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection("sohbetler")
           .orderBy("olusturulma_tarihi", descending: true)
           .limit(getirilecekElemanSayisi)
@@ -199,7 +198,7 @@ class FirestoreDBServiceHelpful {
     } else {
       _querySnapshot = await FirebaseFirestore.instance
           .collection("sohbetler")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection("sohbetler")
           .orderBy("olusturulma_tarihi", descending: true)
           .limit(getirilecekElemanSayisi)
@@ -210,10 +209,8 @@ class FirestoreDBServiceHelpful {
 
     for (DocumentSnapshot snap in _querySnapshot.docs) {
       print("userid: " + snap['kimle_konusuyor'].toString());
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection(
-          "ogretmen").doc(snap['kimle_konusuyor']).get();
-      NeedyModel _tekUser = NeedyModel.fromMap(
-          snapshot.data() as Map<String, dynamic>);
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection("helpful").doc(snap['kimle_konusuyor']).get();
+      NeedyModel _tekUser = NeedyModel.fromMap(snapshot.data());
       _tumKullanicilar.add(_tekUser);
     }
 
@@ -222,15 +219,14 @@ class FirestoreDBServiceHelpful {
 
 
   @override
-  Future<List<HelpfulModel>> getUserwithPaginationYonetici(
-      HelpfulModel enSonGetirilenUser, int getirilecekElemanSayisi) async {
+  Future<List<HelpfulModel>> getUserwithPaginationYonetici(HelpfulModel enSonGetirilenUser, int getirilecekElemanSayisi) async {
     QuerySnapshot _querySnapshot;
     List<HelpfulModel> _tumKullanicilar = [];
 
     if (enSonGetirilenUser == null) {
       _querySnapshot = await FirebaseFirestore.instance
           .collection("sohbetler")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection("sohbetler")
           .orderBy("olusturulma_tarihi", descending: true)
           .limit(getirilecekElemanSayisi)
@@ -238,7 +234,7 @@ class FirestoreDBServiceHelpful {
     } else {
       _querySnapshot = await FirebaseFirestore.instance
           .collection("sohbetler")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection("sohbetler")
           .orderBy("olusturulma_tarihi", descending: true)
           .limit(getirilecekElemanSayisi)
@@ -249,10 +245,8 @@ class FirestoreDBServiceHelpful {
 
     for (DocumentSnapshot snap in _querySnapshot.docs) {
       print("userid: " + snap['kimle_konusuyor'].toString());
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection(
-          "yonetici").doc(snap['kimle_konusuyor']).get();
-      HelpfulModel _tekUser = HelpfulModel.fromMap(
-          snapshot.data() as Map<String, dynamic>);
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection("helpful").doc(snap['kimle_konusuyor']).get();
+      HelpfulModel _tekUser = HelpfulModel.fromMap(snapshot.data());
       _tumKullanicilar.add(_tekUser);
     }
 
@@ -295,7 +289,7 @@ class FirestoreDBServiceHelpful {
     }
 
     for (DocumentSnapshot snap in _querySnapshot.docs) {
-      Mesaj _tekMesaj = Mesaj.fromMap(snap.data() as Map<String, dynamic>);
+      Mesaj _tekMesaj = Mesaj.fromMap(snap.data());
       _tumMesajlar.add(_tekMesaj);
     }
     print("gelen toplam mesaj:" + _querySnapshot.docs.length.toString());

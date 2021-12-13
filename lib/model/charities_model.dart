@@ -3,15 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class CharitiesModel extends ChangeNotifier {
-  final String? email;
-  final String? password;
-  late  String? userId;
-  String? telefon;
-  String? isim;
-  String? logo;
-  String? faaliyetalani;
-  DateTime? kurulusTarihi;
-  bool? hesaponay;
+  final String email;
+  final String password;
+  String userId;
+  String telefon;
+  String isim;
+  String logo;
+  String faaliyetalani;
+  DateTime kurulusTarihi;
+  bool hesaponay;
 
 
   CharitiesModel({this.userId,this.email, this.password, this.isim, this.logo, this.faaliyetalani, this.kurulusTarihi, this.telefon, this.hesaponay});

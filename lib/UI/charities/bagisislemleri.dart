@@ -3,7 +3,7 @@ import 'package:yardimfeneri/COMMON/resimsizcard.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
 
 class BagisIslemleriCharities extends StatefulWidget {
-  const BagisIslemleriCharities({Key? key}) : super(key: key);
+  const BagisIslemleriCharities({Key key}) : super(key: key);
 
   @override
   _BagisIslemleriCharitiesState createState() => _BagisIslemleriCharitiesState();

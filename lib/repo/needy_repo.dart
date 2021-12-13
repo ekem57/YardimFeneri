@@ -25,11 +25,11 @@ class NeedyRepo2 implements AuthBaseNeedy {
 
   AppMode appMode = AppMode.RELEASE;
   @override
-  Future<NeedyModel?> currentNeedy() async {
+  Future<NeedyModel> currentNeedy() async {
     print("object needy");
-    NeedyModel? _user = await _firebaseAuthService.currentNeedy();
+    NeedyModel _user = await _firebaseAuthService.currentNeedy();
 
-    return await _firestoreDBService.readNeedy(_user!.userId, _user.email.toString());
+    return await _firestoreDBService.readNeedy(_user.userId, _user.email.toString());
 
   }
 
@@ -43,9 +43,9 @@ class NeedyRepo2 implements AuthBaseNeedy {
 
 
   @override
-  Future<NeedyModel?> createUserWithEmailandPasswordNeedy(String email, String sifre,NeedyModel users) async {
-    NeedyModel? _user = await _firebaseAuthService.createUserWithEmailandPasswordNeedy(email, sifre,users);
-    users.userId = _user!.userId;
+  Future<NeedyModel> createUserWithEmailandPasswordNeedy(String email, String sifre,NeedyModel users) async {
+    NeedyModel _user = await _firebaseAuthService.createUserWithEmailandPasswordNeedy(email, sifre,users);
+    users.userId = _user.userId;
     bool _sonuc = await _firestoreDBService.saveNeedy(users);
     if (_sonuc) {
       return await _firestoreDBService.readNeedy(_user.userId,email);
@@ -53,11 +53,11 @@ class NeedyRepo2 implements AuthBaseNeedy {
   }
 
   @override
-  Future<NeedyModel?> signInWithEmailandPasswordNeedy(String email, String sifre) async {
+  Future<NeedyModel> signInWithEmailandPasswordNeedy(String email, String sifre) async {
 
-    NeedyModel? _user = await _firebaseAuthService.signInWithEmailandPasswordNeedy(email, sifre);
+    NeedyModel _user = await _firebaseAuthService.signInWithEmailandPasswordNeedy(email, sifre);
 
-    return await _firestoreDBService.readNeedy(_user!.userId,email);
+    return await _firestoreDBService.readNeedy(_user.userId,email);
 
   }
 
@@ -73,28 +73,28 @@ class NeedyRepo2 implements AuthBaseNeedy {
     }
   }
 
-  Stream<List<DocumentSnapshot>> getMessagesDoc(String? currentUserID, String? sohbetEdilenUserID) {
+  Stream<List<DocumentSnapshot>> getMessagesDoc(String currentUserID, String sohbetEdilenUserID) {
     if (appMode == AppMode.DEBUG) {
       return Stream.empty();
     } else {
-      return _firestoreDBService.getMessagesDoc(currentUserID!, sohbetEdilenUserID!);
+      return _firestoreDBService.getMessagesDoc(currentUserID, sohbetEdilenUserID);
     }
   }
 
-  Future<bool> mesajguncelle(String? currentUserID, String? sohbetEdilenUserID,String? Docid) async {
+  Future<bool> mesajguncelle(String currentUserID, String sohbetEdilenUserID,String Docid) async {
     if (appMode == AppMode.DEBUG) {
       return true;
     } else {
-      var dbGuncellemeIslemi = await _firestoreDBService.mesajguncelle(currentUserID!, sohbetEdilenUserID! ,Docid!);
+      var dbGuncellemeIslemi = await _firestoreDBService.mesajguncelle(currentUserID, sohbetEdilenUserID ,Docid);
       return dbGuncellemeIslemi;
     }
   }
 
-  Future<bool> saveMessage(Mesaj kaydedilecekMesaj, NeedyModel? currentUser) async {
+  Future<bool> saveMessage(Mesaj kaydedilecekMesaj, NeedyModel currentUser) async {
     if (appMode == AppMode.DEBUG) {
       return true;
     } else {
-      var dbYazmaIslemi = await _firestoreDBService.saveMessage(kaydedilecekMesaj,currentUser!.userId.toString());
+      var dbYazmaIslemi = await _firestoreDBService.saveMessage(kaydedilecekMesaj,currentUser.userId.toString());
       return true;
     }
   }
@@ -117,7 +117,7 @@ class NeedyRepo2 implements AuthBaseNeedy {
 
     timeago.setLocaleMessages("tr", timeago.TrMessages());
 
-    var _duration = zaman.toDate().difference(oankiKonusma.olusturulma_tarihi!.toDate());
+    var _duration = zaman.toDate().difference(oankiKonusma.olusturulma_tarihi.toDate());
     oankiKonusma.aradakiFark = timeago.format(zaman.toDate().subtract(_duration), locale: "tr");
   }
 
@@ -136,7 +136,7 @@ class NeedyRepo2 implements AuthBaseNeedy {
 
 
 
-  NeedyModel? listedeUserBul(String userID) {
+  NeedyModel listedeUserBul(String userID) {
     for (int i = 0; i < tumKullaniciListesi.length; i++) {
       if (tumKullaniciListesi[i].userId == userID) {
         return tumKullaniciListesi[i];

@@ -10,20 +10,20 @@ import 'package:yardimfeneri/repo/helpfulrepo.dart';
 enum ChatViewState { Idle, Loaded, Busy }
 
 class ChatViewModel with ChangeNotifier {
-  List<Mesaj>? _tumMesajlar;
-  ChatViewState? _state = ChatViewState.Idle;
+  List<Mesaj> _tumMesajlar;
+  ChatViewState _state = ChatViewState.Idle;
   static final sayfaBasinaGonderiSayisi = 20;
   HelpfulRepo _userRepository = locator<HelpfulRepo>();
-  final HelpfulModel? currentUser;
-  final NeedyModel? sohbetEdilenUser;
-  Mesaj? _enSonGetirilenMesaj;
-  Mesaj? _listeyeEklenenIlkMesaj;
+  HelpfulModel currentUser;
+  NeedyModel sohbetEdilenUser;
+  Mesaj _enSonGetirilenMesaj;
+  Mesaj _listeyeEklenenIlkMesaj;
   bool _hasMore = true;
   bool _yeniMesajDinleListener = false;
-  List<Mesaj>? _tumMesajlarTers;
+  List<Mesaj> _tumMesajlarTers;
   bool get hasMoreLoading => _hasMore;
 
-  StreamSubscription? _streamSubscription;
+  StreamSubscription _streamSubscription;
 
   ChatViewModel({this.currentUser, this.sohbetEdilenUser}) {
     _tumMesajlar = [];
@@ -31,9 +31,9 @@ class ChatViewModel with ChangeNotifier {
     getMessageWithPagination(false);
   }
 
-  List<Mesaj>?get mesajlarListesi => _tumMesajlar;
-  List<Mesaj>? get mesajlarListesiTers => _tumMesajlarTers;
-  ChatViewState get state => _state!;
+  List<Mesaj>  get mesajlarListesi => _tumMesajlar;
+  List<Mesaj>  get mesajlarListesiTers => _tumMesajlarTers;
+  ChatViewState get state => _state;
 
   set state(ChatViewState value) {
     _state = value;
@@ -43,40 +43,44 @@ class ChatViewModel with ChangeNotifier {
   @override
   dispose() {
     print("Chatviewmodel dispose edildi");
-    _streamSubscription!.cancel();
+    _streamSubscription.cancel();
     super.dispose();
   }
 
-  Future<bool> saveMessage(Mesaj kaydedilecekMesaj, HelpfulModel? currentUser) async {
+  Future<bool> saveMessage(Mesaj kaydedilecekMesaj, HelpfulModel currentUser) async {
+    print("save message çalıştı");
+    print("gelen message: "+kaydedilecekMesaj.kimden.toString());
+    print("current user: "+currentUser.userId.toString());
     return await _userRepository.saveMessage(kaydedilecekMesaj, currentUser);
   }
 
   void getMessageWithPagination(bool yeniMesajlarGetiriliyor) async {
-    if (_tumMesajlar!.length > 0) {
+    print("gelen kullanıcı current: "+currentUser.userId.toString());
+    print("sohbet edilen user: "+sohbetEdilenUser.userId.toString());
+    if (_tumMesajlar.length > 0) {
       print("tüm mesajlar listesi buyuk 0dır.");
-      print("tüm mesajlar son mesaj."+_tumMesajlar!.last.mesaj.toString());
-      _enSonGetirilenMesaj = _tumMesajlar!.last;
+      print("tüm mesajlar son mesaj."+_tumMesajlar.last.mesaj.toString());
+      _enSonGetirilenMesaj = _tumMesajlar.last;
     }
 
     if (!yeniMesajlarGetiriliyor) state = ChatViewState.Busy;
 
     var getirilenMesajlar = await _userRepository.getMessageWithPagination(
-        currentUser!.userId.toString(),
-        sohbetEdilenUser!.userId.toString(),
-        _enSonGetirilenMesaj!,
+        currentUser.userId.toString(),
+        sohbetEdilenUser.userId.toString(),
+        _enSonGetirilenMesaj,
         sayfaBasinaGonderiSayisi);
 
     if (getirilenMesajlar.length < sayfaBasinaGonderiSayisi) {
       _hasMore = false;
     }
 
-    getirilenMesajlar
-        .forEach((msj) => print("getirilen mesajlar:" + msj.mesaj.toString()));
+    getirilenMesajlar.forEach((msj) => print("getirilen mesajlar:" + msj.mesaj.toString()));
 
-    _tumMesajlar!.addAll(getirilenMesajlar);
-    _tumMesajlarTers!.addAll(_tumMesajlar!.reversed);
-    if (_tumMesajlar!.length > 0) {
-      _listeyeEklenenIlkMesaj = _tumMesajlar!.first;
+    _tumMesajlar.addAll(getirilenMesajlar);
+    _tumMesajlarTers.addAll(_tumMesajlar.reversed);
+    if (_tumMesajlar.length > 0) {
+      _listeyeEklenenIlkMesaj = _tumMesajlar.first;
       // print("Listeye eklenen ilk mesaj :" + _listeyeEklenenIlkMesaj.mesaj);
     }
 
@@ -99,7 +103,7 @@ class ChatViewModel with ChangeNotifier {
   void yeniMesajListenerAta() {
     //print("Yeni mesajlar için listener atandı");
     // _userRepository.mesajguncelle(currentUser.userID, sohbetEdilenUser.userID);
-    _streamSubscription = _userRepository.getMessagesDoc(currentUser!.userId.toString(), sohbetEdilenUser!.userId.toString())
+    _streamSubscription = _userRepository.getMessagesDoc(currentUser.userId.toString(), sohbetEdilenUser.userId.toString())
         .listen((anlikData) {
 
       if (anlikData.isNotEmpty) {
@@ -108,29 +112,29 @@ class ChatViewModel with ChangeNotifier {
 
         Mesaj msj=Mesaj.fromMap(anlikData[0].data() as Map<String, dynamic>);
         if (msj.date != null) {
-          if(!msj.bendenMi!){
-            _userRepository.mesajguncelle(sohbetEdilenUser!.userId.toString(), currentUser!.userId.toString(),anlikData[0].id);
+          if(!msj.bendenMi){
+            _userRepository.mesajguncelle(sohbetEdilenUser.userId.toString(), currentUser.userId.toString(),anlikData[0].id);
           }
 
 
           if (_listeyeEklenenIlkMesaj == null) {
 
-            _tumMesajlar!.insert(0, msj);
-            _tumMesajlarTers!.insert(0, msj);
+            _tumMesajlar.insert(0, msj);
+            _tumMesajlarTers.insert(0, msj);
           }
-          else  if(_tumMesajlar![0].date.millisecondsSinceEpoch == msj.date.millisecondsSinceEpoch){
+          else  if(_tumMesajlar[0].date.millisecondsSinceEpoch == msj.date.millisecondsSinceEpoch){
 
-            if(_tumMesajlar![0].goruldumu != msj.goruldumu){
-              _tumMesajlar![0].goruldumu=msj.goruldumu;
+            if(_tumMesajlar[0].goruldumu != msj.goruldumu){
+              _tumMesajlar[0].goruldumu=msj.goruldumu;
 
             }
           }
-          else if (_listeyeEklenenIlkMesaj!.date.millisecondsSinceEpoch != msj.date.millisecondsSinceEpoch) {
+          else if (_listeyeEklenenIlkMesaj.date.millisecondsSinceEpoch != msj.date.millisecondsSinceEpoch) {
 
-            _tumMesajlar!.insert(0, msj);
-            _tumMesajlarTers!.insert(0, msj);
-            if(_tumMesajlar![0].date.millisecondsSinceEpoch == msj.date.millisecondsSinceEpoch && _tumMesajlar![0].goruldumu != msj.goruldumu) {
-              _tumMesajlar![0].goruldumu=msj.goruldumu;
+            _tumMesajlar.insert(0, msj);
+            _tumMesajlarTers.insert(0, msj);
+            if(_tumMesajlar[0].date.millisecondsSinceEpoch == msj.date.millisecondsSinceEpoch && _tumMesajlar[0].goruldumu != msj.goruldumu) {
+              _tumMesajlar[0].goruldumu=msj.goruldumu;
             }
           }
 

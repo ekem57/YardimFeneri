@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
 
 class ResimliCard extends StatelessWidget {
-  final String? textSubtitle;
+  final String textSubtitle;
   final String textTitle;
-  final String? tarih;
+  final String tarih;
   final String img;
   final VoidCallback onPressed;
   final double fontSize;
-  Color? backcolor;
+  Color backcolor;
 
 
   ResimliCard(
-      {Key? key,
-        required this.textSubtitle,
-        required this.textTitle,
-        required this.onPressed,
-        required this.fontSize,
-        required this.img,
-        required this.tarih,
+      {Key key,
+        this.textSubtitle,
+        this.textTitle,
+        this.onPressed,
+        this.fontSize,
+        this.img,
+        this.tarih,
         this.backcolor,
       })
       : assert(textTitle != null ),

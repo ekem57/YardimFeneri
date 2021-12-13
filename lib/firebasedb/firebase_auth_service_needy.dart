@@ -18,17 +18,17 @@ class FirebaseAuthServiceNeedy2 implements AuthBaseNeedy {
 
 
   @override
-  Future<NeedyModel?> currentNeedy() async {
+  Future<NeedyModel> currentNeedy() async {
     try {
-      User? user = await _firebaseAuth.currentUser;
-      return _userFromFirebaseNeedy(user!);
+      User user = await _firebaseAuth.currentUser;
+      return _userFromFirebaseNeedy(user);
     } catch (e) {
       print("HATA CURRENT USER" + e.toString());
       return null;
     }
   }
 
-  NeedyModel? _userFromFirebaseNeedy(User? user) {
+  NeedyModel _userFromFirebaseNeedy(User user) {
     if (user == null) {
       return null;
     } else {
@@ -38,19 +38,19 @@ class FirebaseAuthServiceNeedy2 implements AuthBaseNeedy {
 
 
   @override
-  Future<NeedyModel?> createUserWithEmailandPasswordNeedy(String email, String sifre, NeedyModel users) async
+  Future<NeedyModel> createUserWithEmailandPasswordNeedy(String email, String sifre, NeedyModel users) async
   {
     UserCredential sonuc = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: sifre);
-    return _userFromFirebaseNeedy(sonuc.user!);
+    return _userFromFirebaseNeedy(sonuc.user);
   }
 
   @override
-  Future<NeedyModel?> signInWithEmailandPasswordNeedy(String email, String sifre) async {
+  Future<NeedyModel> signInWithEmailandPasswordNeedy(String email, String sifre) async {
     print("sign girdi");
     UserCredential sonuc = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: sifre);
     print("giris yapıldı");
-    return _userFromFirebaseNeedy(sonuc.user!);
+    return _userFromFirebaseNeedy(sonuc.user);
   }
 
 }

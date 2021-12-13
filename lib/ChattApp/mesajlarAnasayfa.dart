@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:yardimfeneri/ChattApp/alluserModel.dart';
+import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
+import 'package:yardimfeneri/ChattApp/mesajkisiSec.dart';
+import 'package:yardimfeneri/ChattApp/sohbetPage.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/konusma.dart';
 
 
@@ -296,7 +301,7 @@ class _MesajlarNewAnasayfaState extends State<MesajlarNewAnasayfa> {
               MaterialPageRoute(
                 builder: (context) => ChangeNotifierProvider(
                   create: (context) => ChatViewModel(currentUser: _userModel.user, sohbetEdilenUser: _oankiUser),
-                  child: SohbetPage(fotourl: _oankiUser.avatarImageUrl,userad: _oankiUser.adsoyad,userid: _oankiUser.userId,),
+                  child: SohbetPage(fotourl: _oankiUser.foto,userad: _oankiUser.isim,userid: _oankiUser.userId,),
                 ),
               ),
             );
@@ -317,7 +322,7 @@ class _MesajlarNewAnasayfaState extends State<MesajlarNewAnasayfa> {
                 color: Theme.of(context).backgroundColor),
             child: ListTile(
               title: Text(
-                _oankiUser.adsoyad,
+                _oankiUser.isim,
                 style: TextStyle(
                     color: const Color(0xff343633),
                     fontWeight: FontWeight.w600,
@@ -328,7 +333,7 @@ class _MesajlarNewAnasayfaState extends State<MesajlarNewAnasayfa> {
                 maxLines: 1,
               ),
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(_oankiUser.avatarImageUrl),
+                backgroundImage: NetworkImage(_oankiUser.foto),
                 radius: 26.0,
               ),
 
@@ -476,7 +481,7 @@ class _MesajlarNewAnasayfaState extends State<MesajlarNewAnasayfa> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: Renkler.backGroundColor,
+      backgroundColor: Colors.green,
       appBar: AppBar(
         backgroundColor:  Colors.white,
         title: !isSearching

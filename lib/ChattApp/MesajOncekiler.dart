@@ -6,6 +6,7 @@ import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
 import 'package:yardimfeneri/ChattApp/mesajkisiSec.dart';
 import 'package:yardimfeneri/ChattApp/sohbetPage.dart';
 import 'package:yardimfeneri/ChattApp/alluserModel.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/konusma.dart';
 
 import 'mesaj_kisi_sec_firebase.dart';
@@ -112,7 +113,7 @@ class _MesajlarimAnasayfaState extends State<MesajlarimAnasayfa> {
 
           } else if (model.state == AllUserViewState.Loaded) {
             return RefreshIndicator(
-              onRefresh: model.refresh,
+            //  onRefresh: model.refresh,
               child: ListView.builder(
                 controller: _scrollController,
                 itemBuilder: (context, index) {
@@ -145,7 +146,7 @@ class _MesajlarimAnasayfaState extends State<MesajlarimAnasayfa> {
   Widget _kullaniciYokUi() {
     final _kullanicilarModel = Provider.of<AllUserViewModel>(context,listen: false);
     return RefreshIndicator(
-      onRefresh: _kullanicilarModel.refresh,
+     // onRefresh: _kullanicilarModel.refresh,
       child: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Container(
@@ -175,7 +176,7 @@ class _MesajlarimAnasayfaState extends State<MesajlarimAnasayfa> {
   Widget _userListeElemaniOlustur(int index ,List<Konusma> konusmalar) {
     final _userModel = Provider.of<UserModel>(context);
     final _tumKullanicilarViewModel = Provider.of<AllUserViewModel>(context);
-    var _oankiUser? = _tumKullanicilarViewModel.kullanicilarListesi[index];
+    var _oankiUser = _tumKullanicilarViewModel.kullanicilarListesi[index];
 
 
       print("konusmalar "+ (konusmalar[index].sonOkunmaZamani.toDate().subtract(Duration(days: 1)).millisecond > DateTime.now().millisecond).toString());
@@ -212,7 +213,7 @@ class _MesajlarimAnasayfaState extends State<MesajlarimAnasayfa> {
             title: Container(
               width: MediaQuery.of(context).size.width-200,
               child: Text(
-                _oankiUser.adsoyad,
+                _oankiUser.isim,
                 style: TextStyle(
                     color: const Color(0xff343633),
                     fontWeight: FontWeight.w600,
@@ -224,7 +225,7 @@ class _MesajlarimAnasayfaState extends State<MesajlarimAnasayfa> {
               ),
             ),
             leading: CircleAvatar(
-              backgroundImage: NetworkImage(_oankiUser!.foto),
+              backgroundImage: NetworkImage(_oankiUser.foto),
               radius: 26.0,
             ),
             trailing: Padding(

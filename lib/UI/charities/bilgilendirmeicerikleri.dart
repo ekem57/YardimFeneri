@@ -13,14 +13,14 @@ import 'package:yardimfeneri/servis/charities_service.dart';
 
 
 class BilgilendirmeIcerikleri extends StatefulWidget {
-  const BilgilendirmeIcerikleri({Key? key}) : super(key: key);
+  const BilgilendirmeIcerikleri({Key key}) : super(key: key);
 
   @override
   _BilgilendirmeIcerikleriState createState() => _BilgilendirmeIcerikleriState();
 }
 
 class _BilgilendirmeIcerikleriState extends State<BilgilendirmeIcerikleri> {
-  PickedFile? _image;
+  PickedFile _image;
   var imageUrl;
   final picker = ImagePicker();
 
@@ -86,7 +86,7 @@ class _BilgilendirmeIcerikleriState extends State<BilgilendirmeIcerikleri> {
                       : ClipRRect(
                     borderRadius: BorderRadius.circular(17),
                     child: Image.file(
-                      File(_image!.path),
+                      File(_image.path),
                       width: 312.0.w,
                       height: 146.0.h,
                       fit: BoxFit.fitWidth,
@@ -112,7 +112,7 @@ class _BilgilendirmeIcerikleriState extends State<BilgilendirmeIcerikleri> {
                   etkinliklerim['date'] = Timestamp.now();
                   etkinliklerim['foto'] = await uploadDuyuruImage(_reference.id);
                   etkinliklerim['icerik'] = _icerik.text;
-                  etkinliklerim['kurumid'] = _charitiesModel.user!.userId;
+                  etkinliklerim['kurumid'] = _charitiesModel.user.userId;
                   etkinliklerim['postid'] = _reference.id;
                   etkinliklerim['like'] = 0;
 
@@ -193,19 +193,19 @@ class _BilgilendirmeIcerikleriState extends State<BilgilendirmeIcerikleri> {
   }
 
   _imgFromCamera() async {
-    PickedFile? image = await picker.getImage(source: ImageSource.camera, imageQuality: 25);
+    PickedFile image = await picker.getImage(source: ImageSource.camera, imageQuality: 25);
 
     setState(() {
-      _image = image!;
+      _image = image;
     });
   }
 
   _imgFromGallery() async {
-    PickedFile? image = await picker.getImage(source: ImageSource.gallery, imageQuality: 25);
+    PickedFile image = await picker.getImage(source: ImageSource.gallery, imageQuality: 25);
 
     setState(() {
-      _image = image!;
-      print(_image!.path);
+      _image = image;
+      print(_image.path);
     });
   }
 
@@ -213,7 +213,7 @@ class _BilgilendirmeIcerikleriState extends State<BilgilendirmeIcerikleri> {
   Future<String> uploadDuyuruImage(String id) async {
     if(_image == null)
       return "";
-    String filePath = _image!.path;
+    String filePath = _image.path;
     String userId = "_modelYonetici.user.userId";
     File file = File(filePath);
     try {

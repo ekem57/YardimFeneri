@@ -4,7 +4,7 @@ import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/servis/charities_service.dart';
 
 class NotApprovedPageCharities extends StatelessWidget {
-  const NotApprovedPageCharities({Key? key}) : super(key: key);
+  const NotApprovedPageCharities({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

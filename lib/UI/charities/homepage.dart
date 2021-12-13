@@ -19,11 +19,11 @@ class HomePageCharities extends StatefulWidget {
 }
 
 class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTickerProviderStateMixin{
-  AnimationController? controller;
-  Animation<double>? animation;
+  AnimationController controller;
+  Animation<double> animation;
   String gelenfiltre="";
-  late String emre;
-  Future<String>? filter;
+  String emre;
+  Future<String> filter;
   String sharedileadligimfiltre="yok";
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -73,13 +73,13 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                 stream: FirebaseFirestore.instance.collection('anasayfa').orderBy("date",descending: true).snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) return const Text('Yükleniyor...');
-                  final int cardLength = snapshot.data!.docs.length;
+                  final int cardLength = snapshot.data.docs.length;
                   return new ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: cardLength,
                     itemBuilder: (BuildContext context, int index) {
-                      final DocumentSnapshot _card = snapshot.data!.docs[index];
+                      final DocumentSnapshot _card = snapshot.data.docs[index];
                       DateTime dateTimeCreatedAt =
                       DateTime.parse(_card['date'].toDate().toString());
                       DateTime dateTimeNow = DateTime.now();
@@ -91,7 +91,7 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                           dateTimeNow.difference(dateTimeCreatedAt).inMinutes;
 
 
-                      late Widget child;
+                      Widget child;
                       if (_card['foto'] == "null" && _card['bicim'].toString() == "post") {
                         child = Column(
                           children: <Widget>[
@@ -101,13 +101,13 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                               builder: (BuildContext context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data!.docs.length;
+                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data!.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -209,12 +209,12 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                             StreamBuilder<QuerySnapshot>(
                                 stream: FirebaseFirestore.instance
                                     .collection('userspost')
-                                    .doc(_userModel.user!.userId)
+                                    .doc(_userModel.user.userId)
                                     .collection('katilimci').where('postid',isEqualTo: _card['postid'])
                                     .snapshots(),
-                                builder: (BuildContext? context,
-                                    AsyncSnapshot<QuerySnapshot>? snapshot) {
-                                  if (!snapshot!.hasData)
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (!snapshot.hasData)
                                     return Center(
                                         child:
                                         const CircularProgressIndicator());
@@ -224,9 +224,9 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                                       const NeverScrollableScrollPhysics(),
                                       itemCount: 1,
 
-                                      itemBuilder: (BuildContext? context, int? index) {
+                                      itemBuilder: (BuildContext context, int index) {
 
-                                       return Userpost(snapshot,index,_card,context!);
+                                       return Userpost(snapshot,index,_card,context);
 
                                       });
                                 }),
@@ -243,13 +243,13 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                               builder: (BuildContext context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data!.docs.length;
+                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data!.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -369,7 +369,7 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                             StreamBuilder<QuerySnapshot>(
                                 stream: FirebaseFirestore.instance
                                     .collection('userspost')
-                                    .doc(_userModel.user!.userId)
+                                    .doc(_userModel.user.userId)
                                     .collection('katilimci').where('postid',isEqualTo: _card['postid'])
                                     .snapshots(),
                                 builder: (BuildContext context,
@@ -386,8 +386,8 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                                       // ignore: missing_return
                                       itemBuilder: (context, int index) {
 
-                                        late Widget child;
-                                        if (snapshot.data!.docs.toString() == "[]") {
+                                        Widget child;
+                                        if (snapshot.data.docs.toString() == "[]") {
                                           child = GestureDetector(
                                             onTap:(){gri_kalp_tikla(_card);},
                                             child: Padding(
@@ -408,7 +408,7 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                                                   )),
                                             ),
                                           );
-                                        } else if (snapshot.data!.docs[0]['onay'] == false) {
+                                        } else if (snapshot.data.docs[0]['onay'] == false) {
                                           child = GestureDetector(
                                             onTap: (){gri_kalp_tikla(_card);},
                                             child: Padding(
@@ -431,7 +431,7 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                                               ),
                                             ),
                                           );
-                                        } else if (snapshot.data!.docs[0]['onay'] == true) {
+                                        } else if (snapshot.data.docs[0]['onay'] == true) {
                                           child = GestureDetector(
                                             onTap: (){
                                               kirmizi_kalp_tikla(_card);
@@ -495,7 +495,7 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
 
     EtkinlikEkle['postid'] = card['postid'];
     EtkinlikEkle['onay'] = true;
-    _firestore.collection("userspost").doc(_userModel.user!.userId).collection("katilimci").doc(card.id).set(EtkinlikEkle);
+    _firestore.collection("userspost").doc(_userModel.user.userId).collection("katilimci").doc(card.id).set(EtkinlikEkle);
 
 
   }
@@ -515,16 +515,16 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
 
     EtkinlikEkle['postid'] = card['postid'];
     EtkinlikEkle['onay'] = false;
-    _firestore.collection("userspost").doc(_userModel.user!.userId).collection("katilimci").doc(card.id).set(EtkinlikEkle);
+    _firestore.collection("userspost").doc(_userModel.user.userId).collection("katilimci").doc(card.id).set(EtkinlikEkle);
 
   }
 
 
-  Widget Userpost(AsyncSnapshot<QuerySnapshot>? snapshot,int? index,DocumentSnapshot? _card,BuildContext context) {
-    late Widget child;
-    if (snapshot!.data!.docs.toString() == "[]") {
+  Widget Userpost(AsyncSnapshot<QuerySnapshot> snapshot,int index,DocumentSnapshot _card,BuildContext context) {
+     Widget child;
+    if (snapshot.data.docs.toString() == "[]") {
       child = GestureDetector(
-        onTap:(){gri_kalp_tikla(_card!);},
+        onTap:(){gri_kalp_tikla(_card);},
         child: Padding(
           padding: const EdgeInsets.only(left: 20),
           child: Align(
@@ -537,16 +537,16 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                       child: Image.asset("assets/gri_kalp.png")),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(_card!['like'].toString(),style: TextStyle(),),
+                    child: Text(_card['like'].toString(),style: TextStyle(),),
                   ),
                 ],
               )),
         ),
       );
     }
-    else if (snapshot.data!.docs[0]['onay'] == false) {
+    else if (snapshot.data.docs[0]['onay'] == false) {
       child = GestureDetector(
-        onTap: (){gri_kalp_tikla(_card!);},
+        onTap: (){gri_kalp_tikla(_card);},
         child: Padding(
           padding: const EdgeInsets.only(left: 20),
           child: Align(
@@ -560,7 +560,7 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                         "assets/gri_kalp.png")),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(_card!['like'].toString(),style: TextStyle(),),
+                  child: Text(_card['like'].toString(),style: TextStyle(),),
                 ),
               ],
             ),
@@ -568,11 +568,11 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
         ),
       );
     }
-    else if (snapshot.data!.docs[0]['onay'] ==
+    else if (snapshot.data.docs[0]['onay'] ==
         true) {
       child = GestureDetector(
         onTap: (){
-          kirmizi_kalp_tikla(_card!);
+          kirmizi_kalp_tikla(_card);
         },
         child: Padding(
           padding: const EdgeInsets.only(left: 20),
@@ -587,7 +587,7 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                         "assets/kirmizi_kalp.png")),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(_card!['like'].toString(),style: TextStyle(),),
+                  child: Text(_card['like'].toString(),style: TextStyle(),),
                 ),
               ],
             ),
@@ -605,7 +605,7 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
 class DescriptionTextWidget extends StatefulWidget {
   final String text;
 
-  DescriptionTextWidget({required this.text});
+  DescriptionTextWidget({this.text});
 
   @override
   _DescriptionTextWidgetState createState() =>
@@ -613,8 +613,8 @@ class DescriptionTextWidget extends StatefulWidget {
 }
 
 class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
-  String? firstHalf;
-  String? secondHalf;
+  String firstHalf;
+  String secondHalf;
 
   bool flag = true;
 
@@ -635,15 +635,15 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
   Widget build(BuildContext context) {
     return new Container(
       padding: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-      child: secondHalf!.isEmpty
+      child: secondHalf.isEmpty
           ? new Text(
-        firstHalf!,
+        firstHalf,
         style: TextStyle(fontSize: 18),
       )
           : new Column(
         children: <Widget>[
           new Text(
-            flag ? (firstHalf! + "...") : (firstHalf! + secondHalf!),
+            flag ? (firstHalf + "...") : (firstHalf + secondHalf),
             style: TextStyle(fontSize: 18),
           ),
           new InkWell(

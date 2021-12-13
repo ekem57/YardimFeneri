@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/COMMON/myButton.dart';
-import 'package:yardimfeneri/SERVICE/helpful_service.dart';
+import 'package:yardimfeneri/servis/helpful_service.dart';
 
 class YardimEttigiProjeler extends StatefulWidget {
-  const YardimEttigiProjeler({Key? key}) : super(key: key);
+  const YardimEttigiProjeler({Key key}) : super(key: key);
 
   @override
   _YardimEttigiProjelerState createState() => _YardimEttigiProjelerState();

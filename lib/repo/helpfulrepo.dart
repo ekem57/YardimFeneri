@@ -20,11 +20,11 @@ class HelpfulRepo implements AuthBaseHelpful {
 
   AppMode appMode = AppMode.RELEASE;
   @override
-  Future<HelpfulModel?> currentHelpful() async {
+  Future<HelpfulModel> currentHelpful() async {
 
-    HelpfulModel? _user = await _firebaseAuthService.currentHelpful();
+    HelpfulModel _user = await _firebaseAuthService.currentHelpful();
 
-    return await _firestoreDBService.readHelpful(_user!.userId, _user.email.toString());
+    return await _firestoreDBService.readHelpful(_user.userId, _user.email.toString());
 
   }
 
@@ -38,9 +38,9 @@ class HelpfulRepo implements AuthBaseHelpful {
 
 
   @override
-  Future<HelpfulModel?> createUserWithEmailandPasswordHelpful(String email, String sifre,HelpfulModel users) async {
-    HelpfulModel? _user = await _firebaseAuthService.createUserWithEmailandPasswordHelpful(email, sifre,users);
-    users.userId = _user!.userId;
+  Future<HelpfulModel> createUserWithEmailandPasswordHelpful(String email, String sifre,HelpfulModel users) async {
+    HelpfulModel _user = await _firebaseAuthService.createUserWithEmailandPasswordHelpful(email, sifre,users);
+    users.userId = _user.userId;
     bool _sonuc = await _firestoreDBService.saveHelpful(users);
     if (_sonuc) {
       return await _firestoreDBService.readHelpful(_user.userId,email);
@@ -48,11 +48,11 @@ class HelpfulRepo implements AuthBaseHelpful {
   }
 
   @override
-  Future<HelpfulModel?> signInWithEmailandPasswordHelpful(String email, String sifre) async {
+  Future<HelpfulModel> signInWithEmailandPasswordHelpful(String email, String sifre) async {
 
-    HelpfulModel? _user = await _firebaseAuthService.signInWithEmailandPasswordHelpful(email, sifre);
+    HelpfulModel _user = await _firebaseAuthService.signInWithEmailandPasswordHelpful(email, sifre);
 
-    return await _firestoreDBService.readHelpful(_user!.userId.toString(),email);
+    return await _firestoreDBService.readHelpful(_user.userId.toString(),email);
 
   }
 
@@ -82,7 +82,7 @@ class HelpfulRepo implements AuthBaseHelpful {
 
     timeago.setLocaleMessages("tr", timeago.TrMessages());
 
-    var _duration = zaman.toDate().difference(oankiKonusma.olusturulma_tarihi!.toDate());
+    var _duration = zaman.toDate().difference(oankiKonusma.olusturulma_tarihi.toDate());
     oankiKonusma.aradakiFark = timeago.format(zaman.toDate().subtract(_duration), locale: "tr");
   }
 
@@ -98,11 +98,8 @@ class HelpfulRepo implements AuthBaseHelpful {
   }
 
 
-  Future<List<Mesaj>> getMessageWithPagination(
-      String currentUserID,
-      String sohbetEdilenUserID,
-      Mesaj enSonGetirilenMesaj,
-      int getirilecekElemanSayisi) async {
+  Future<List<Mesaj>> getMessageWithPagination(String currentUserID, String sohbetEdilenUserID, Mesaj enSonGetirilenMesaj, int getirilecekElemanSayisi) async {
+   print("current userid: "+currentUserID+"  sohbet edilen id: "+sohbetEdilenUserID +" ");
     if (appMode == AppMode.DEBUG) {
       return [];
     } else {
@@ -112,11 +109,11 @@ class HelpfulRepo implements AuthBaseHelpful {
   }
 
 
-  Future<bool> saveMessage(Mesaj kaydedilecekMesaj, HelpfulModel? currentUser) async {
+  Future<bool> saveMessage(Mesaj kaydedilecekMesaj, HelpfulModel currentUser) async {
     if (appMode == AppMode.DEBUG) {
       return true;
     } else {
-      var dbYazmaIslemi = await _firestoreDBService.saveMessage(kaydedilecekMesaj,currentUser!.userId.toString());
+      var dbYazmaIslemi = await _firestoreDBService.saveMessage(kaydedilecekMesaj,currentUser.userId.toString());
 
 
       return true;

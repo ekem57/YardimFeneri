@@ -7,14 +7,14 @@ import 'package:yardimfeneri/COMMON/myButton.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
 
 class YardimKampanyasiAcmaCharities extends StatefulWidget {
-  const YardimKampanyasiAcmaCharities({Key? key}) : super(key: key);
+  const YardimKampanyasiAcmaCharities({Key key}) : super(key: key);
 
   @override
   _YardimKampanyasiAcmaCharitiesState createState() => _YardimKampanyasiAcmaCharitiesState();
 }
 
 class _YardimKampanyasiAcmaCharitiesState extends State<YardimKampanyasiAcmaCharities> {
-  PickedFile? _image;
+  PickedFile _image;
   var imageUrl;
   final picker = ImagePicker();
 
@@ -76,7 +76,7 @@ class _YardimKampanyasiAcmaCharitiesState extends State<YardimKampanyasiAcmaChar
                       : ClipRRect(
                     borderRadius: BorderRadius.circular(17),
                     child: Image.file(
-                      File(_image!.path),
+                      File(_image.path),
                       width: 312.0.w,
                       height: 146.0.h,
                       fit: BoxFit.fitWidth,
@@ -128,19 +128,19 @@ class _YardimKampanyasiAcmaCharitiesState extends State<YardimKampanyasiAcmaChar
   }
 
   _imgFromCamera() async {
-    PickedFile? image = await picker.getImage(source: ImageSource.camera, imageQuality: 25);
+    PickedFile image = await picker.getImage(source: ImageSource.camera, imageQuality: 25);
 
     setState(() {
-      _image = image!;
+      _image = image;
     });
   }
 
   _imgFromGallery() async {
-    PickedFile? image = await picker.getImage(source: ImageSource.gallery, imageQuality: 25);
+    PickedFile image = await picker.getImage(source: ImageSource.gallery, imageQuality: 25);
 
     setState(() {
-      _image = image!;
-      print(_image!.path);
+      _image = image;
+      print(_image.path);
     });
   }
 
@@ -148,7 +148,7 @@ class _YardimKampanyasiAcmaCharitiesState extends State<YardimKampanyasiAcmaChar
   Future<String> uploadDuyuruImage(String id) async {
     if(_image == null)
       return "";
-    String filePath = _image!.path;
+    String filePath = _image.path;
     String userId = "_modelYonetici.user.userId";
     String fileName = "${userId}-${id}}.jpg";
     File file = File(filePath);

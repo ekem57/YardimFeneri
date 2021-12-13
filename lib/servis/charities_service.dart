@@ -10,9 +10,9 @@ enum CharitiesViewState { Idle, Busy }
 class CharitiesService with ChangeNotifier implements AuthBaseCharities {
   CharitiesViewState _state = CharitiesViewState.Idle;
   CharitiesRepo _userRepository = locator<CharitiesRepo>();
-  CharitiesModel? _user;
+  CharitiesModel _user;
 
-  CharitiesModel? get user => _user;
+  CharitiesModel get user => _user;
 
   CharitiesViewState get state => _state;
 
@@ -42,7 +42,7 @@ class CharitiesService with ChangeNotifier implements AuthBaseCharities {
   }
 
   @override
-  Future<CharitiesModel?> createUserWithEmailandPasswordCharities(String email, String sifre, CharitiesModel users) async {
+  Future<CharitiesModel> createUserWithEmailandPasswordCharities(String email, String sifre, CharitiesModel users) async {
     try {
       _user = await _userRepository.createUserWithEmailandPasswordCharities(email, sifre,users);
       return _user;
@@ -52,13 +52,13 @@ class CharitiesService with ChangeNotifier implements AuthBaseCharities {
   }
 
   @override
-  Future<CharitiesModel?> currentCharities() async {
+  Future<CharitiesModel> currentCharities() async {
     try {
       print("service charities");
       state = CharitiesViewState.Busy;
       _user = await _userRepository.currentCharities();
       if (_user != null)
-        return _user!;
+        return _user;
     } catch (e) {
       return null;
     } finally {
@@ -68,11 +68,11 @@ class CharitiesService with ChangeNotifier implements AuthBaseCharities {
 
 
   @override
-  Future<CharitiesModel?> signInWithEmailandPasswordCharities(String email, String sifre) async {
+  Future<CharitiesModel> signInWithEmailandPasswordCharities(String email, String sifre) async {
     try {
 
       _user = await _userRepository.signInWithEmailandPasswordCharities(email, sifre);
-      return _user!;
+      return _user;
 
     } finally {
       state = CharitiesViewState.Idle;

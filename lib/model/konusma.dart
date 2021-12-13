@@ -3,17 +3,17 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Konusma {
-  final String? konusma_sahibi;
-  final String? kimle_konusuyor;
-  bool? goruldu;
-  Timestamp? olusturulma_tarihi;
-  String? son_yollanan_mesaj;
-  Timestamp? gorulme_tarihi;
-  String? konusulanUserName;
-  String? konusulanUserProfilURL;
-  Timestamp? sonOkunmaZamani;
-  String? aradakiFark;
-  String? name;
+  final String konusma_sahibi;
+  final String kimle_konusuyor;
+  bool goruldu;
+  Timestamp olusturulma_tarihi;
+  String son_yollanan_mesaj;
+  Timestamp gorulme_tarihi;
+  String konusulanUserName;
+  String konusulanUserProfilURL;
+  Timestamp sonOkunmaZamani;
+  String aradakiFark;
+  String name;
 
   Konusma(
       {this.konusma_sahibi,

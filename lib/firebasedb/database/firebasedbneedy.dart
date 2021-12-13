@@ -22,18 +22,18 @@ class FirestoreDBServiceNeedy {
   }
 
   @override
-  Future<NeedyModel> readNeedy(String? userID, String? email) async {
+  Future<NeedyModel> readNeedy(String userID, String email) async {
     print("gelen userid read needy: "+userID.toString());
-    DocumentSnapshot<Map<String, dynamic>> _okunanUser = await _firebaseDB.collection("needy").doc(userID).get();
-    Map<String, dynamic>? _okunanUserBilgileriMap = _okunanUser.data();
+    DocumentSnapshot _okunanUser = await _firebaseDB.collection("needy").doc(userID).get();
+    Map<String, dynamic> _okunanUserBilgileriMap = _okunanUser.data();
     print("okunan user: "+_okunanUserBilgileriMap.toString());
     if(_okunanUser.data != null){
       NeedyModel _okunanUserNesnesi;
-      _okunanUserNesnesi = NeedyModel.fromMap(_okunanUserBilgileriMap!);
+      _okunanUserNesnesi = NeedyModel.fromMap(_okunanUserBilgileriMap);
       print("Okunan user nesnesi :" + _okunanUserNesnesi.toString());
       return _okunanUserNesnesi;
     }else{
-      return null!;
+      return null;
     }
   }
 
@@ -178,14 +178,15 @@ class FirestoreDBServiceNeedy {
   }
 
   @override
-  Future<List<NeedyModel>> getUserwithPagination(NeedyModel? enSonGetirilenUser, int getirilecekElemanSayisi) async {
+  Future<List<NeedyModel>> getUserwithPagination(NeedyModel enSonGetirilenUser, int getirilecekElemanSayisi) async {
     QuerySnapshot _querySnapshot;
     List<NeedyModel> _tumKullanicilar = [];
-
     if (enSonGetirilenUser == null) {
+      print("get user with e girdi :"+FirebaseAuth.instance.currentUser.uid + " sohbet edilen: "+enSonGetirilenUser.toString());
+
       _querySnapshot = await FirebaseFirestore.instance
           .collection("sohbetler")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection("sohbetler")
           .orderBy("olusturulma_tarihi", descending: true)
           .limit(getirilecekElemanSayisi)
@@ -193,7 +194,7 @@ class FirestoreDBServiceNeedy {
     } else {
       _querySnapshot = await FirebaseFirestore.instance
           .collection("sohbetler")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection("sohbetler")
           .orderBy("olusturulma_tarihi", descending: true)
           .limit(getirilecekElemanSayisi)
@@ -203,17 +204,60 @@ class FirestoreDBServiceNeedy {
     }
 
     for (DocumentSnapshot snap in _querySnapshot.docs) {
-      print("userid: " + snap['kimle_konusuyor'].toString());
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection(
-          "ogretmen").doc(snap['kimle_konusuyor']).get();
-      NeedyModel _tekUser = NeedyModel.fromMap(
-          snapshot.data() as Map<String, dynamic>);
+      print("userid KİMLE KONUŞUYOR: " + snap['kimle_konusuyor'].toString());
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection("needy").doc(snap['kimle_konusuyor']).get();
+      NeedyModel _tekUser = NeedyModel.fromMap(snapshot.data());
       _tumKullanicilar.add(_tekUser);
     }
 
     return _tumKullanicilar;
   }
 
+
+  Future<List<Mesaj>> getMessagewithPagination(
+      String currentUserID,
+      String sohbetEdilenUserID,
+      Mesaj enSonGetirilenMesaj,
+      int getirilecekElemanSayisi) async {
+    QuerySnapshot _querySnapshot;
+    List<Mesaj> _tumMesajlar = [];
+
+    if (enSonGetirilenMesaj == null) {
+      _querySnapshot = await FirebaseFirestore.instance
+          .collection("sohbetler")
+          .doc(currentUserID)
+          .collection("sohbetler")
+          .doc(sohbetEdilenUserID)
+          .collection("mesajlar")
+          .where("konusmaSahibi", isEqualTo: currentUserID)
+          .orderBy("date", descending: true)
+          .limit(getirilecekElemanSayisi)
+          .get();
+    } else {
+      _querySnapshot = await FirebaseFirestore.instance
+          .collection("sohbetler")
+          .doc(currentUserID)
+          .collection("sohbetler")
+          .doc(sohbetEdilenUserID)
+          .collection("mesajlar")
+          .where("konusmaSahibi", isEqualTo: currentUserID)
+          .orderBy("date", descending: true)
+          .startAfter([enSonGetirilenMesaj.date])
+          .limit(getirilecekElemanSayisi)
+          .get();
+
+      await Future.delayed(Duration(seconds: 1));
+    }
+
+    for (DocumentSnapshot snap in _querySnapshot.docs) {
+
+      Mesaj _tekMesaj = Mesaj.fromMap(snap.data() as Map<String, dynamic>);
+      _tumMesajlar.add(_tekMesaj);
+    }
+    print("gelen toplam mesaj:"+_querySnapshot.docs.length.toString());
+
+    return _tumMesajlar;
+  }
 
 
 

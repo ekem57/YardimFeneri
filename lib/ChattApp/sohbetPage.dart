@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
@@ -10,9 +11,9 @@ import 'package:yardimfeneri/model/mesaj.dart';
 
 
 class SohbetPage extends StatefulWidget {
-  final String? fotourl;
-  final String? userad;
-  final String? userid;
+  final String fotourl;
+  final String userad;
+  final String userid;
 
   SohbetPage({ this.fotourl,this.userad,this.userid});
   @override
@@ -23,7 +24,7 @@ class _SohbetPageState extends State<SohbetPage> {
   var _mesajController = TextEditingController();
   ScrollController _scrollController = new ScrollController();
   bool _isLoading = false;
-  DocumentSnapshot? sohetsahibi;
+  DocumentSnapshot sohetsahibi;
   @override
   void initState() {
     // TODO: implement initState
@@ -34,7 +35,9 @@ class _SohbetPageState extends State<SohbetPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _chatModel = Provider.of<ChatViewModelYonetici>(context);
+    final _chatModel = Provider.of<ChatViewModel>(context);
+    print("chat model: "+_chatModel.currentUser.userId.toString());
+    print("chat model sohbet user : "+_chatModel.sohbetEdilenUser.userId.toString());
     return Scaffold(
       backgroundColor:  Colors.green,
       appBar: AppBar(
@@ -45,11 +48,7 @@ class _SohbetPageState extends State<SohbetPage> {
         backgroundColor: Colors.green,
 
       ),
-      body: _chatModel.state == ChatViewState.Busy
-          ? Center(
-        child: CircularProgressIndicator(),
-      )
-          : _sayfaYapisi(),
+      body: _sayfaYapisi(),
     );
   }
   Widget _sayfaYapisi(){
@@ -82,19 +81,20 @@ class _SohbetPageState extends State<SohbetPage> {
 
   }
   Widget _buildMesajListesi() {
-    return Consumer<ChatViewModelYonetici?>(builder: (context, chatModel, child) {
+    return Consumer<ChatViewModel>(builder:
+        (context, chatModel, child) {
       return Expanded(
         child: ListView.builder(
           controller: _scrollController,
           reverse: true,
           itemBuilder: (context, index) {
-            if (chatModel!.hasMoreLoading &&
-                chatModel.mesajlarListesi.length == index) {
+            print("mesaj listesi:"+ chatModel.mesajlarListesi.length.toString());
+            if (chatModel.hasMoreLoading && chatModel.mesajlarListesi.length == index) {
               return _yeniElemanlarYukleniyorIndicator();
             } else
               return _SohbetkonusmaBalonuOlustur(chatModel.mesajlarListesi[index],chatModel.mesajlarListesi[0].goruldumu);
           },
-          itemCount: chatModel!.hasMoreLoading
+          itemCount: chatModel.hasMoreLoading
               ? chatModel.mesajlarListesi.length + 1
               : chatModel.mesajlarListesi.length,
         ),
@@ -103,7 +103,7 @@ class _SohbetPageState extends State<SohbetPage> {
   }
 
   Widget _buildYeniMesajGir() {
-    final _chatModel = Provider.of<ChatViewModelYonetici>(context);
+    final _chatModel = Provider.of<ChatViewModel>(context);
     return Container(
       padding: EdgeInsets.only(bottom: 8.0.h, left: 8.0.w, right:8.0.w),
       child: Row(
@@ -145,13 +145,15 @@ class _SohbetPageState extends State<SohbetPage> {
           GestureDetector(
             onTap: ()  async {
 
+              print("kimden "+_chatModel.currentUser.toString());
+              print("kime "+_chatModel.sohbetEdilenUser.userId.toString());
               if (_mesajController.text.trim().length > 0) {
-                Mesaj _kaydedilecekMesaj = Mesaj(
-                  kimden: _chatModel.currentUser!.userId,
-                  kime: _chatModel.sohbetEdilenUser!.userId,
+                Mesaj _kaydedilecekMesaj =  new Mesaj(
+                  kimden: _chatModel.currentUser.userId.toString(),
+                  kime: _chatModel.sohbetEdilenUser.userId.toString(),
                   bendenMi: true,
                   goruldumu: false,
-                  konusmaSahibi: _chatModel.currentUser!.userId,
+                  konusmaSahibi: _chatModel.currentUser.userId.toString(),
                   mesaj: _mesajController.text, date: Timestamp.now(),
                 );
                 _mesajController.clear();
@@ -190,21 +192,24 @@ class _SohbetPageState extends State<SohbetPage> {
     );
   }
 
-  Widget _SohbetkonusmaBalonuOlustur(Mesaj? oankiMesaj,bool sonmesajgorunme) {
+  Widget _SohbetkonusmaBalonuOlustur(Mesaj oankiMesaj,bool sonmesajgorunme) {
     Color _gelenMesajRenk = Colors.blue;
     Color _gidenMesajRenk = Theme.of(context).primaryColor;
-    final _chatModel = Provider.of<ChatViewModelYonetici>(context);
+    final _chatModel = Provider.of<ChatViewModel>(context);
     var _saatDakikaDegeri = "";
-    final icon = sonmesajgorunme ? Icon(Icons.done_all,color: Colors.blue,size: 16.0.h,) : oankiMesaj!.goruldumu ? Icon(Icons.done_all,color: Colors.blue,size: 16.0.h,) : Icon(Icons.done,color: Colors.black38,size: 16.0.h,);
+    final icon = sonmesajgorunme ? Icon(Icons.done_all,color: Colors.blue,size: 16.0.h,) : oankiMesaj.goruldumu ? Icon(Icons.done_all,color: Colors.blue,size: 16.0.h,) : Icon(Icons.done,color: Colors.black38,size: 16.0.h,);
 
-    try {
-      _saatDakikaDegeri = _saatDakikaGoster(oankiMesaj!.date);
-    } catch (e) {
+    try
+    {
+      _saatDakikaDegeri = _saatDakikaGoster(oankiMesaj.date);
+    } catch (e)
+    {
       print("hata var:" + e.toString());
     }
 
-    var _benimMesajimMi = oankiMesaj!.bendenMi;
-    if (_benimMesajimMi!) {
+    var _benimMesajimMi = oankiMesaj.bendenMi;
+    if (_benimMesajimMi)
+    {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.0.w, vertical: 6.2.h),
         child: Row(
@@ -269,9 +274,8 @@ class _SohbetPageState extends State<SohbetPage> {
           ],
         ),
       );
-    } else {
-
-
+    }
+    else {
       return  Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.0.w, vertical: 6.2.h),
         child: Row(
@@ -337,6 +341,7 @@ class _SohbetPageState extends State<SohbetPage> {
 
 
   String _saatDakikaGoster(Timestamp date) {
+    initializeDateFormatting();
     var _formatterTime = DateFormat.Hm('tr_TR');
     var _formatterDate = DateFormat.yMd('tr_TR');
     var _formatlanmisTarih="";

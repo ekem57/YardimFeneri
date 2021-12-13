@@ -4,7 +4,7 @@ import 'package:yardimfeneri/COMMON/myButton.dart';
 import 'package:yardimfeneri/servis/needy_service.dart';
 
 class HomePageNeedy extends StatefulWidget {
-  const HomePageNeedy({Key? key}) : super(key: key);
+  const HomePageNeedy({Key key}) : super(key: key);
 
   @override
   _HomePageNeedyState createState() => _HomePageNeedyState();

@@ -10,20 +10,20 @@ import 'package:yardimfeneri/repo/helpfulrepo.dart';
 enum AllUserViewStateYonetici { Idle, Loaded, Busy }
 
 class AllUserViewModelYonetici with ChangeNotifier {
-  AllUserViewStateYonetici? _state = AllUserViewStateYonetici.Idle;
-  List<HelpfulModel>? _tumKullanicilar;
-  HelpfulModel? _enSonGetirilenUser;
+  AllUserViewStateYonetici _state = AllUserViewStateYonetici.Idle;
+  List<HelpfulModel> _tumKullanicilar;
+  HelpfulModel _enSonGetirilenUser;
   static final sayfaBasinaGonderiSayisi = 10;
-  bool? _hasMore = true;
-  List<Konusma>? tumKonusma;
-  List<bool>? yenigelenokunmamiskonusmalar=[];
-  bool get hasMoreLoading => _hasMore!;
-  StreamSubscription? _streamSubscription;
-  HelpfulRepo? _userRepository = locator<HelpfulRepo>();
-  List<HelpfulModel>? get kullanicilarListesi => _tumKullanicilar;
+  bool _hasMore = true;
+  List<Konusma> tumKonusma;
+  List<bool> yenigelenokunmamiskonusmalar=[];
+  bool get hasMoreLoading => _hasMore;
+  StreamSubscription _streamSubscription;
+  HelpfulRepo _userRepository = locator<HelpfulRepo>();
+  List<HelpfulModel> get kullanicilarListesi => _tumKullanicilar;
 
-  List<Konusma>? get kullaniciBilgileri => tumKonusma;
-  AllUserViewStateYonetici get state => _state!;
+  List<Konusma> get kullaniciBilgileri => tumKonusma;
+  AllUserViewStateYonetici get state => _state;
 
   set state(AllUserViewStateYonetici value) {
     _state = value;
@@ -34,13 +34,13 @@ class AllUserViewModelYonetici with ChangeNotifier {
     _tumKullanicilar = [];
     tumKonusma=[];
     _enSonGetirilenUser = null;
-    getUserWithPagination(_enSonGetirilenUser!, false,FirebaseAuth.instance.currentUser!.uid);
+    getUserWithPagination(_enSonGetirilenUser, false,FirebaseAuth.instance.currentUser.uid);
   }
 
 
   @override
   dispose() {
-    _streamSubscription!.cancel();
+    _streamSubscription.cancel();
     super.dispose();
   }
 
@@ -48,8 +48,8 @@ class AllUserViewModelYonetici with ChangeNotifier {
   //yenielemanlar getir true yapılır
   //ilk açılıs için yenielemanlar için false deger verilir.
   getUserWithPagination(HelpfulModel enSonGetirilenUser, bool yeniElemanlarGetiriliyor,String userid) async {
-    if (_tumKullanicilar!.length > 0) {
-      _enSonGetirilenUser = _tumKullanicilar!.last;
+    if (_tumKullanicilar.length > 0) {
+      _enSonGetirilenUser = _tumKullanicilar.last;
     }
 
     if (yeniElemanlarGetiriliyor) {
@@ -57,26 +57,26 @@ class AllUserViewModelYonetici with ChangeNotifier {
       state = AllUserViewStateYonetici.Busy;
     }
 
-    var yeniListe = await _userRepository!.getUserwithPagination(_enSonGetirilenUser!, sayfaBasinaGonderiSayisi);
+    var yeniListe = await _userRepository.getUserwithPagination(_enSonGetirilenUser, sayfaBasinaGonderiSayisi);
 
     if (yeniListe.length < sayfaBasinaGonderiSayisi) {
       _hasMore = false;
     }
 
 
-    _tumKullanicilar!.addAll(yeniListe);
+    _tumKullanicilar.addAll(yeniListe);
 
 
-    _streamSubscription = _userRepository!.getAllConversations(userid)
+    _streamSubscription = _userRepository.getAllConversations(userid)
         .listen((anlikData) async {
 
-      tumKonusma!.clear();
-      yenigelenokunmamiskonusmalar!.clear();
+      tumKonusma.clear();
+      yenigelenokunmamiskonusmalar.clear();
 
-      tumKonusma!.addAll(anlikData);
+      tumKonusma.addAll(anlikData);
 
-      if(_tumKullanicilar!.isNotEmpty) {
-        if (tumKonusma![0].kimle_konusuyor != _tumKullanicilar![0].userId) {
+      if(_tumKullanicilar.isNotEmpty) {
+        if (tumKonusma[0].kimle_konusuyor != _tumKullanicilar[0].userId) {
           refresh();
         }
       }
@@ -91,7 +91,7 @@ class AllUserViewModelYonetici with ChangeNotifier {
 
   Future<void> dahaFazlaUserGetir() async {
     // print("Daha fazla user getir tetiklendi - viewmodeldeyiz -");
-    if (_hasMore!) getUserWithPagination(_enSonGetirilenUser!, true,FirebaseAuth.instance.currentUser!.uid.toString());
+    if (_hasMore) getUserWithPagination(_enSonGetirilenUser, true,FirebaseAuth.instance.currentUser.uid.toString());
     //else
     //print("Daha fazla eleman yok o yüzden çagrılmayacak");
     await Future.delayed(Duration(seconds: 2));
@@ -101,6 +101,6 @@ class AllUserViewModelYonetici with ChangeNotifier {
     _hasMore = true;
     _enSonGetirilenUser = null;
     _tumKullanicilar = [];
-    getUserWithPagination(_enSonGetirilenUser!, true,FirebaseAuth.instance.currentUser!.uid);
+    getUserWithPagination(_enSonGetirilenUser, true,FirebaseAuth.instance.currentUser.uid);
   }
 }

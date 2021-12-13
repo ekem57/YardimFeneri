@@ -7,8 +7,8 @@ class CitySearch extends SearchDelegate<String>{
   @override
   String get searchFieldLabel => "Şehir Ara";
 
-  final List<String>? cities;
-  String? result;
+  final List<String> cities;
+  String result;
 
   CitySearch(this.cities);
 
@@ -38,7 +38,7 @@ class CitySearch extends SearchDelegate<String>{
 
   @override
   Widget buildResults(BuildContext context) {
-    final suggestions = cities!.where((name) {
+    final suggestions = cities.where((name) {
       return name.toLowerCase().contains(query.toLowerCase());
     });
 
@@ -66,7 +66,7 @@ class CitySearch extends SearchDelegate<String>{
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestions = cities!.where((name) {
+    final suggestions = cities.where((name) {
       return name.toLowerCase().contains(query.toLowerCase());
     });
 

@@ -3,16 +3,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class HelpfulModel extends ChangeNotifier {
-  final String? email;
-  final String? password;
-  late  String? userId;
-  String? telefon;
-  String? isim;
-  String? soyisim;
-  String? adres;
-  String? il;
-  String? foto;
-  DateTime? dogumTarihi;
+  final String email;
+  final String password;
+  String userId;
+  String telefon;
+  String isim;
+  String soyisim;
+  String adres;
+  String il;
+  String foto;
+  DateTime dogumTarihi;
 
   HelpfulModel({this.userId,this.email, this.password,this.isim,this.soyisim,this.adres,this.il,this.foto,this.dogumTarihi,this.telefon});
 
@@ -31,7 +31,7 @@ class HelpfulModel extends ChangeNotifier {
   }
 
   HelpfulModel.fromMap(Map<String, dynamic> map)
-      : userId = map['userId'],
+      : userId = map['userID'],
         telefon = map['telefon'],
         email = map['email'],
         password = null,

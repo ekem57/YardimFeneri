@@ -6,7 +6,7 @@ class ImageViewerPage extends StatefulWidget {
 
 
   final String assetName;
-  ImageViewerPage({required this.assetName});
+  ImageViewerPage({ this.assetName});
   @override
   _ImageViewerPageState createState() => _ImageViewerPageState();
 }

@@ -16,18 +16,18 @@ class FirestoreDBServiceCharities {
   }
 
   @override
-  Future<CharitiesModel> readCharities(String? userID, String? email) async {
+  Future<CharitiesModel> readCharities(String userID, String email) async {
     print("gelen userid read charities: "+userID.toString());
-    DocumentSnapshot<Map<String, dynamic>> _okunanUser = await _firebaseDB.collection("charities").doc(userID).get();
-    Map<String, dynamic>? _okunanUserBilgileriMap = _okunanUser.data();
+    DocumentSnapshot _okunanUser = await _firebaseDB.collection("charities").doc(userID).get();
+    Map<String, dynamic> _okunanUserBilgileriMap = _okunanUser.data();
     print("okunan user: "+_okunanUserBilgileriMap.toString());
     if(_okunanUser.data != null){
       CharitiesModel _okunanUserNesnesi;
-      _okunanUserNesnesi = CharitiesModel.fromMap(_okunanUserBilgileriMap!);
+      _okunanUserNesnesi = CharitiesModel.fromMap(_okunanUserBilgileriMap);
       print("Okunan user nesnesi :" + _okunanUserNesnesi.toString());
       return _okunanUserNesnesi;
     }else{
-      return null!;
+      return null;
     }
 
   }

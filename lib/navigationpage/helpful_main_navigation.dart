@@ -10,9 +10,9 @@ import 'package:yardimfeneri/extantion/size_config.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 
 class HelpfulMainNavigation extends StatefulWidget {
-  final HelpfulModel? user;
+  final HelpfulModel user;
 
-  HelpfulMainNavigation({Key? key, required this.user}) : super(key: key);
+  HelpfulMainNavigation({ this.user});
 
   @override
   _HelpfulMainNavigationState createState() => _HelpfulMainNavigationState();
@@ -48,7 +48,7 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
           onTapped = false;
           index = position;
         });
-        final CurvedNavigationBarState? navBarState = _bottomNavigationKey.currentState as CurvedNavigationBarState?;
+        final CurvedNavigationBarState navBarState = _bottomNavigationKey.currentState as CurvedNavigationBarState;
         navBarState?.setPage(1);
         print("index: $index");
         setState(() {
@@ -104,7 +104,7 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
     });
   }
 
-  Widget? _getBody(int index) {
+  Widget _getBody(int index) {
     switch (index) {
       case 0:
         return HomePageHelpful();

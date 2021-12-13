@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/FLTFirebaseFirestorePlugin.h</key>
 		<data>
-		9AE4hvDF6prIhr5aEAUzA+3biyw=
+		90QevNYqqAdQDZu5ZoIp5P2kH2M=
 		</data>
 		<key>Headers/cloud_firestore-umbrella.h</key>
 		<data>
@@ -14,7 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		e+WWH9FnDN+BXWKkkdob1K61ziQ=
+		LGG1481sdFvL4eDFLr5X1CPa3V4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -22,19 +22,19 @@
 		</data>
 		<key>PrivateHeaders/FLTDocumentSnapshotStreamHandler.h</key>
 		<data>
-		Fr7k2a743dDIcZA/g1EToI3BU3w=
+		RcNQqQLIFlKx4Izkc26GVuGMw00=
 		</data>
 		<key>PrivateHeaders/FLTFirebaseFirestoreReader.h</key>
 		<data>
-		WeVzSDKzsXYhOVz72nEj1fjN3CQ=
+		vrSis8GoTP4l0GYVWlPk6VTw86s=
 		</data>
 		<key>PrivateHeaders/FLTFirebaseFirestoreUtils.h</key>
 		<data>
-		CfhHmwOOMrmZO7yTDgHu0QYI68w=
+		01Z/i7GWTIcLY+7Hxp1Z/dBqS4o=
 		</data>
 		<key>PrivateHeaders/FLTFirebaseFirestoreWriter.h</key>
 		<data>
-		q/OVzbj9gU69Rbc+x0yeVmypw8M=
+		O9nIDietQ4Bm5hy2cwwqIhZQKF0=
 		</data>
 		<key>PrivateHeaders/FLTLoadBundleStreamHandler.h</key>
 		<data>
@@ -42,15 +42,15 @@
 		</data>
 		<key>PrivateHeaders/FLTQuerySnapshotStreamHandler.h</key>
 		<data>
-		Mx8J6YATAY82TDvzFWMIwGo1TbQ=
+		24dPIHMzPXIFaiz5X+1f9OTRwEk=
 		</data>
 		<key>PrivateHeaders/FLTSnapshotsInSyncStreamHandler.h</key>
 		<data>
-		zop7JV0xMqsIIeqS94X5tRDsseI=
+		JRuLYbepFna00V21wzLSskFPinY=
 		</data>
 		<key>PrivateHeaders/FLTTransactionStreamHandler.h</key>
 		<data>
-		RP+qqLhoa3TdNpLby5zssoTODAk=
+		lvx8+WfWcQPVFHWAMYYTM3sny7s=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -59,11 +59,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9AE4hvDF6prIhr5aEAUzA+3biyw=
+			90QevNYqqAdQDZu5ZoIp5P2kH2M=
 			</data>
 			<key>hash2</key>
 			<data>
-			LinpxuWKzJrP/mPW2THPGaug9RPgD4MExS6axbQq64I=
+			e9ckM2gQ5f9PFDjGxpASDUAIbFHXRriXyC0XIT1CMks=
 			</data>
 		</dict>
 		<key>Headers/cloud_firestore-umbrella.h</key>
@@ -92,44 +92,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Fr7k2a743dDIcZA/g1EToI3BU3w=
+			RcNQqQLIFlKx4Izkc26GVuGMw00=
 			</data>
 			<key>hash2</key>
 			<data>
-			yKe109drhNh+JG1ZgaDfAJyHb1idv7e5f1SrjzRm0F8=
+			R1le3fVCVI2sfcKpb6PHyox9BaMONu2D9r4CzNV3cZQ=
 			</data>
 		</dict>
 		<key>PrivateHeaders/FLTFirebaseFirestoreReader.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WeVzSDKzsXYhOVz72nEj1fjN3CQ=
+			vrSis8GoTP4l0GYVWlPk6VTw86s=
 			</data>
 			<key>hash2</key>
 			<data>
-			k9tQDrJVOW3Vk35yjuFbc64QaNN4igtPH8+YZwMalQA=
+			dFai32EdDZ/su8z8zXEA7WbDsBjo4qXB49pBscKLbe8=
 			</data>
 		</dict>
 		<key>PrivateHeaders/FLTFirebaseFirestoreUtils.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CfhHmwOOMrmZO7yTDgHu0QYI68w=
+			01Z/i7GWTIcLY+7Hxp1Z/dBqS4o=
 			</data>
 			<key>hash2</key>
 			<data>
-			MsW0tpbQxNfa/CmaB1qwo0N9X5SQhfWQHCIQcmJ/O7o=
+			YnC26dQPYjikRVOyWnujg6v6DoEE0+r7FB9RiSdbb5A=
 			</data>
 		</dict>
 		<key>PrivateHeaders/FLTFirebaseFirestoreWriter.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			q/OVzbj9gU69Rbc+x0yeVmypw8M=
+			O9nIDietQ4Bm5hy2cwwqIhZQKF0=
 			</data>
 			<key>hash2</key>
 			<data>
-			a+liyvmKEvTnTEtrM497X4b4cvKrWS3GTzvqh99Babs=
+			HqlBXWiFLdz4kgSfFVpTjOklY3ZXT/8f6NGWlbHA/XQ=
 			</data>
 		</dict>
 		<key>PrivateHeaders/FLTLoadBundleStreamHandler.h</key>
@@ -147,33 +147,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Mx8J6YATAY82TDvzFWMIwGo1TbQ=
+			24dPIHMzPXIFaiz5X+1f9OTRwEk=
 			</data>
 			<key>hash2</key>
 			<data>
-			fsmEp0wYqk9pXgxOssl78+bzmWQZDxHC043/QkFGmk4=
+			HyfkwYNIJ8YC/QwbeNzvBRsLrivJuTczpHe0GbnKu1g=
 			</data>
 		</dict>
 		<key>PrivateHeaders/FLTSnapshotsInSyncStreamHandler.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zop7JV0xMqsIIeqS94X5tRDsseI=
+			JRuLYbepFna00V21wzLSskFPinY=
 			</data>
 			<key>hash2</key>
 			<data>
-			3vaL1v/AQLtiFZPhFZ7hLQQqatZYA/YA3okJf1AcqZk=
+			5mgfr0S5SOUzoBrubyZpI9+yQRNlQlPfDLrq8NNwTxI=
 			</data>
 		</dict>
 		<key>PrivateHeaders/FLTTransactionStreamHandler.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			RP+qqLhoa3TdNpLby5zssoTODAk=
+			lvx8+WfWcQPVFHWAMYYTM3sny7s=
 			</data>
 			<key>hash2</key>
 			<data>
-			G5Y+i7qhUK6v7jl/Hsu9RGmU06LgrQ0T4oks0R340mo=
+			P9cm9De5D6tTwsnaLzXSLiesPSMILGky97FrtppGMU0=
 			</data>
 		</dict>
 	</dict>

@@ -10,11 +10,11 @@ class ResimsizCard extends StatelessWidget {
 
 
   const ResimsizCard(
-      {Key? key,
-        required this.isim,
-        required this.bagismiktar,
-        required this.mesaj,
-        required this.onPressed,
+      {Key key,
+        this.isim,
+        this.bagismiktar,
+        this.mesaj,
+        this.onPressed,
       })
       : assert(isim != null ),
         super(key: key);

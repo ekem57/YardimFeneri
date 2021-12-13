@@ -18,17 +18,17 @@ class FirebaseAuthServiceHelpful implements AuthBaseHelpful {
 
 
   @override
-  Future<HelpfulModel?> currentHelpful() async {
+  Future<HelpfulModel> currentHelpful() async {
     try {
-      User? user = await _firebaseAuth.currentUser;
-      return _userFromFirebaseCharities(user!);
+      User user = await _firebaseAuth.currentUser;
+      return _userFromFirebaseCharities(user);
     } catch (e) {
       print("HATA CURRENT USER" + e.toString());
       return null;
     }
   }
 
-  HelpfulModel? _userFromFirebaseCharities(User? user) {
+  HelpfulModel _userFromFirebaseCharities(User user) {
     if (user == null) {
       return null;
     } else {
@@ -38,19 +38,19 @@ class FirebaseAuthServiceHelpful implements AuthBaseHelpful {
 
 
   @override
-  Future<HelpfulModel?> createUserWithEmailandPasswordHelpful(String email, String sifre, HelpfulModel users) async
+  Future<HelpfulModel> createUserWithEmailandPasswordHelpful(String email, String sifre, HelpfulModel users) async
   {
     UserCredential sonuc = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: sifre);
-    return _userFromFirebaseCharities(sonuc.user!);
+    return _userFromFirebaseCharities(sonuc.user);
   }
 
   @override
-  Future<HelpfulModel?> signInWithEmailandPasswordHelpful(String email, String sifre) async {
+  Future<HelpfulModel> signInWithEmailandPasswordHelpful(String email, String sifre) async {
     print("sign girdi");
     UserCredential sonuc = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: sifre);
     print("giris yapıldı");
-    return _userFromFirebaseCharities(sonuc.user!);
+    return _userFromFirebaseCharities(sonuc.user);
   }
 
 

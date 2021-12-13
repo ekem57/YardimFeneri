@@ -4,12 +4,12 @@ import 'myButton.dart';
 
 
 class AlertBilgilendirme extends StatefulWidget {
-  final Color? bgColor;
-  final String? baslik;
-  final String? icerik;
-  final String? BtnText;
+  final Color bgColor;
+  final String baslik;
+  final String icerik;
+  final String BtnText;
   VoidCallback Pressed;
-   double? circularBorderRadius;
+   double circularBorderRadius;
 
   AlertBilgilendirme({
     this.baslik,
@@ -17,7 +17,7 @@ class AlertBilgilendirme extends StatefulWidget {
     this.circularBorderRadius = 15.0,
     this.bgColor = Colors.white,
     this.BtnText,
-    required this.Pressed,
+    this.Pressed,
   })  : assert(bgColor != null),
         assert(circularBorderRadius != null);
 
@@ -32,13 +32,13 @@ class _AlertBilgilendirmeState extends State<AlertBilgilendirme> {
   Widget build(BuildContext context) {
     return Center(
       child: AlertDialog(
-        title: widget.baslik != null ? Text(widget.baslik!) : null,
+        title: widget.baslik != null ? Text(widget.baslik) : null,
         content: widget.icerik != null
             ? Padding(
           padding:
           EdgeInsets.only(top: 30.0.h),
           child: Text(
-            widget.icerik!,
+            widget.icerik,
             style: TextStyle(
               fontSize: 18.0.spByWidth,
               fontWeight: FontWeight.w600,
@@ -51,7 +51,7 @@ class _AlertBilgilendirmeState extends State<AlertBilgilendirme> {
             : null,
         backgroundColor: widget.bgColor,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(widget.circularBorderRadius!)),
+            borderRadius: BorderRadius.circular(widget.circularBorderRadius)),
         actions: <Widget>[
 
           Padding(

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yardimfeneri/COMMON/myButton.dart';
-import 'package:yardimfeneri/EXTENSIONS/size_extension.dart';
-import 'package:yardimfeneri/SERVICE/needy_service.dart';
+import 'package:yardimfeneri/extantion/size_extension.dart';
+import 'package:yardimfeneri/servis/needy_service.dart';
 
 class NotApprovedPageNeedy extends StatelessWidget {
-  const NotApprovedPageNeedy({Key? key}) : super(key: key);
+  const NotApprovedPageNeedy({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

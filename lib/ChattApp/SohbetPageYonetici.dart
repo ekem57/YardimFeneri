@@ -1,17 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
+import 'package:yardimfeneri/ChattApp/chat_view_model_Yonetici.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/mesaj.dart';
 
 
 class SohbetPageYonetici extends StatefulWidget {
-  final String? fotourl;
-  final String? userad;
-  final String? userid;
+  final String fotourl;
+  final String userad;
+  final String userid;
 
   SohbetPageYonetici({ this.fotourl,this.userad,this.userid});
   @override
@@ -22,7 +24,7 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
   var _mesajController = TextEditingController();
   ScrollController _scrollController = new ScrollController();
   bool _isLoading = false;
-  late DocumentSnapshot sohetsahibi;
+  DocumentSnapshot sohetsahibi;
   @override
   void initState() {
     // TODO: implement initState
@@ -33,11 +35,11 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
 
   @override
   Widget build(BuildContext context) {
-    final _chatModel = Provider.of<ChatViewModel>(context);
+    final _chatModel = Provider.of<ChatViewModelYonetici>(context);
     return Scaffold(
       backgroundColor:  Colors.green,
       appBar: AppBar(
-        title: Text("Sohbet"),
+        title: Text("Sohbet Needy"),
         elevation: 0.0,
         brightness: Brightness.dark,
         toolbarHeight: 60.0.h,
@@ -81,28 +83,28 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
 
   }
   Widget _buildMesajListesi() {
-    return Consumer<ChatViewModel>(builder: (context, chatModel, child) {
+    return Consumer<ChatViewModelYonetici>(builder: (context, chatModel, child) {
       return Expanded(
         child: ListView.builder(
           controller: _scrollController,
           reverse: true,
           itemBuilder: (context, index) {
             if (chatModel.hasMoreLoading &&
-                chatModel.mesajlarListesi!.length == index) {
+                chatModel.mesajlarListesi.length == index) {
               return _yeniElemanlarYukleniyorIndicator();
             } else
-              return _SohbetkonusmaBalonuOlustur(chatModel.mesajlarListesi![index],chatModel.mesajlarListesi![0].goruldumu);
+              return _SohbetkonusmaBalonuOlustur(chatModel.mesajlarListesi[index],chatModel.mesajlarListesi[0].goruldumu);
           },
           itemCount: chatModel.hasMoreLoading
-              ? chatModel.mesajlarListesi!.length + 1
-              : chatModel.mesajlarListesi!.length,
+              ? chatModel.mesajlarListesi.length + 1
+              : chatModel.mesajlarListesi.length,
         ),
       );
     });
   }
 
   Widget _buildYeniMesajGir() {
-    final _chatModel = Provider.of<ChatViewModel>(context);
+    final _chatModel = Provider.of<ChatViewModelYonetici>(context);
     return Container(
       padding: EdgeInsets.only(bottom: 8.0.h, left: 8.0.w, right:8.0.w),
       child: Row(
@@ -147,11 +149,11 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
               if (_mesajController.text.trim().length > 0) {
                 Mesaj _kaydedilecekMesaj =
                 Mesaj(
-                  kimden: _chatModel.currentUser!.userId.toString(),
-                  kime: _chatModel.sohbetEdilenUser!.userId,
+                  kimden: _chatModel.currentUser.userId.toString(),
+                  kime: _chatModel.sohbetEdilenUser.userId,
                   bendenMi: true,
                   goruldumu: false,
-                  konusmaSahibi: _chatModel.currentUser!.userId,
+                  konusmaSahibi: _chatModel.currentUser.userId,
                   mesaj: _mesajController.text, date: Timestamp.now(),
                 );
                 _mesajController.clear();
@@ -193,7 +195,7 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
   Widget _SohbetkonusmaBalonuOlustur(Mesaj oankiMesaj,bool sonmesajgorunme) {
     Color _gelenMesajRenk = Colors.blue;
     Color _gidenMesajRenk = Theme.of(context).primaryColor;
-    final _chatModel = Provider.of<ChatViewModel>(context);
+    final _chatModel = Provider.of<ChatViewModelYonetici>(context);
     var _saatDakikaDegeri = "";
     final icon = sonmesajgorunme ? Icon(Icons.done_all,color: Colors.blue,size: 16.0.h,) : oankiMesaj.goruldumu ? Icon(Icons.done_all,color: Colors.blue,size: 16.0.h,) : Icon(Icons.done,color: Colors.black38,size: 16.0.h,);
 
@@ -204,7 +206,7 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
     }
 
     var _benimMesajimMi = oankiMesaj.bendenMi;
-    if (_benimMesajimMi!) {
+    if (_benimMesajimMi) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.0.w, vertical: 6.2.h),
         child: Row(
@@ -345,6 +347,7 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
 
    */
   String _saatDakikaGoster(Timestamp date) {
+    initializeDateFormatting();
     var _formatterTime = DateFormat.Hm('tr_TR');
     var _formatterDate = DateFormat.yMd('tr_TR');
     var _formatlanmisTarih="";

@@ -30,14 +30,14 @@ class _LandingPageState extends State<LandingPage> {
         if (_charitiesService.user == null) {
           return SignInPage();
         } else {
-          return CharitiesMainNavigation(user: _charitiesService.user!);
+          return CharitiesMainNavigation(user: _charitiesService.user);
         }
       }else
       {
-        return NeedyMainNavigation(user: _needyService.user!);
+        return NeedyMainNavigation(user: _needyService.user);
       }
     }else{
-      return HelpfulMainNavigation(user: _helpfulService.user!,);
+      return HelpfulMainNavigation(user: _helpfulService.user,);
     }
 
 

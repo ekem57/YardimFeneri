@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:yardimfeneri/servis/needy_service.dart';
 
 class ProfilNeedy extends StatefulWidget {
-  const ProfilNeedy({Key? key}) : super(key: key);
+  const ProfilNeedy({Key key}) : super(key: key);
 
   @override
   _ProfilNeedyState createState() => _ProfilNeedyState();

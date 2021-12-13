@@ -7,7 +7,7 @@ import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/servis/charities_service.dart';
 
 class UyelerCharities extends StatefulWidget {
-  const UyelerCharities({Key? key}) : super(key: key);
+  const UyelerCharities({Key key}) : super(key: key);
 
   @override
   _UyelerCharitiesState createState() => _UyelerCharitiesState();
@@ -27,21 +27,21 @@ class _UyelerCharitiesState extends State<UyelerCharities> {
             ),
             SizedBox(height: 20.0.h,),
             StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('charities').doc(_charitiesModel.user!.userId).collection("uyeler").snapshots(),
+              stream: FirebaseFirestore.instance.collection('charities').doc(_charitiesModel.user.userId).collection("uyeler").snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshotUye) {
                 if (!snapshotUye.hasData) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
                 }
-                final int cardLength2 = snapshotUye.data!.docs.length;
+                final int cardLength2 = snapshotUye.data.docs.length;
 
                 return ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: cardLength2,
                   itemBuilder: (_, int index) {
-                    final DocumentSnapshot _cardYonetici = snapshotUye.data!.docs[index];
+                    final DocumentSnapshot _cardYonetici = snapshotUye.data.docs[index];
                     return StreamBuilder<DocumentSnapshot>(
                       stream: uyesec(_cardYonetici),
                       builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -57,7 +57,7 @@ class _UyelerCharitiesState extends State<UyelerCharities> {
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: cardLength,
                           itemBuilder: (_, int index) {
-                            final DocumentSnapshot _card = snapshot.data!;
+                            final DocumentSnapshot _card = snapshot.data;
                             print("Üye işlemleri _card: " + _card.data().toString());
                             return _card.data() != null ?  Slidable(
                               actionPane: SlidableDrawerActionPane(),
@@ -104,7 +104,7 @@ class _UyelerCharitiesState extends State<UyelerCharities> {
     );
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> uyesec(DocumentSnapshot<Object?> cardYonetici) {
+  Stream uyesec(DocumentSnapshot cardYonetici) {
 
     if(cardYonetici['uyetipi']=="charities")
     {

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:yardimfeneri/servis/needy_service.dart';
 
 class YardimTalebindeBulunma extends StatefulWidget {
-  const YardimTalebindeBulunma({Key? key}) : super(key: key);
+  const YardimTalebindeBulunma({Key key}) : super(key: key);
 
   @override
   _YardimTalebindeBulunmaState createState() => _YardimTalebindeBulunmaState();

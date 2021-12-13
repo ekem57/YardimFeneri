@@ -4,31 +4,31 @@ import 'package:yardimfeneri/extantion/size_extension.dart';
 
 class Myinput extends StatelessWidget {
   final String hintText;
-  final String? errortext;
-  final int? satir;
-  final  TextEditingController controller;
-  final  FocusNode? focusNode;
+  final String errortext;
+  final int satir;
+  final TextEditingController controller;
+  final FocusNode focusNode;
   final Widget icon;
-  final FormFieldValidator<String>? validate;
+  final FormFieldValidator<String> validate;
   final FormFieldSetter<String>  onSaved;
-  final ValueChanged<String>? onchange;
+  final ValueChanged<String> onchange;
   final TextInputType keybordType;
   final bool passwordVisible;
 
   const Myinput(
       {
-        Key? key,
-        required this.hintText,
-         this.errortext,
+        Key key,
+        this.hintText,
+        this.errortext,
         this.satir,
-        required this.controller,
+        this.controller,
         this.validate,
-        required this.icon,
-        required this.onSaved,
-         this.focusNode,
-         this.onchange,
-        required this.keybordType,
-        required this.passwordVisible
+        this.icon,
+        this.onSaved,
+        this.focusNode,
+        this.onchange,
+        this.keybordType,
+        this.passwordVisible
       })
       : assert(hintText != null, onSaved != null),
         super(key: key);

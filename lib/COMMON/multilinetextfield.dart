@@ -3,30 +3,30 @@ import 'package:yardimfeneri/extantion/size_extension.dart';
 
 class MultilineTextField extends StatelessWidget {
   final String hintText;
-  final String? errortext;
-  final int? satir;
+  final String errortext;
+  final int satir;
   final  TextEditingController controller;
-  final  FocusNode? focusNode;
+  final  FocusNode focusNode;
   final Widget icon;
-  final FormFieldValidator<String>? validate;
+  final FormFieldValidator<String> validate;
   final FormFieldSetter<String>  onSaved;
-  final ValueChanged<String>? onchange;
+  final ValueChanged<String> onchange;
   final TextInputType keybordType;
   final bool passwordVisible;
 
   const MultilineTextField(
       {
-        required this.hintText,
+        this.hintText,
         this.errortext,
         this.satir,
-        required this.controller,
+        this.controller,
         this.validate,
-        required this.icon,
-        required this.onSaved,
+        this.icon,
+        this.onSaved,
         this.focusNode,
         this.onchange,
-        required this.keybordType,
-        required this.passwordVisible
+        this.keybordType,
+        this.passwordVisible
       })
       : assert(hintText != null, onSaved != null);
 

@@ -29,7 +29,7 @@ import 'package:yardimfeneri/servis/needy_service.dart';
 
 
 class SignUpHelpful extends StatefulWidget {
-  final String? getButtonText;
+  final String getButtonText;
   SignUpHelpful(
       {
         this.getButtonText,
@@ -39,20 +39,20 @@ class SignUpHelpful extends StatefulWidget {
 }
 
 class _SignUpHelpfulState extends State<SignUpHelpful> {
-  final TextEditingController? _emailcontroller = TextEditingController();
-  final TextEditingController? _sifrecontroller = TextEditingController();
-  final TextEditingController? _isimcontroller = TextEditingController();
-  final TextEditingController? _soyisimcontroller = TextEditingController();
-  final TextEditingController? _telefoncontroller = TextEditingController();
-  final TextEditingController? _adrescontroller = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _sifrecontroller = TextEditingController();
+  final TextEditingController _isimcontroller = TextEditingController();
+  final TextEditingController _soyisimcontroller = TextEditingController();
+  final TextEditingController _telefoncontroller = TextEditingController();
+  final TextEditingController _adrescontroller = TextEditingController();
   var controllertel = new MaskTextInputFormatter(mask: '### - ### - ## - ##');
   var controller = new MaskTextInputFormatter(mask: '000-000-00-00');
   String il = "İl Seçiniz";
   final _formKey1 = GlobalKey<FormState>();
   bool _validate = false;
-  PickedFile? _image;
+  PickedFile _image;
   var imageUrl;
-  DateTime? _dateTime;
+  DateTime _dateTime;
   final f = new DateFormat('yyyy-MM-dd');
 
   bool _loadingVisible = false;
@@ -89,8 +89,8 @@ class _SignUpHelpfulState extends State<SignUpHelpful> {
                         height: 10.0.h,
                       ),
 
-                      Myinput(hintText:"İsim" ,icon: Icon(Icons.person,color: Colors.green,),onSaved: validateEmail,controller: _isimcontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false),
-                      Myinput(hintText:"Soyisim" ,icon: Icon(Icons.person,color: Colors.green,),onSaved: validateEmail,controller: _soyisimcontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false),
+                      Myinput(hintText:"İsim" ,icon: Icon(Icons.person,color: Colors.green,),onSaved: validateEmail,controller: _isimcontroller,keybordType: TextInputType.emailAddress,passwordVisible: false),
+                      Myinput(hintText:"Soyisim" ,icon: Icon(Icons.person,color: Colors.green,),onSaved: validateEmail,controller: _soyisimcontroller,keybordType: TextInputType.emailAddress,passwordVisible: false),
                       Padding(
                         padding:  EdgeInsets.all(16.0.w),
                         child: Container(
@@ -139,8 +139,8 @@ class _SignUpHelpfulState extends State<SignUpHelpful> {
                           ),
                         ),
                       ),
-                      Myinput(hintText:"E-mail" ,icon: Icon(Icons.email,color: Colors.green,),onSaved: validateEmail,controller: _emailcontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false),
-                      Myinput(hintText:"Şifre" ,icon: Icon(Icons.lock,color: Colors.green,),onSaved: validateSifre,controller: _sifrecontroller!,keybordType: TextInputType.emailAddress,passwordVisible: true),
+                      Myinput(hintText:"E-mail" ,icon: Icon(Icons.email,color: Colors.green,),onSaved: validateEmail,controller: _emailcontroller,keybordType: TextInputType.emailAddress,passwordVisible: false),
+                      Myinput(hintText:"Şifre" ,icon: Icon(Icons.lock,color: Colors.green,),onSaved: validateSifre,controller: _sifrecontroller,keybordType: TextInputType.emailAddress,passwordVisible: true),
                       InkWell(
                         onTap: () {
                           var result = showSearch<String>(
@@ -168,7 +168,7 @@ class _SignUpHelpfulState extends State<SignUpHelpful> {
                           ),
                         ),
                       ),
-                      MultilineTextField(hintText:"Adres" ,icon: Icon(Icons.home_filled,color: Colors.green,),satir:4,onSaved: validateEmail,controller: _adrescontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false),
+                      MultilineTextField(hintText:"Adres" ,icon: Icon(Icons.home_filled,color: Colors.green,),satir:4,onSaved: validateEmail,controller: _adrescontroller,keybordType: TextInputType.emailAddress,passwordVisible: false),
                       InkWell(
                         onTap: () {
                           showCupertinoDatePicker(context);
@@ -208,7 +208,7 @@ class _SignUpHelpfulState extends State<SignUpHelpful> {
                                 height: 55.0.h,
                                 child: DropdownButtonFormField(
                                   items: [],
-                                  hint: Text( _dateTime == null ? "Doğum Tarihinizi Seçiniz" : formatTheDate(_dateTime!, format: DateFormat("dd.MM.y")),),
+                                  hint: Text( _dateTime == null ? "Doğum Tarihinizi Seçiniz" : formatTheDate(_dateTime, format: DateFormat("dd.MM.y")),),
                                   decoration:InputDecoration(
                                     helperText: "   ",
                                     icon: Padding(
@@ -276,18 +276,18 @@ class _SignUpHelpfulState extends State<SignUpHelpful> {
     );
   }
 
-  String? validateEmail(String? value) {
+  String validateEmail(String value) {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value!))
+    if (!regex.hasMatch(value))
       return 'Email Geçersiz';
     else
       return null;
   }
 
-  String? validateSifre(String? value) {
-    if (value!.length<6)
+  String validateSifre(String value) {
+    if (value.length<6)
       return 'Şifre Geçersiz';
     else
       return null;
@@ -315,7 +315,7 @@ class _SignUpHelpfulState extends State<SignUpHelpful> {
   }
 
   void _validateInputsRegister(BuildContext context) async {
-    if (_formKey1.currentState!.validate()) {
+    if (_formKey1.currentState.validate()) {
       if(il=="İl Seçiniz")
       {
         var dialogBilgi = AlertBilgilendirme(
@@ -344,17 +344,17 @@ class _SignUpHelpfulState extends State<SignUpHelpful> {
         final _userModel = Provider.of<HelpfulService>(context, listen: false);
         HelpfulModel needyModel =
         new HelpfulModel(userId: "userid",
-            email: _emailcontroller!.text,
-            password: _sifrecontroller!.text,
-            isim: _isimcontroller!.text,
-            soyisim: _soyisimcontroller!.text,
+            email: _emailcontroller.text,
+            password: _sifrecontroller.text,
+            isim: _isimcontroller.text,
+            soyisim: _soyisimcontroller.text,
             il: il,
-            adres: _adrescontroller!.text,
-            dogumTarihi: _dateTime!,
-            telefon: _telefoncontroller!.text);
-        HelpfulModel? createuser = await _userModel
+            adres: _adrescontroller.text,
+            dogumTarihi: _dateTime,
+            telefon: _telefoncontroller.text);
+        HelpfulModel createuser = await _userModel
             .createUserWithEmailandPasswordHelpful(
-            _emailcontroller!.text, _sifrecontroller!.text, needyModel);
+            _emailcontroller.text, _sifrecontroller.text, needyModel);
         if (createuser != null) {
           NavigationService.instance.navigateToReset(
               RouteConstants.LANDINGPAGE);
@@ -377,25 +377,25 @@ class _SignUpHelpfulState extends State<SignUpHelpful> {
     }
 
 
-    if (_formKey1.currentState!.validate()) {
+    if (_formKey1.currentState.validate()) {
       SystemChannels.textInput.invokeMethod('TextInput.hide');
       await _changeLoadingVisible();
       try {
 
-        CharitiesModel? _usercharities = null;
-        NeedyModel? _userneedy;
-        HelpfulModel? _userhelpful;
+        CharitiesModel _usercharities = null;
+        NeedyModel _userneedy;
+        HelpfulModel _userhelpful;
 
         if(widget.getButtonText=="kurulus")
         {
-          _usercharities = (await _userModel.signInWithEmailandPasswordCharities(_emailcontroller!.text, _sifrecontroller!.text))!;
+          _usercharities = (await _userModel.signInWithEmailandPasswordCharities(_emailcontroller.text, _sifrecontroller.text));
 
         }else if( widget.getButtonText == "yardımsever")
         {
-          _userhelpful = (await _userModel.signInWithEmailandPasswordHelpful(_emailcontroller!.text, _sifrecontroller!.text))!;
+          _userhelpful = (await _userModel.signInWithEmailandPasswordHelpful(_emailcontroller.text, _sifrecontroller.text));
 
         }else{
-          _userneedy = (await _userModel.signInWithEmailandPasswordNeedy(_emailcontroller!.text, _sifrecontroller!.text))!;
+          _userneedy = (await _userModel.signInWithEmailandPasswordNeedy(_emailcontroller.text, _sifrecontroller.text));
         }
 
 
@@ -483,23 +483,23 @@ class _SignUpHelpfulState extends State<SignUpHelpful> {
   }
 
   _imgFromCamera() async {
-    PickedFile? image = await picker.getImage(source: ImageSource.camera, imageQuality: 25);
+    PickedFile image = await picker.getImage(source: ImageSource.camera, imageQuality: 25);
 
     setState(() {
-      _image = image!;
+      _image = image;
     });
   }
 
   _imgFromGallery() async {
-    PickedFile? image = await picker.getImage(source: ImageSource.gallery, imageQuality: 25);
+    PickedFile image = await picker.getImage(source: ImageSource.gallery, imageQuality: 25);
 
     setState(() {
-      _image = image!;
-      print(_image!.path);
+      _image = image;
+      print(_image.path);
     });
   }
 
-  String formatTheDate(DateTime selectedDate, {DateFormat? format}) {
+  String formatTheDate(DateTime selectedDate, {DateFormat format}) {
     final DateTime now = selectedDate;
     final DateFormat formatter = format ?? DateFormat('dd.MM.y', "tr_TR");
     final String formatted = formatter.format(now);
@@ -511,7 +511,7 @@ class _SignUpHelpfulState extends State<SignUpHelpful> {
     //final _modelYonetici = Provider.of<YoneticiModel>(context, listen: false);
     if(_image == null)
       return "";
-    String filePath = _image!.path;
+    String filePath = _image.path;
     String userId = "_modelYonetici.user.userId";
     String fileName = "${userId}-${id}}.jpg";
     File file = File(filePath);

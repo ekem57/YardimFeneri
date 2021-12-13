@@ -9,9 +9,9 @@ enum HelpfulViewState { Idle, Busy }
 class HelpfulService with ChangeNotifier implements AuthBaseHelpful {
   HelpfulViewState _state = HelpfulViewState.Idle;
   HelpfulRepo _userRepository = locator<HelpfulRepo>();
-  HelpfulModel? _user;
+  HelpfulModel _user;
 
-  HelpfulModel? get user => _user;
+  HelpfulModel get user => _user;
 
   HelpfulViewState get state => _state;
 
@@ -41,7 +41,7 @@ class HelpfulService with ChangeNotifier implements AuthBaseHelpful {
   }
 
   @override
-  Future<HelpfulModel?> createUserWithEmailandPasswordHelpful(String email, String sifre, HelpfulModel users) async {
+  Future<HelpfulModel> createUserWithEmailandPasswordHelpful(String email, String sifre, HelpfulModel users) async {
     try {
       _user = await _userRepository.createUserWithEmailandPasswordHelpful(email, sifre,users);
       return _user;
@@ -51,12 +51,12 @@ class HelpfulService with ChangeNotifier implements AuthBaseHelpful {
   }
 
   @override
-  Future<HelpfulModel?> currentHelpful() async {
+  Future<HelpfulModel> currentHelpful() async {
     try {
       state = HelpfulViewState.Busy;
       _user = await _userRepository.currentHelpful();
       if (_user != null)
-        return _user!;
+        return _user;
     } catch (e) {
       return null;
     } finally {
@@ -65,11 +65,11 @@ class HelpfulService with ChangeNotifier implements AuthBaseHelpful {
   }
 
   @override
-  Future<HelpfulModel?> signInWithEmailandPasswordHelpful(String email, String sifre) async {
+  Future<HelpfulModel> signInWithEmailandPasswordHelpful(String email, String sifre) async {
     try {
 
       _user = await _userRepository.signInWithEmailandPasswordHelpful(email, sifre);
-      return _user!;
+      return _user;
 
     } finally {
       state = HelpfulViewState.Idle;

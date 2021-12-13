@@ -6,7 +6,7 @@ import 'package:yardimfeneri/servis/charities_service.dart';
 
 
 class BildirimlerCharities extends StatefulWidget {
-  const BildirimlerCharities({Key? key}) : super(key: key);
+  const BildirimlerCharities({Key key}) : super(key: key);
 
   @override
   _BildirimlerCharitiesState createState() => _BildirimlerCharitiesState();
@@ -41,7 +41,7 @@ class _BildirimlerCharitiesState extends State<BildirimlerCharities> {
           FutureBuilder<QuerySnapshot>(
             future: FirebaseFirestore.instance
                 .collection('charities')
-                .doc(_charitiesModel.user!.userId)
+                .doc(_charitiesModel.user.userId)
                 .collection('bildirimler')
                 .orderBy('date', descending: true)
                 .get(),
@@ -50,7 +50,7 @@ class _BildirimlerCharitiesState extends State<BildirimlerCharities> {
               if (!snapshot.hasData){
                 return Center(child: CircularProgressIndicator(),);
               }
-              final int cardLength = snapshot.data!.docs.length;
+              final int cardLength = snapshot.data.docs.length;
 
               return cardLength == 0 ?
               Container(
@@ -61,7 +61,7 @@ class _BildirimlerCharitiesState extends State<BildirimlerCharities> {
                   shrinkWrap: true,
                   itemCount: cardLength,
                   itemBuilder: (context, index) {
-                    final DocumentSnapshot _cardFuture = snapshot.data!.docs[index];
+                    final DocumentSnapshot _cardFuture = snapshot.data.docs[index];
                     return InkWell(
                       onTap: (){
                         _cardFuture["etid"] != null ?  Navigator.of(context).push(

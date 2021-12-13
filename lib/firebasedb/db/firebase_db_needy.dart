@@ -22,18 +22,18 @@ class FirestoreDBServiceNeedy2 {
   }
 
   @override
-  Future<NeedyModel> readNeedy(String? userID, String? email) async {
+  Future<NeedyModel> readNeedy(String userID, String email) async {
     print("gelen userid read needy: "+userID.toString());
-    DocumentSnapshot<Map<String, dynamic>> _okunanUser = await _firebaseDB.collection("needy").doc(userID).get();
-    Map<String, dynamic>? _okunanUserBilgileriMap = _okunanUser.data();
+    DocumentSnapshot _okunanUser = await _firebaseDB.collection("needy").doc(userID).get();
+    Map<String, dynamic> _okunanUserBilgileriMap = _okunanUser.data();
     print("okunan user: "+_okunanUserBilgileriMap.toString());
     if(_okunanUser.data != null){
       NeedyModel _okunanUserNesnesi;
-      _okunanUserNesnesi = NeedyModel.fromMap(_okunanUserBilgileriMap!);
+      _okunanUserNesnesi = NeedyModel.fromMap(_okunanUserBilgileriMap);
       print("Okunan user nesnesi :" + _okunanUserNesnesi.toString());
       return _okunanUserNesnesi;
     }else{
-      return null!;
+      return null;
     }
   }
 
@@ -185,7 +185,7 @@ class FirestoreDBServiceNeedy2 {
     if (enSonGetirilenUser == null) {
       _querySnapshot = await FirebaseFirestore.instance
           .collection("sohbetler")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection("sohbetler")
           .orderBy("olusturulma_tarihi", descending: true)
           .limit(getirilecekElemanSayisi)
@@ -193,7 +193,7 @@ class FirestoreDBServiceNeedy2 {
     } else {
       _querySnapshot = await FirebaseFirestore.instance
           .collection("sohbetler")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(FirebaseAuth.instance.currentUser.uid)
           .collection("sohbetler")
           .orderBy("olusturulma_tarihi", descending: true)
           .limit(getirilecekElemanSayisi)

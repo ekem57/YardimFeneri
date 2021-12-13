@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/ChattApp/alluserModel.dart';
+import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
 import 'package:yardimfeneri/ChattApp/mesajkisiSec.dart';
+import 'package:yardimfeneri/ChattApp/sohbetPage.dart';
 
 class MesajlarimListesi extends StatefulWidget {
   @override
@@ -119,18 +121,18 @@ class _MesajlarimListesiState extends State<MesajlarimListesi> {
           MaterialPageRoute(
             builder: (context) => ChangeNotifierProvider(
               create: (context) => ChatViewModel(currentUser: _userModel.user, sohbetEdilenUser: _oankiUser),
-              child: SohbetPage(fotourl: _oankiUser.avatarImageUrl,userad: _oankiUser.adsoyad,userid: _oankiUser.userId,),
+              child: SohbetPage(fotourl: _oankiUser.foto,userad: _oankiUser.isim,userid: _oankiUser.userId,),
             ),
           ),
         );
       },
       child: Card(
         child: ListTile(
-          title: Text(_oankiUser.adsoyad),
+          title: Text(_oankiUser.isim),
           subtitle: Text(_oankiUser.meslek),
           leading: CircleAvatar(
             backgroundColor: Colors.grey.withAlpha(40),
-            backgroundImage: NetworkImage(_oankiUser.avatarImageUrl),
+            backgroundImage: NetworkImage(_oankiUser.foto),
           ),
         ),
       ),

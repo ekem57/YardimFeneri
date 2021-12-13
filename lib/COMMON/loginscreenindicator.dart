@@ -4,22 +4,22 @@ class LoadingScreen extends StatelessWidget {
   final bool inAsyncCall;
   final double opacity;
   final Color color;
-  final Color? backcolor;
+  final Color backcolor;
   final Widget progressIndicator;
-  final Offset? offset;
+  final Offset offset;
   final bool dismissible;
   final Widget child;
 
   LoadingScreen({
-    Key? key,
-    required this.inAsyncCall,
+    Key key,
+    this.inAsyncCall,
     this.opacity = 0.7,
     this.color = Colors.white,
     this.backcolor,
     this.progressIndicator = const CircularProgressIndicator(),
     this.offset,
     this.dismissible = false,
-    required this.child,
+     this.child,
   })  : assert(child != null),
         assert(inAsyncCall != null),
         super(key: key);
@@ -50,8 +50,8 @@ class LoadingScreen extends StatelessWidget {
       } else {
         layOutProgressIndicator = Positioned(
           child: progressIndicator,
-          left: offset!.dx,
-          top: offset!.dy,
+          left: offset.dx,
+          top: offset.dy,
         );
       }
       final modal = [

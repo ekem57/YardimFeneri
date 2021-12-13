@@ -10,9 +10,9 @@ enum NeedyViewState { Idle, Busy }
 class NeedyService with ChangeNotifier implements AuthBaseNeedy {
   NeedyViewState _state = NeedyViewState.Idle;
   NeedyRepo _userRepository = locator<NeedyRepo>();
-  NeedyModel? _user;
+  NeedyModel _user;
 
-  NeedyModel? get user => _user;
+  NeedyModel get user => _user;
 
   NeedyViewState get state => _state;
 
@@ -42,7 +42,7 @@ class NeedyService with ChangeNotifier implements AuthBaseNeedy {
   }
 
   @override
-  Future<NeedyModel?> createUserWithEmailandPasswordNeedy(String email, String sifre, NeedyModel users) async {
+  Future<NeedyModel> createUserWithEmailandPasswordNeedy(String email, String sifre, NeedyModel users) async {
     try {
       _user = await _userRepository.createUserWithEmailandPasswordNeedy(email, sifre,users);
       return _user;
@@ -52,12 +52,12 @@ class NeedyService with ChangeNotifier implements AuthBaseNeedy {
   }
 
   @override
-  Future<NeedyModel?> currentNeedy() async {
+  Future<NeedyModel> currentNeedy() async {
     try {
       state = NeedyViewState.Busy;
       _user = await _userRepository.currentNeedy();
       if (_user != null)
-        return _user!;
+        return _user;
     } catch (e) {
       return null;
     } finally {
@@ -66,10 +66,10 @@ class NeedyService with ChangeNotifier implements AuthBaseNeedy {
   }
 
   @override
-  Future<NeedyModel?> signInWithEmailandPasswordNeedy(String email, String sifre) async {
+  Future<NeedyModel> signInWithEmailandPasswordNeedy(String email, String sifre) async {
     try {
       _user = await _userRepository.signInWithEmailandPasswordNeedy(email, sifre);
-      return _user!;
+      return _user;
 
     } finally {
       print("needy state changed");

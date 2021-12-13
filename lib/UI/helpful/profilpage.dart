@@ -4,7 +4,7 @@ import 'package:yardimfeneri/COMMON/myButton.dart';
 import 'package:yardimfeneri/servis/helpful_service.dart';
 
 class ProfilPageHelpful extends StatefulWidget {
-  const ProfilPageHelpful({Key? key}) : super(key: key);
+  const ProfilPageHelpful({Key key}) : super(key: key);
 
   @override
   _ProfilPageHelpfulState createState() => _ProfilPageHelpfulState();

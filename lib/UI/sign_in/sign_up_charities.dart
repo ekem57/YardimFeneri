@@ -22,7 +22,7 @@ import 'package:yardimfeneri/servis/charities_service.dart';
 
 
 class SignUpCharities extends StatefulWidget {
-  final String? getButtonText;
+  final String getButtonText;
   SignUpCharities(
       {
         this.getButtonText,
@@ -32,22 +32,22 @@ class SignUpCharities extends StatefulWidget {
 }
 
 class _SignUpCharitiesState extends State<SignUpCharities> {
-  final TextEditingController? _emailcontroller = TextEditingController();
-  final TextEditingController? _sifrecontroller = TextEditingController();
-  final TextEditingController? _isimcontroller = TextEditingController();
-  final TextEditingController? _baskancontroller = TextEditingController();
-  final TextEditingController? _telefoncontroller = TextEditingController();
-  final TextEditingController? _adrescontroller = TextEditingController();
-  final TextEditingController? _faaliyetalanicontroller = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _sifrecontroller = TextEditingController();
+  final TextEditingController _isimcontroller = TextEditingController();
+  final TextEditingController _baskancontroller = TextEditingController();
+  final TextEditingController _telefoncontroller = TextEditingController();
+  final TextEditingController _adrescontroller = TextEditingController();
+  final TextEditingController _faaliyetalanicontroller = TextEditingController();
   var controllertel = new MaskTextInputFormatter(mask: '### - ### - ## - ##');
   var controller = new MaskTextInputFormatter(mask: '000-000-00-00');
 
   final _formKey1 = GlobalKey<FormState>();
   bool _validate = false;
   String isim="";
-  PickedFile? _image;
+  PickedFile _image;
   var imageUrl;
-  DateTime? _dateTime;
+  DateTime _dateTime;
   final f = new DateFormat('yyyy-MM-dd');
   final picker = ImagePicker();
 
@@ -86,8 +86,8 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
                         height: 10.0.h,
                       ),
 
-                      Myinput(hintText:"Kuruluş İsmi" ,icon: Icon(Icons.home_work_sharp,color: Colors.green,),onSaved: validateKurulusName,controller: _isimcontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateKurulusName,),
-                      Myinput(hintText:"Başkan Adı" ,icon: Icon(Icons.person,color: Colors.green,),onSaved: validateBaskan,controller: _baskancontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateBaskan ,),
+                      Myinput(hintText:"Kuruluş İsmi" ,icon: Icon(Icons.home_work_sharp,color: Colors.green,),onSaved: validateKurulusName,controller: _isimcontroller,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateKurulusName,),
+                      Myinput(hintText:"Başkan Adı" ,icon: Icon(Icons.person,color: Colors.green,),onSaved: validateBaskan,controller: _baskancontroller,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateBaskan ,),
                       Padding(
                         padding:  EdgeInsets.all(16.0.w),
                         child: Container(
@@ -139,9 +139,9 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
                           ),
                         ),
                       ),
-                      Myinput(hintText:"E-mail" ,icon: Icon(Icons.email,color: Colors.green,),onSaved: validateEmail,controller: _emailcontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateEmail,),
-                      Myinput(hintText:"Şifre" ,icon: Icon(Icons.lock,color: Colors.green,),onSaved: validateSifre,controller: _sifrecontroller!,keybordType: TextInputType.emailAddress,passwordVisible: true,validate: validateSifre,),
-                      MultilineTextField(hintText:"Adres" ,icon: Icon(Icons.home_sharp,color: Colors.green,),satir:4,onSaved: validateEmail,controller: _adrescontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateAdres,),
+                      Myinput(hintText:"E-mail" ,icon: Icon(Icons.email,color: Colors.green,),onSaved: validateEmail,controller: _emailcontroller,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateEmail,),
+                      Myinput(hintText:"Şifre" ,icon: Icon(Icons.lock,color: Colors.green,),onSaved: validateSifre,controller: _sifrecontroller,keybordType: TextInputType.emailAddress,passwordVisible: true,validate: validateSifre,),
+                      MultilineTextField(hintText:"Adres" ,icon: Icon(Icons.home_sharp,color: Colors.green,),satir:4,onSaved: validateEmail,controller: _adrescontroller,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateAdres,),
                       InkWell(
                         onTap: () {
                           showCupertinoDatePicker(context);
@@ -181,7 +181,7 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
                                 height: 55.0.h,
                                 child: DropdownButtonFormField(
                                   items: [],
-                                  hint: Text( _dateTime == null ? "Kuruluş Tarihi Seçiniz" : formatTheDate(_dateTime!, format: DateFormat("dd.MM.y")),),
+                                  hint: Text( _dateTime == null ? "Kuruluş Tarihi Seçiniz" : formatTheDate(_dateTime, format: DateFormat("dd.MM.y")),),
                                   decoration:InputDecoration(
                                       helperText: "   ",
                                       icon: Padding(
@@ -204,7 +204,7 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
                           ],
                         ),
                       ),
-                      Myinput(hintText:"Faaliyet Alanı" ,icon: Icon(Icons.work,color: Colors.green,),onSaved: validateEmail,controller: _faaliyetalanicontroller!,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateFaaliyet,),
+                      Myinput(hintText:"Faaliyet Alanı" ,icon: Icon(Icons.work,color: Colors.green,),onSaved: validateEmail,controller: _faaliyetalanicontroller,keybordType: TextInputType.emailAddress,passwordVisible: false,validate: validateFaaliyet,),
                       Padding(
                         padding:  EdgeInsets.only(left: 20.0.w),
                         child: Align(
@@ -276,7 +276,7 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
                                 : ClipRRect(
                               borderRadius: BorderRadius.circular(17),
                               child: Image.file(
-                                File(_image!.path),
+                                File(_image.path),
                                 width: 312.0.w,
                                 height: 146.0.h,
                                 fit: BoxFit.fitWidth,
@@ -332,18 +332,18 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
     );
   }
 
-  String? validateEmail(String? value) {
+  String validateEmail(String value) {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value!))
+    if (!regex.hasMatch(value))
       return 'Email Geçersiz';
     else
       return null;
   }
 
-  String? validateSifre(String? value) {
-    if (value!.length<6)
+  String validateSifre(String value) {
+    if (value.length<6)
       return 'Şifre Geçersiz';
     else
       return null;
@@ -371,8 +371,8 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
   }
 
   void _validateInputsRegister(BuildContext context) async {
-    if (_formKey1.currentState!.validate()) {
-      _formKey1.currentState!.save();
+    if (_formKey1.currentState.validate()) {
+      _formKey1.currentState.save();
       if(_image==null)
       {
         var dialogBilgi = AlertBilgilendirme(
@@ -391,17 +391,17 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
             context, listen: false);
         CharitiesModel charitiesModel =
         new CharitiesModel(userId: "userid",
-            email: _emailcontroller!.text,
-            password: _sifrecontroller!.text,
-            isim: _isimcontroller!.text,
+            email: _emailcontroller.text,
+            password: _sifrecontroller.text,
+            isim: _isimcontroller.text,
             logo: "logo",
-            faaliyetalani: _faaliyetalanicontroller!.text,
-            kurulusTarihi: _dateTime!,
-            telefon: _telefoncontroller!.text,
+            faaliyetalani: _faaliyetalanicontroller.text,
+            kurulusTarihi: _dateTime,
+            telefon: _telefoncontroller.text,
             hesaponay: false);
-        CharitiesModel? createuser = await _userModel
+        CharitiesModel createuser = await _userModel
             .createUserWithEmailandPasswordCharities(
-            _emailcontroller!.text, _sifrecontroller!.text, charitiesModel);
+            _emailcontroller.text, _sifrecontroller.text, charitiesModel);
         if (createuser != null) {
           NavigationService.instance.navigateToReset(
               RouteConstants.LANDINGPAGE);
@@ -426,39 +426,39 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
     }
   }
 
-  String? validateKurulusName(String? value) {
-    if (value!.length < 3)
+  String validateKurulusName(String value) {
+    if (value.length < 3)
       return 'Kuruluş ismi en az 3 karakter olmalıdır.';
     else
       return null;
   }
-  String? validateBaskan(String? value) {
-    if (value!.length < 3)
+  String validateBaskan(String value) {
+    if (value.length < 3)
       return 'Başkan Adı en az 3 karakter olmalıdır.';
     else
       return null;
   }
-  String? validateTelefon(String? value) {
-    if (value!.length < 11)
+  String validateTelefon(String value) {
+    if (value.length < 11)
       return 'Lütfen Geçerli bir telefon numarası giriniz';
     else
       return null;
   }
-  String? validateAdres(String? value) {
-    if (value!.length < 6)
+  String validateAdres(String value) {
+    if (value.length < 6)
       return 'Adres en az 5 karakter olmalıdır.';
     else
       return null;
   }
-  String? validateFaaliyet(String? value) {
-    if (value!.length < 6)
+  String validateFaaliyet(String value) {
+    if (value.length < 6)
       return 'Faaliyet Alanı en az 3 karakter olmalıdır.';
     else
       return null;
   }
 
-  String? validateSurname(String? value) {
-    if (value!.length < 3)
+  String validateSurname(String value) {
+    if (value.length < 3)
       return 'Soyisminiz en az 3 karakter olmalıdır.';
     else
       return null;
@@ -496,23 +496,23 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
   }
 
   _imgFromCamera() async {
-    PickedFile? image = await picker.getImage(source: ImageSource.camera, imageQuality: 25);
+    PickedFile image = await picker.getImage(source: ImageSource.camera, imageQuality: 25);
 
     setState(() {
-      _image = image!;
+      _image = image;
     });
   }
 
   _imgFromGallery() async {
-    PickedFile? image = await picker.getImage(source: ImageSource.gallery, imageQuality: 25);
+    PickedFile image = await picker.getImage(source: ImageSource.gallery, imageQuality: 25);
 
     setState(() {
-      _image = image!;
-      print(_image!.path);
+      _image = image;
+      print(_image.path);
     });
   }
 
-  String formatTheDate(DateTime selectedDate, {DateFormat? format}) {
+  String formatTheDate(DateTime selectedDate, {DateFormat format}) {
     final DateTime now = selectedDate;
     final DateFormat formatter = format ?? DateFormat('dd.MM.y', "tr_TR");
     final String formatted = formatter.format(now);
@@ -523,7 +523,7 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
   Future<String> uploadDuyuruImage(String id) async {
     if(_image == null)
       return "";
-    String filePath = _image!.path;
+    String filePath = _image.path;
     String userId = "_modelYonetici.user.userId";
     String fileName = "${userId}-${id}}.jpg";
     File file = File(filePath);

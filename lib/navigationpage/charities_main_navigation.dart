@@ -17,7 +17,7 @@ import 'package:yardimfeneri/servis/charities_service.dart';
 class CharitiesMainNavigation extends StatefulWidget {
   final CharitiesModel user;
 
-  CharitiesMainNavigation({Key? key, required this.user}) : super(key: key);
+  CharitiesMainNavigation({Key key,  this.user}) : super(key: key);
 
   @override
   _CharitiesMainNavigationState createState() => _CharitiesMainNavigationState();
@@ -53,8 +53,8 @@ class _CharitiesMainNavigationState extends State<CharitiesMainNavigation> {
           onTapped = false;
           index = position;
         });
-        final CurvedNavigationBarState? navBarState = _bottomNavigationKey.currentState as CurvedNavigationBarState?;
-        navBarState?.setPage(1);
+        final CurvedNavigationBarState navBarState = _bottomNavigationKey.currentState as CurvedNavigationBarState;
+        navBarState.setPage(1);
         print("index: $index");
         setState(() {
           onTapped = true;
@@ -83,7 +83,7 @@ class _CharitiesMainNavigationState extends State<CharitiesMainNavigation> {
           letIndexChange: (index) => true,
         ),
           backgroundColor: Colors.white,
-          body: _charitiesService.user!.hesaponay == true ?  _getBody(index) : NotApprovedPageCharities(),
+          body: _charitiesService.user.hesaponay == true ?  _getBody(index) : NotApprovedPageCharities(),
           ),
     );
   }
@@ -111,7 +111,7 @@ class _CharitiesMainNavigationState extends State<CharitiesMainNavigation> {
     });
   }
 
- static Widget? _getBody(int index) {
+ static Widget _getBody(int index) {
     switch (index) {
       case 0:
         return HomePageCharities();

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
 import 'package:yardimfeneri/UI/helpful/chat.dart';
 import 'package:yardimfeneri/UI/needy/homepage.dart';
+import 'package:yardimfeneri/UI/needy/mesaj.dart';
 import 'package:yardimfeneri/UI/needy/profil.dart';
 import 'package:yardimfeneri/UI/needy/yardim_talebinde_bulunma.dart';
 import 'package:yardimfeneri/extantion/size_config.dart';
@@ -15,7 +16,7 @@ import 'package:yardimfeneri/servis/needy_service.dart';
 class NeedyMainNavigation extends StatefulWidget {
   final NeedyModel user;
 
-  NeedyMainNavigation({Key? key, required this.user}) : super(key: key);
+  NeedyMainNavigation({Key key,  this.user,}) : super(key: key);
 
   @override
   _NeedyMainNavigationState createState() => _NeedyMainNavigationState();
@@ -52,8 +53,8 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
           onTapped = false;
           index = position;
         });
-        final CurvedNavigationBarState? navBarState = _bottomNavigationKey.currentState as CurvedNavigationBarState?;
-        navBarState?.setPage(1);
+        final CurvedNavigationBarState navBarState = _bottomNavigationKey.currentState as CurvedNavigationBarState;
+        navBarState.setPage(1);
         print("index: $index");
         setState(() {
           onTapped = true;
@@ -63,7 +64,7 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
       child: Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           extendBody: true,
-          body: _needyService.user!.hesaponay == true ? Center(child: _getBody(index)) : NotApprovedPageCharities(),
+          body: _needyService.user.hesaponay == true ? Center(child: _getBody(index)) : NotApprovedPageCharities(),
           bottomNavigationBar:  CurvedNavigationBar(
             key: _bottomNavigationKey,
             index: 0,
@@ -107,14 +108,14 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
     });
   }
 
-  Widget? _getBody(int index) {
+  Widget _getBody(int index) {
     switch (index) {
       case 0:
         return HomePageNeedy();
       case 1:
         return YardimTalebindeBulunma();
       case 2:
-        return MesajlarAnasayfa();
+        return NeedyChat();
       case 3:
         return ProfilNeedy();
     }

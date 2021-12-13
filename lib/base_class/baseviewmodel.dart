@@ -3,7 +3,7 @@ import 'package:yardimfeneri/ROUTING/navigation/navigation_service.dart';
 
 
 abstract class BaseViewModel {
-  BuildContext? context;
+  BuildContext context;
 
   NavigationService navigation = NavigationService.instance;
 

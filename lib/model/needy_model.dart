@@ -3,18 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class NeedyModel extends ChangeNotifier {
-  final String? email;
-  final String? password;
-  late  String? userId;
-  String? telefon;
-  String? isim;
-  String? soyisim;
-  String? meslek;
-  String? adres;
-  String? il;
-  String? foto;
-  DateTime? dogumTarihi;
-  bool? hesaponay;
+  final String email;
+  final String password;
+  String userId;
+  String telefon;
+  String isim;
+  String soyisim;
+  String meslek;
+  String adres;
+  String il;
+  String foto;
+  DateTime dogumTarihi;
+  bool hesaponay;
 
 
 
@@ -37,7 +37,7 @@ class NeedyModel extends ChangeNotifier {
   }
 
   NeedyModel.fromMap(Map<String, dynamic> map)
-      : userId = map['userId'],
+      : userId = map['userID'],
         telefon = map['telefon'],
         email = map['email'],
         password = null,
