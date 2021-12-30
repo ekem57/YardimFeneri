@@ -44,7 +44,7 @@ class _NeedyChatState extends State<NeedyChat> {
 
   Widget usersWidget() {
 
-    final _kullanicilarModel = Provider.of<AllUserViewModel>(context);
+    final _kullanicilarModel = Provider.of<AllUserViewModelHelpful>(context);
 
     if (_kullanicilarModel.tumKonusma.length> _kullanicilarModel.kullanicilarListesi.length) {
       _kullanicilarModel.refresh();
@@ -52,14 +52,14 @@ class _NeedyChatState extends State<NeedyChat> {
         _isyenikullanici=true;
       });
     }
-    return Consumer<AllUserViewModel>(
+    return Consumer<AllUserViewModelHelpful>(
       builder: (context, model, child) {
-        if (model.state == AllUserViewState.Busy || _isLoading) {
+        if (model.state == AllUserViewStateHelpful.Busy || _isLoading) {
           return Center(
             child: CircularProgressIndicator(),
           );
 
-        } else if (model.state == AllUserViewState.Loaded) {
+        } else if (model.state == AllUserViewStateHelpful.Loaded) {
           return RefreshIndicator(
             onRefresh: model.refresh,
             child: ListView.builder(
@@ -95,7 +95,7 @@ class _NeedyChatState extends State<NeedyChat> {
 
   Widget _userListeElemaniOlustur(int index ,List<Konusma> konusmalar) {
     final _ogretmenModel = Provider.of<HelpfulModel>(context, listen: true);
-    final _tumKullanicilarViewModel = Provider.of<AllUserViewModel>(context);
+    final _tumKullanicilarViewModel = Provider.of<AllUserViewModelHelpful>(context);
     var _oankiUser = _tumKullanicilarViewModel.kullanicilarListesi[index];
 
 
@@ -117,7 +117,7 @@ class _NeedyChatState extends State<NeedyChat> {
               MaterialPageRoute(
                 builder: (context) => ChangeNotifierProvider(
                   create: (context) => ChatViewModel(currentUser: _ogretmenModel, sohbetEdilenUser: _oankiUser),
-                  child: SohbetPageYonetici(fotourl: "_oankiUser.avatarImageUrl",userad: _oankiUser.isim,userid: _oankiUser.userId,),
+                  child: SohbetPageNeedy(fotourl: "_oankiUser.avatarImageUrl",userad: _oankiUser.isim,userid: _oankiUser.userId,),
                 ),
               ),
             );
@@ -230,7 +230,7 @@ class _NeedyChatState extends State<NeedyChat> {
   void dahaFazlaKullaniciGetir() async {
     if (_isLoading == false) {
       _isLoading = true;
-      final _tumKullanicilarViewModel = Provider.of<AllUserViewModel>(context);
+      final _tumKullanicilarViewModel = Provider.of<AllUserViewModelHelpful>(context);
       await _tumKullanicilarViewModel.dahaFazlaUserGetir();
       _isLoading = false;
     }
@@ -244,7 +244,7 @@ class _NeedyChatState extends State<NeedyChat> {
   }
 
   Widget _kullaniciYokUi() {
-    final _kullanicilarModel = Provider.of<AllUserViewModelYonetici>(context);
+    final _kullanicilarModel = Provider.of<AllUserViewModelNeedy>(context);
     return SingleChildScrollView(
       physics: AlwaysScrollableScrollPhysics(),
       child: Container(
@@ -318,7 +318,7 @@ class _NeedyChatState extends State<NeedyChat> {
         child: FloatingActionButton(
           onPressed: () {
 
-            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context) => ChattKisiSec()),);
+            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context) => ChattKisiSecHelpful()),);
           },
           child: Icon(
             Icons.add,

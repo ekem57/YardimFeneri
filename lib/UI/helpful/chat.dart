@@ -42,7 +42,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
 
   Widget usersWidget() {
 
-    final _kullanicilarModel = Provider.of<AllUserViewModel>(context);
+    final _kullanicilarModel = Provider.of<AllUserViewModelHelpful>(context);
 
     if (_kullanicilarModel.tumKonusma.length> _kullanicilarModel.kullanicilarListesi.length) {
       _kullanicilarModel.refresh();
@@ -51,14 +51,14 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
       });
     }
 
-    return Consumer<AllUserViewModel>(
-      builder: (context, AllUserViewModel model, child) {
-        if (model.state == AllUserViewState.Busy || _isLoading) {
+    return Consumer<AllUserViewModelHelpful>(
+      builder: (context, AllUserViewModelHelpful model, child) {
+        if (model.state == AllUserViewStateHelpful.Busy || _isLoading) {
           return Center(
             child: CircularProgressIndicator(),
           );
 
-        } else if (model.state == AllUserViewState.Loaded) {
+        } else if (model.state == AllUserViewStateHelpful.Loaded) {
           return RefreshIndicator(
             onRefresh: model.refresh,
             child: ListView.builder(
@@ -93,7 +93,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
 
   Widget _userListeElemaniOlustur(int index ,List<Konusma> konusmalar) {
     final _ogretmenModel = Provider.of<HelpfulService>(context, listen: true);
-    final _tumKullanicilarViewModel = Provider.of<AllUserViewModel>(context);
+    final _tumKullanicilarViewModel = Provider.of<AllUserViewModelHelpful>(context);
     var _oankiUser = _tumKullanicilarViewModel.kullanicilarListesi[index];
     print("emree");
 
@@ -112,7 +112,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
               MaterialPageRoute(
                 builder: (context) => ChangeNotifierProvider(
                   create: (context) => ChatViewModel(currentUser: _ogretmenModel.user, sohbetEdilenUser: _oankiUser),
-                  child: SohbetPage(fotourl: _oankiUser.foto,userad: _oankiUser.isim,userid: _oankiUser.userId,),
+                  child: SohbetPageHelpful(fotourl: _oankiUser.foto,userad: _oankiUser.isim,userid: _oankiUser.userId,),
                 ),
               ),
             );
@@ -127,10 +127,10 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
                   BoxShadow(
                       color: const Color(0x26000000),
                       offset: Offset(0, 0),
-                      blurRadius: 5.50,
+                      blurRadius: 2.50,
                       spreadRadius: 0.5)
                 ],
-                color: Theme.of(context).backgroundColor),
+                color: Colors.white),
             child: ListTile(
               title: Text(
                 _oankiUser.isim.toString(),
@@ -158,7 +158,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
                           fontWeight: FontWeight.w400,
                           fontFamily: "Arial",
                           fontStyle: FontStyle.normal,
-                          fontSize: 12.3.h),
+                          fontSize: 11.3.h),
                     ),
                   ],
                 ),
@@ -224,7 +224,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
   void dahaFazlaKullaniciGetir() async {
     if (_isLoading == false) {
       _isLoading = true;
-      final _tumKullanicilarViewModel = Provider.of<AllUserViewModel>(context);
+      final _tumKullanicilarViewModel = Provider.of<AllUserViewModelHelpful>(context);
       await _tumKullanicilarViewModel.dahaFazlaUserGetir();
       _isLoading = false;
     }
@@ -285,7 +285,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
       backgroundColor: Colors.green,
       appBar: AppBar(
         backgroundColor:  Colors.white,
-        title: Text("Mesajlarım Helpful",
+        title: Text("Mesajlarım",
           style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w700,
@@ -303,14 +303,15 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
       floatingActionButton:  Padding(
         padding: const EdgeInsets.only(bottom: 80),
         child: FloatingActionButton(
+          backgroundColor: Colors.green,
           onPressed: () {
 
-            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context) => ChattKisiSecYonetici()),);
+            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context) => ChattKisiSecNeedy()),);
           },
           child: Icon(
             Icons.add,
             size: 30.0.w,
-            color: const Color(0xff343633),
+            color: Colors.black,
           ),
         ),
       ),

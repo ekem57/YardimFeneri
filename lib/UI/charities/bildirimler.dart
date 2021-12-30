@@ -25,16 +25,7 @@ class _BildirimlerCharitiesState extends State<BildirimlerCharities> {
         iconTheme: new IconThemeData(color: Colors.black),
         title: Text("Bildirimler", style: TextStyle(
             fontSize: 30.0.spByWidth, fontWeight: FontWeight.bold, color: Colors.black),),
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          Padding(
-            padding:  EdgeInsets.only(right: 20.0.w),
-            child: IconButton(icon: Icon(Icons.exit_to_app,size: 30.0.h,), onPressed: (){
-              _charitiesModel.signOut();
-            }),
-          )
 
-        ],
       ),
       body: ListView(
         children: [
@@ -63,14 +54,12 @@ class _BildirimlerCharitiesState extends State<BildirimlerCharities> {
                   itemBuilder: (context, index) {
                     final DocumentSnapshot _cardFuture = snapshot.data.docs[index];
                     return InkWell(
-                      onTap: (){
-                        _cardFuture["etid"] != null ?  Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (c) => BildirimlerCharities(),
-                          ),
-                        ) : null;
+                   //   onTap: (){
+                     //   _cardFuture["etid"] != null ?
+                       // Navigator.of(context).push(MaterialPageRoute(builder: (c) => BildirimlerCharities(),),
+                     //   ) : null;
                       //  _card!.reference.update({'okundu':true});
-                      },
+                    //  },
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 12.0.h, horizontal: 34.0.w),
                         child: Container(

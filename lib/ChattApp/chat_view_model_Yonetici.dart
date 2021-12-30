@@ -7,11 +7,11 @@ import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:yardimfeneri/repo/needyrepo.dart';
 
 
-enum ChatViewStateYonetici { Idle, Loaded, Busy }
+enum ChatViewStateNeedy { Idle, Loaded, Busy }
 
-class ChatViewModelYonetici with ChangeNotifier {
+class ChatViewModelNeedy with ChangeNotifier {
   List<Mesaj> _tumMesajlar;
-  ChatViewStateYonetici _state = ChatViewStateYonetici.Idle;
+  ChatViewStateNeedy _state = ChatViewStateNeedy.Idle;
   static final sayfaBasinaGonderiSayisi = 20;
   NeedyRepo _userRepository = locator<NeedyRepo>();
   final NeedyModel currentUser;
@@ -25,7 +25,7 @@ class ChatViewModelYonetici with ChangeNotifier {
 
   StreamSubscription _streamSubscription;
 
-  ChatViewModelYonetici({this.currentUser,this.sohbetEdilenUser}) {
+  ChatViewModelNeedy({this.currentUser,this.sohbetEdilenUser}) {
     _tumMesajlar = [];
     _tumMesajlarTers=[];
     getMessageWithPagination(false);
@@ -33,9 +33,9 @@ class ChatViewModelYonetici with ChangeNotifier {
 
   List<Mesaj> get mesajlarListesi => _tumMesajlar;
   List<Mesaj> get mesajlarListesiTers => _tumMesajlarTers;
-  ChatViewStateYonetici get state => _state;
+  ChatViewStateNeedy get state => _state;
 
-  set state(ChatViewStateYonetici value) {
+  set state(ChatViewStateNeedy value) {
     _state = value;
     notifyListeners();
   }
@@ -59,7 +59,7 @@ class ChatViewModelYonetici with ChangeNotifier {
       _enSonGetirilenMesaj = _tumMesajlar.last;
     }
 
-    if (!yeniMesajlarGetiriliyor) state = ChatViewStateYonetici.Busy;
+    if (!yeniMesajlarGetiriliyor) state = ChatViewStateNeedy.Busy;
 
     var getirilenMesajlar = await _userRepository.getMessageWithPagination(
         currentUser.userId.toString(),
@@ -80,7 +80,7 @@ class ChatViewModelYonetici with ChangeNotifier {
       // print("Listeye eklenen ilk mesaj :" + _listeyeEklenenIlkMesaj.mesaj);
     }
 
-    state = ChatViewStateYonetici.Loaded;
+    state = ChatViewStateNeedy.Loaded;
 
     if (_yeniMesajDinleListener == false) {
       _yeniMesajDinleListener = true;
@@ -137,7 +137,7 @@ class ChatViewModelYonetici with ChangeNotifier {
         }
 
 
-        state = ChatViewStateYonetici.Loaded;
+        state = ChatViewStateNeedy.Loaded;
       }
     });
   }

@@ -14,14 +14,14 @@ import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:yardimfeneri/servis/helpful_service.dart';
 import 'package:yardimfeneri/servis/needy_service.dart';
 
-class ChattKisiSecYonetici extends StatefulWidget {
+class ChattKisiSecNeedy extends StatefulWidget {
   @override
-  _ChattKisiSecYoneticiState createState() => _ChattKisiSecYoneticiState();
+  _ChattKisiSecNeedyState createState() => _ChattKisiSecNeedyState();
 }
 
 
 
-class _ChattKisiSecYoneticiState extends State<ChattKisiSecYonetici> {
+class _ChattKisiSecNeedyState extends State<ChattKisiSecNeedy> {
   bool isSearching = false;
   List<DocumentSnapshot> totalUsers = [];
   List data=[];
@@ -36,7 +36,7 @@ class _ChattKisiSecYoneticiState extends State<ChattKisiSecYonetici> {
       backgroundColor: Colors.green,
       appBar: AppBar(
         backgroundColor:  Colors.white,
-        title: Text("Kişi Seç HELPFUL",
+        title: Text("Kişi Seç",
           style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w700,
@@ -85,22 +85,27 @@ class _ChattKisiSecYoneticiState extends State<ChattKisiSecYonetici> {
 
                 final DocumentSnapshot _card = snapshot.data.docs[index];
 
-                return ResimliCard(textSubtitle: null, textTitle: _card['isim'].toString(), fontSize: 12.0.spByWidth,
-                  img: _card['foto'].toString(), tarih: null,
-                  onPressed: (){
-                    print("current user: "+_ogretmenModel.user.userId.toString());
-                    print("EMREEEEE sohbet user: "+_card.data().toString());
-                    Navigator.of(context, rootNavigator: true).push(
-                      MaterialPageRoute(
-                        builder: (context) => ChangeNotifierProvider(
-                          create: (context) => ChatViewModel(currentUser: _ogretmenModel.user, sohbetEdilenUser: NeedyModel.fromMap(_card.data())),
-                          child: SohbetPage(fotourl:  _card['foto'].toString(),userad:  _card['isim'].toString(),userid: _card['userID']),
-                        ),
-                      ),
-                    );
-                  },
+                return Column(
+                  children: [
+                    ResimliCard(textSubtitle: null, textTitle: _card['isim'].toString(), fontSize: 12.0.spByWidth,
+                      img: _card['foto'].toString(), tarih: null,
+                      onPressed: (){
+                        print("current user: "+_ogretmenModel.user.userId.toString());
+                        print("EMREEEEE sohbet user: "+_card.data().toString());
+                        Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                            builder: (context) => ChangeNotifierProvider(
+                              create: (context) => ChatViewModel(currentUser: _ogretmenModel.user, sohbetEdilenUser: NeedyModel.fromMap(_card.data())),
+                              child: SohbetPageHelpful(fotourl:  _card['foto'].toString(),userad:  _card['isim'].toString(),userid: _card['userID']),
+                            ),
+                          ),
+                        );
+                      },
 
 
+                    ),
+                    SizedBox(height: 10.0.h,),
+                  ],
                 );
 
               },

@@ -7,11 +7,11 @@ import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:yardimfeneri/repo/helpfulrepo.dart';
 
 
-enum ChatViewState { Idle, Loaded, Busy }
+enum ChatViewStateHelpful { Idle, Loaded, Busy }
 
 class ChatViewModel with ChangeNotifier {
   List<Mesaj> _tumMesajlar;
-  ChatViewState _state = ChatViewState.Idle;
+  ChatViewStateHelpful _state = ChatViewStateHelpful.Idle;
   static final sayfaBasinaGonderiSayisi = 20;
   HelpfulRepo _userRepository = locator<HelpfulRepo>();
   HelpfulModel currentUser;
@@ -33,9 +33,9 @@ class ChatViewModel with ChangeNotifier {
 
   List<Mesaj>  get mesajlarListesi => _tumMesajlar;
   List<Mesaj>  get mesajlarListesiTers => _tumMesajlarTers;
-  ChatViewState get state => _state;
+  ChatViewStateHelpful get state => _state;
 
-  set state(ChatViewState value) {
+  set state(ChatViewStateHelpful value) {
     _state = value;
     notifyListeners();
   }
@@ -63,7 +63,7 @@ class ChatViewModel with ChangeNotifier {
       _enSonGetirilenMesaj = _tumMesajlar.last;
     }
 
-    if (!yeniMesajlarGetiriliyor) state = ChatViewState.Busy;
+    if (!yeniMesajlarGetiriliyor) state = ChatViewStateHelpful.Busy;
 
     var getirilenMesajlar = await _userRepository.getMessageWithPagination(
         currentUser.userId.toString(),
@@ -84,7 +84,7 @@ class ChatViewModel with ChangeNotifier {
       // print("Listeye eklenen ilk mesaj :" + _listeyeEklenenIlkMesaj.mesaj);
     }
 
-    state = ChatViewState.Loaded;
+    state = ChatViewStateHelpful.Loaded;
 
     if (_yeniMesajDinleListener == false) {
       _yeniMesajDinleListener = true;
@@ -141,7 +141,7 @@ class ChatViewModel with ChangeNotifier {
         }
 
 
-        state = ChatViewState.Loaded;
+        state = ChatViewStateHelpful.Loaded;
       }
     });
   }

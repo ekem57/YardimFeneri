@@ -14,13 +14,13 @@ import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:yardimfeneri/servis/helpful_service.dart';
 import 'package:yardimfeneri/servis/needy_service.dart';
 
-class ChattKisiSec extends StatefulWidget {
+class ChattKisiSecHelpful extends StatefulWidget {
   @override
-  _ChattKisiSecState createState() => _ChattKisiSecState();
+  _ChattKisiSecHelpfulState createState() => _ChattKisiSecHelpfulState();
 }
 
 
-class _ChattKisiSecState extends State<ChattKisiSec> {
+class _ChattKisiSecHelpfulState extends State<ChattKisiSecHelpful> {
   bool isSearching = false;
   List<DocumentSnapshot> totalUsers = [];
   List data=[];
@@ -34,7 +34,7 @@ class _ChattKisiSecState extends State<ChattKisiSec> {
       backgroundColor: Colors.green,
       appBar: AppBar(
         backgroundColor:  Colors.white,
-        title: Text("Kişi Seç Needy",
+        title: Text("Kişi Seç",
             style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w700,
@@ -90,8 +90,8 @@ class _ChattKisiSecState extends State<ChattKisiSec> {
                     Navigator.of(context, rootNavigator: true).push(
                       MaterialPageRoute(
                         builder: (context) => ChangeNotifierProvider(
-                          create: (context) => ChatViewModelYonetici(currentUser: _ogretmenModel.user, sohbetEdilenUser: HelpfulModel.fromMap(_card.data())),
-                          child: SohbetPageYonetici(fotourl:  _card['foto'].toString(),userad:  _card['isim'].toString(),userid: _card['userID']),
+                          create: (context) => ChatViewModelNeedy(currentUser: _ogretmenModel.user, sohbetEdilenUser: HelpfulModel.fromMap(_card.data())),
+                          child: SohbetPageNeedy(fotourl:  _card['foto'].toString(),userad:  _card['isim'].toString(),userid: _card['userID']),
                         ),
                       ),
                     );

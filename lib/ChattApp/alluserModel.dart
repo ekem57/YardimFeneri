@@ -7,10 +7,10 @@ import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:yardimfeneri/repo/needyrepo.dart';
 
 
-enum AllUserViewState { Idle, Loaded, Busy }
+enum AllUserViewStateHelpful { Idle, Loaded, Busy }
 
-class AllUserViewModel with ChangeNotifier {
-  AllUserViewState _state = AllUserViewState.Idle;
+class AllUserViewModelHelpful with ChangeNotifier {
+  AllUserViewStateHelpful _state = AllUserViewStateHelpful.Idle;
   List<NeedyModel> _tumKullanicilar;
   NeedyModel _enSonGetirilenUser;
   static final sayfaBasinaGonderiSayisi = 10;
@@ -22,14 +22,14 @@ class AllUserViewModel with ChangeNotifier {
   NeedyRepo _userRepository = locator<NeedyRepo>();
   List<NeedyModel> get kullanicilarListesi => _tumKullanicilar;
   List<Konusma> get kullaniciBilgileri => tumKonusma;
-  AllUserViewState get state => _state;
+  AllUserViewStateHelpful get state => _state;
 
-  set state(AllUserViewState value) {
+  set state(AllUserViewStateHelpful value) {
     _state = value;
     notifyListeners();
   }
 
-  AllUserViewModel() {
+  AllUserViewModelHelpful() {
     _tumKullanicilar = [];
     tumKonusma=[];
     _enSonGetirilenUser = null;
@@ -55,7 +55,7 @@ class AllUserViewModel with ChangeNotifier {
 
     if (yeniElemanlarGetiriliyor) {
     } else {
-      state = AllUserViewState.Busy;
+      state = AllUserViewStateHelpful.Busy;
     }
 
     var yeniListe = await _userRepository.getUserwithPagination(_enSonGetirilenUser, sayfaBasinaGonderiSayisi);
@@ -87,11 +87,11 @@ class AllUserViewModel with ChangeNotifier {
 
 
 
-      state = AllUserViewState.Loaded;
+      state = AllUserViewStateHelpful.Loaded;
 
     });
 
-    state = AllUserViewState.Loaded;
+    state = AllUserViewStateHelpful.Loaded;
   }
 
   Future<void> dahaFazlaUserGetir() async {

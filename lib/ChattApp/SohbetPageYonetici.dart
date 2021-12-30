@@ -10,17 +10,17 @@ import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/mesaj.dart';
 
 
-class SohbetPageYonetici extends StatefulWidget {
+class SohbetPageNeedy extends StatefulWidget {
   final String fotourl;
   final String userad;
   final String userid;
 
-  SohbetPageYonetici({ this.fotourl,this.userad,this.userid});
+  SohbetPageNeedy({ this.fotourl,this.userad,this.userid});
   @override
-  _SohbetPageYoneticiState createState() => _SohbetPageYoneticiState();
+  _SohbetPageNeedyState createState() => _SohbetPageNeedyState();
 }
 
-class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
+class _SohbetPageNeedyState extends State<SohbetPageNeedy> {
   var _mesajController = TextEditingController();
   ScrollController _scrollController = new ScrollController();
   bool _isLoading = false;
@@ -35,18 +35,18 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
 
   @override
   Widget build(BuildContext context) {
-    final _chatModel = Provider.of<ChatViewModelYonetici>(context);
+    final _chatModel = Provider.of<ChatViewModelNeedy>(context);
     return Scaffold(
       backgroundColor:  Colors.green,
       appBar: AppBar(
-        title: Text("Sohbet Needy"),
+        title: Text("Sohbet"),
         elevation: 0.0,
         brightness: Brightness.dark,
         toolbarHeight: 60.0.h,
         backgroundColor: Colors.green,
 
       ),
-      body: _chatModel.state == ChatViewState.Busy
+      body: _chatModel.state == ChatViewStateHelpful.Busy
           ? Center(
         child: CircularProgressIndicator(),
       )
@@ -62,7 +62,7 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.70),
             topRight: Radius.circular(20.70)),
-        color: Theme.of(context).backgroundColor,
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
               color: const Color(0x5c000000),
@@ -83,7 +83,7 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
 
   }
   Widget _buildMesajListesi() {
-    return Consumer<ChatViewModelYonetici>(builder: (context, chatModel, child) {
+    return Consumer<ChatViewModelNeedy>(builder: (context, chatModel, child) {
       return Expanded(
         child: ListView.builder(
           controller: _scrollController,
@@ -104,7 +104,7 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
   }
 
   Widget _buildYeniMesajGir() {
-    final _chatModel = Provider.of<ChatViewModelYonetici>(context);
+    final _chatModel = Provider.of<ChatViewModelNeedy>(context);
     return Container(
       padding: EdgeInsets.only(bottom: 8.0.h, left: 8.0.w, right:8.0.w),
       child: Row(
@@ -131,11 +131,16 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
                   maxLines: 4,
                   minLines: 1,
                   decoration: InputDecoration(
-
+                    focusedErrorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
                     fillColor: Colors.white,
                     filled: true,
                     hintText: "Mesajınızı Yazın",
                     border: new OutlineInputBorder(
+
                         borderRadius: new BorderRadius.circular(30.0),
                         borderSide: BorderSide.none),
                   ),
@@ -195,7 +200,7 @@ class _SohbetPageYoneticiState extends State<SohbetPageYonetici> {
   Widget _SohbetkonusmaBalonuOlustur(Mesaj oankiMesaj,bool sonmesajgorunme) {
     Color _gelenMesajRenk = Colors.blue;
     Color _gidenMesajRenk = Theme.of(context).primaryColor;
-    final _chatModel = Provider.of<ChatViewModelYonetici>(context);
+    final _chatModel = Provider.of<ChatViewModelNeedy>(context);
     var _saatDakikaDegeri = "";
     final icon = sonmesajgorunme ? Icon(Icons.done_all,color: Colors.blue,size: 16.0.h,) : oankiMesaj.goruldumu ? Icon(Icons.done_all,color: Colors.blue,size: 16.0.h,) : Icon(Icons.done,color: Colors.black38,size: 16.0.h,);
 

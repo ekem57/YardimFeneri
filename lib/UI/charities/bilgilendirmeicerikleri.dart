@@ -100,6 +100,7 @@ class _BilgilendirmeIcerikleriState extends State<BilgilendirmeIcerikleri> {
             Padding(
               padding:  EdgeInsets.all(25.0.h),
               child: MyButton(text: "İçerik Paylaş", onPressed: () async {
+
                 SystemChannels.textInput.invokeMethod('TextInput.hide');
                 await _changeLoadingVisible();
                 try {

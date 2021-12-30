@@ -10,17 +10,17 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:yardimfeneri/model/mesaj.dart';
 
 
-class SohbetPage extends StatefulWidget {
+class SohbetPageHelpful extends StatefulWidget {
   final String fotourl;
   final String userad;
   final String userid;
 
-  SohbetPage({ this.fotourl,this.userad,this.userid});
+  SohbetPageHelpful({ this.fotourl,this.userad,this.userid});
   @override
-  _SohbetPageState createState() => _SohbetPageState();
+  _SohbetPageHelpfulState createState() => _SohbetPageHelpfulState();
 }
 
-class _SohbetPageState extends State<SohbetPage> {
+class _SohbetPageHelpfulState extends State<SohbetPageHelpful> {
   var _mesajController = TextEditingController();
   ScrollController _scrollController = new ScrollController();
   bool _isLoading = false;
@@ -60,7 +60,7 @@ class _SohbetPageState extends State<SohbetPage> {
       borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20.70),
           topRight: Radius.circular(20.70)),
-      color: Theme.of(context).backgroundColor,
+      color: Colors.white,
       boxShadow: [
         BoxShadow(
             color: const Color(0x5c000000),
@@ -130,12 +130,16 @@ class _SohbetPageState extends State<SohbetPage> {
                   maxLines: 4,
                   minLines: 1,
                   decoration: InputDecoration(
-
+                    focusedErrorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
                     fillColor: Colors.white,
                     filled: true,
                     hintText: "Mesajınızı Yazın",
-                    border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
+                    border:  OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(20.0),
                         borderSide: BorderSide.none),
                   ),
                 ),

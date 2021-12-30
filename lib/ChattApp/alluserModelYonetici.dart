@@ -7,10 +7,10 @@ import 'package:yardimfeneri/model/konusma.dart';
 import 'package:yardimfeneri/repo/helpfulrepo.dart';
 
 
-enum AllUserViewStateYonetici { Idle, Loaded, Busy }
+enum AllUserViewStateNeedy { Idle, Loaded, Busy }
 
-class AllUserViewModelYonetici with ChangeNotifier {
-  AllUserViewStateYonetici _state = AllUserViewStateYonetici.Idle;
+class AllUserViewModelNeedy with ChangeNotifier {
+  AllUserViewStateNeedy _state = AllUserViewStateNeedy.Idle;
   List<HelpfulModel> _tumKullanicilar;
   HelpfulModel _enSonGetirilenUser;
   static final sayfaBasinaGonderiSayisi = 10;
@@ -23,14 +23,14 @@ class AllUserViewModelYonetici with ChangeNotifier {
   List<HelpfulModel> get kullanicilarListesi => _tumKullanicilar;
 
   List<Konusma> get kullaniciBilgileri => tumKonusma;
-  AllUserViewStateYonetici get state => _state;
+  AllUserViewStateNeedy get state => _state;
 
-  set state(AllUserViewStateYonetici value) {
+  set state(AllUserViewStateNeedy value) {
     _state = value;
     notifyListeners();
   }
 
-  AllUserViewModelYonetici() {
+  AllUserViewModelNeedy() {
     _tumKullanicilar = [];
     tumKonusma=[];
     _enSonGetirilenUser = null;
@@ -54,7 +54,7 @@ class AllUserViewModelYonetici with ChangeNotifier {
 
     if (yeniElemanlarGetiriliyor) {
     } else {
-      state = AllUserViewStateYonetici.Busy;
+      state = AllUserViewStateNeedy.Busy;
     }
 
     var yeniListe = await _userRepository.getUserwithPagination(_enSonGetirilenUser, sayfaBasinaGonderiSayisi);
@@ -82,11 +82,11 @@ class AllUserViewModelYonetici with ChangeNotifier {
       }
 
 
-      state = AllUserViewStateYonetici.Loaded;
+      state = AllUserViewStateNeedy.Loaded;
 
     });
 
-    state = AllUserViewStateYonetici.Loaded;
+    state = AllUserViewStateNeedy.Loaded;
   }
 
   Future<void> dahaFazlaUserGetir() async {

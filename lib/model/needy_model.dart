@@ -11,6 +11,7 @@ class NeedyModel extends ChangeNotifier {
   String soyisim;
   String meslek;
   String adres;
+  String hakkimda;
   String il;
   String foto;
   DateTime dogumTarihi;
@@ -30,6 +31,7 @@ class NeedyModel extends ChangeNotifier {
       'meslek': meslek,
       'il': il,
       'adres': adres,
+      'hakkimda': "Öğrenci",
       'foto': foto,
       'dogumTarihi': dogumTarihi,
       'hesapOnay': hesaponay ?? false,
@@ -45,6 +47,7 @@ class NeedyModel extends ChangeNotifier {
         soyisim = map['soyisim'],
         meslek = map['meslek'],
         il = map['il'],
+        hakkimda = map['hakkimda'],
         adres = map['adres'],
         dogumTarihi = (map['dogumTarihi'] as Timestamp).toDate(),
         foto = map['foto'],

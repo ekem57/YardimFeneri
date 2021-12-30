@@ -1,13 +1,15 @@
 import 'dart:collection';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
+import 'package:yardimfeneri/UI/charities/uyelikbasvurusu.dart';
 import 'package:yardimfeneri/UI/helpful/chat.dart';
-import 'package:yardimfeneri/UI/helpful/profilpage.dart';
 import 'package:yardimfeneri/UI/helpful/homepage.dart';
+import 'package:yardimfeneri/UI/helpful/yardimettigiinsanlar.dart';
+import 'package:yardimfeneri/UI/helpful/yardimettigiprojeler.dart';
 import 'package:yardimfeneri/extantion/size_config.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
+import 'package:yardimfeneri/navigationpage/profil_page/profile_page.dart';
 
 class HelpfulMainNavigation extends StatefulWidget {
   final HelpfulModel user;
@@ -109,9 +111,9 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
       case 0:
         return HomePageHelpful();
       case 1:
-        return HomePageHelpful();
+        return UyelikBasvurusu();
       case 2:
-        return HomePageHelpful();
+        return YardimEttigiProjeler();
       case 3:
         return MesajlarAnasayfa();
       case 4:

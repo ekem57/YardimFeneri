@@ -6,8 +6,10 @@ import 'package:yardimfeneri/UI/charities/bagisislemleri.dart';
 import 'package:yardimfeneri/UI/charities/bildirimler.dart';
 import 'package:yardimfeneri/UI/charities/bilgilendirmeicerikleri.dart';
 import 'package:yardimfeneri/UI/charities/homepage.dart';
+import 'package:yardimfeneri/UI/charities/kampanyalarim.dart';
 import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
 import 'package:yardimfeneri/UI/charities/uyeler.dart';
+import 'package:yardimfeneri/UI/charities/yardim_istegi_gonderme.dart';
 import 'package:yardimfeneri/UI/charities/yardimkampanyasiacma.dart';
 import 'package:yardimfeneri/extantion/size_config.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
@@ -73,6 +75,7 @@ class _CharitiesMainNavigationState extends State<CharitiesMainNavigation> {
             Icon(Icons.person, size: 30, color: Colors.white),
             Icon(Icons.campaign_sharp, size: 30, color: Colors.white),
             Icon(Icons.add_box_sharp, size: 30, color:Colors.white),
+            Icon(Icons.supervised_user_circle, size: 30, color:Colors.white),
             Icon(Icons.notifications_active, size: 30, color:Colors.white),
           ],
           color: Colors.blue,
@@ -124,7 +127,9 @@ class _CharitiesMainNavigationState extends State<CharitiesMainNavigation> {
       case 4:
         return BilgilendirmeIcerikleri();
       case 5:
-        return BildirimlerCharities();
+        return YardimIstegiGonderme();
+      case 6:
+        return Kampanyalarim();
     }
 
   }

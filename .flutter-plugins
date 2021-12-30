@@ -10,7 +10,3 @@ firebase_storage_web=/Users/emre/development/flutter/.pub-cache/hosted/pub.dartl
 flutter_plugin_android_lifecycle=/Users/emre/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.4/
 image_picker=/Users/emre/development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.7.5+4/
 image_picker_for_web=/Users/emre/development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.4/
-path_provider=/Users/emre/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.6/
-path_provider_linux=/Users/emre/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.0/
-path_provider_macos=/Users/emre/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.2/
-path_provider_windows=/Users/emre/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.3/

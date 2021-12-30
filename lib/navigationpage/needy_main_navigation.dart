@@ -117,7 +117,7 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
       case 2:
         return NeedyChat();
       case 3:
-        return ProfilNeedy();
+        return ProfilPageNeedy();
     }
 
   }

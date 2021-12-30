@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/COMMON/resimlicard.dart';
+import 'package:yardimfeneri/UI/charities/uyekabul.dart';
+import 'package:yardimfeneri/common/kullanici_profil.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/servis/charities_service.dart';
 
@@ -21,9 +23,16 @@ class _UyelerCharitiesState extends State<UyelerCharities> {
       body: ListView(
           children: [
             SizedBox(height: 12.0.h,),
-            Center(
-              child: Text("Üyeler", style: TextStyle(
-                  fontSize: 30.0.spByWidth, fontWeight: FontWeight.bold, color: Colors.black),),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("Üyeler", style: TextStyle(fontSize: 30.0.spByWidth, fontWeight: FontWeight.bold, color: Colors.black),),
+                IconButton(onPressed: (){
+
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => CharitiesUyeKabul()));
+
+                }, icon: Icon(Icons.person_add,size: 35,)),
+              ],
             ),
             SizedBox(height: 20.0.h,),
             StreamBuilder<QuerySnapshot>(
@@ -62,13 +71,22 @@ class _UyelerCharitiesState extends State<UyelerCharities> {
                             return _card.data() != null ?  Slidable(
                               actionPane: SlidableDrawerActionPane(),
                               actionExtentRatio: 0.45,
-                              child:ResimliCard(
-                                  textSubtitle: null,
-                                  textTitle: _card['isim'].toString(),
-                                  onPressed: () {},
-                                  fontSize: 12.0.spByWidth,
-                                  img: _card['foto'].toString(),
-                                  tarih: null),
+                              child:InkWell(
+                                onTap: ()
+                                {
+
+                                },
+                                child: ResimliCard(
+                                    textSubtitle: null,
+                                    textTitle: _card['isim'].toString(),
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) =>KullaniciProfilPage(user: _card,)),);
+
+                                    },
+                                    fontSize: 12.0.spByWidth,
+                                    img: _card['foto'].toString(),
+                                    tarih: null),
+                              ),
                               secondaryActions: <Widget>[
 
                                 Container(

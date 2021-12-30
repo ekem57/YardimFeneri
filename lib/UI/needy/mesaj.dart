@@ -5,19 +5,15 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/ChattApp/SohbetPageYonetici.dart';
-import 'package:yardimfeneri/ChattApp/alluserModel.dart';
+import 'package:yardimfeneri/ChattApp/alluserModel-Needy-Charities.dart';
 import 'package:yardimfeneri/ChattApp/alluserModelYonetici.dart';
-import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
+import 'package:yardimfeneri/ChattApp/chat_view_model_Needy_Charities.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model_Yonetici.dart';
-import 'package:yardimfeneri/ChattApp/mesajKisiSecYonetici.dart';
 import 'package:yardimfeneri/ChattApp/mesajkisiSec.dart';
-import 'package:yardimfeneri/ChattApp/sohbetPage.dart';
+import 'package:yardimfeneri/ChattApp/sohbetpageNeedy_Charities.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
-import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/konusma.dart';
-import 'package:yardimfeneri/model/needy_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:yardimfeneri/servis/helpful_service.dart';
 import 'package:yardimfeneri/servis/needy_service.dart';
 
 
@@ -46,7 +42,7 @@ class _NeedyChatState extends State<NeedyChat> {
 
   Widget usersWidget() {
 
-    final _kullanicilarModel = Provider.of<AllUserViewModelYonetici>(context);
+    final _kullanicilarModel = Provider.of<AllUserViewModelNeedy_Charities>(context);
 
     if (_kullanicilarModel.tumKonusma.length> _kullanicilarModel.kullanicilarListesi.length) {
       _kullanicilarModel.refresh();
@@ -55,14 +51,14 @@ class _NeedyChatState extends State<NeedyChat> {
       });
     }
 
-    return Consumer<AllUserViewModelYonetici>(
-      builder: (context, AllUserViewModelYonetici model, child) {
-        if (model.state == AllUserViewStateYonetici.Busy || _isLoading) {
+    return Consumer<AllUserViewModelNeedy_Charities>(
+      builder: (context, AllUserViewModelNeedy_Charities model, child) {
+        if (model.state == AllUserViewStateNeedy_Charities.Busy || _isLoading) {
           return Center(
             child: CircularProgressIndicator(),
           );
 
-        } else if (model.state == AllUserViewStateYonetici.Loaded) {
+        } else if (model.state == AllUserViewStateNeedy_Charities.Loaded) {
           return RefreshIndicator(
             onRefresh: model.refresh,
             child: ListView.builder(
@@ -97,7 +93,7 @@ class _NeedyChatState extends State<NeedyChat> {
 
   Widget _userListeElemaniOlustur(int index ,List<Konusma> konusmalar) {
     final _ogretmenModel = Provider.of<NeedyService>(context, listen: true);
-    final _tumKullanicilarViewModel = Provider.of<AllUserViewModelYonetici>(context);
+    final _tumKullanicilarViewModel = Provider.of<AllUserViewModelNeedy_Charities>(context);
     var _oankiUser = _tumKullanicilarViewModel.kullanicilarListesi[index];
     print("emree");
 
@@ -115,8 +111,8 @@ class _NeedyChatState extends State<NeedyChat> {
             Navigator.of(context, rootNavigator: true).push(
               MaterialPageRoute(
                 builder: (context) => ChangeNotifierProvider(
-                  create: (context) => ChatViewModelYonetici(currentUser: _ogretmenModel.user, sohbetEdilenUser: _oankiUser),
-                  child: SohbetPageYonetici(fotourl: _oankiUser.foto,userad: _oankiUser.isim,userid: _oankiUser.userId,),
+                  create: (context) => ChatViewModelNeedy_Charities(currentUser: _ogretmenModel.user, sohbetEdilenUser: _oankiUser),
+                  child: SohbetPageNeedy_Charities(fotourl: _oankiUser.logo,userad: _oankiUser.isim,userid: _oankiUser.userId,),
                 ),
               ),
             );
@@ -134,7 +130,7 @@ class _NeedyChatState extends State<NeedyChat> {
                       blurRadius: 5.50,
                       spreadRadius: 0.5)
                 ],
-                color: Theme.of(context).backgroundColor),
+                color: Colors.white),
             child: ListTile(
               title: Text(
                 _oankiUser.isim.toString(),
@@ -228,7 +224,7 @@ class _NeedyChatState extends State<NeedyChat> {
   void dahaFazlaKullaniciGetir() async {
     if (_isLoading == false) {
       _isLoading = true;
-      final _tumKullanicilarViewModel = Provider.of<AllUserViewModelYonetici>(context);
+      final _tumKullanicilarViewModel = Provider.of<AllUserViewModelNeedy_Charities>(context);
       await _tumKullanicilarViewModel.dahaFazlaUserGetir();
       _isLoading = false;
     }
@@ -289,7 +285,7 @@ class _NeedyChatState extends State<NeedyChat> {
       backgroundColor: Colors.green,
       appBar: AppBar(
         backgroundColor:  Colors.white,
-        title: Text("Mesajlarım needy",
+        title: Text("Mesajlarım",
           style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w700,
@@ -304,12 +300,13 @@ class _NeedyChatState extends State<NeedyChat> {
         // status bar brightness
 
       ),
+      /*
       floatingActionButton:  Padding(
         padding: const EdgeInsets.only(bottom: 80),
         child: FloatingActionButton(
           onPressed: () {
 
-            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context) => ChattKisiSec()),);
+            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context) => ChattKisiSecHelpful()),);
           },
           child: Icon(
             Icons.add,
@@ -318,6 +315,8 @@ class _NeedyChatState extends State<NeedyChat> {
           ),
         ),
       ),
+      
+       */
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

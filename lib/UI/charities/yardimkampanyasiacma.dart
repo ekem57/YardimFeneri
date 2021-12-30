@@ -2,9 +2,13 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:yardimfeneri/COMMON/myButton.dart';
+import 'package:yardimfeneri/common/alertinfo.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
+import 'package:yardimfeneri/servis/charities_service.dart';
 
 class YardimKampanyasiAcmaCharities extends StatefulWidget {
   const YardimKampanyasiAcmaCharities({Key key}) : super(key: key);
@@ -26,10 +30,13 @@ class _YardimKampanyasiAcmaCharitiesState extends State<YardimKampanyasiAcmaChar
   }
 
   TextEditingController _baslik = new TextEditingController();
+  TextEditingController _icerik = new TextEditingController();
 
 
   @override
   Widget build(BuildContext context) {
+    final _charitiesModel = Provider.of<CharitiesService>(context, listen: true);
+
     return Scaffold(
       body: ListView(
           children: [
@@ -85,11 +92,71 @@ class _YardimKampanyasiAcmaCharitiesState extends State<YardimKampanyasiAcmaChar
                 ),
               ),
             ),
-            _golgelitext("Başlık", _baslik, 5,10),
+            _golgelitext("Başlık", _baslik, 9,15),
             SizedBox(height: 13.0.h,),
             Padding(
               padding:  EdgeInsets.all(25.0.h),
-              child: MyButton(text: "Kampanyayı Başlat", onPressed: (){}, textColor: Colors.white, fontSize: 16.0.spByWidth, width: 50.0.w, height: 55.0.h,butonColor: Colors.green,),
+              child: MyButton(text: "Kampanyayı Başlat", onPressed: () async {
+
+                SystemChannels.textInput.invokeMethod('TextInput.hide');
+                await _changeLoadingVisible();
+                try {
+                  DocumentReference _reference = await FirebaseFirestore.instance.collection("anasayfa").doc();
+                  DocumentReference _myreference = await FirebaseFirestore.instance.collection("charities").doc(_charitiesModel.user.userId).collection("yardim_kampanyalarim").doc(_reference.id);
+
+                  Map<String, dynamic> etkinliklerim = Map();
+
+                  etkinliklerim['bicim'] = "kampanya";
+                  etkinliklerim['date'] = Timestamp.now();
+                  etkinliklerim['foto'] = await uploadDuyuruImage(_reference.id);
+                  etkinliklerim['icerik'] = _baslik.text;
+                  etkinliklerim['kurumid'] = _charitiesModel.user.userId;
+                  etkinliklerim['postid'] = _reference.id;
+                  etkinliklerim['like'] = 0;
+                  etkinliklerim['toplanan_tutar'] = 0;
+                  etkinliklerim['tamamlandi'] = false;
+
+                  _reference.set(etkinliklerim).then((value) async {
+                    await _myreference.set(etkinliklerim);
+                    var dialogBilgi = AlertBilgilendirme(
+                      icerik: "İçeriğiniz paylaşıldı.",
+                      Pressed: () {
+                        Navigator.pop(context);
+                      },
+                    );
+
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => dialogBilgi);
+
+                    setState(() {
+                      _icerik.clear();
+                      _image=null;
+                      _loadingVisible = false;
+                    });
+                  });
+
+                }catch(e){
+                  print(e);
+                  var dialogBilgi = AlertBilgilendirme(
+                    icerik: "İçerik paylaşılamadı üzgünüz. Lütfen tekrar deneyiniz... \n",
+                    Pressed: () {
+                      Navigator.pop(context);
+                    },
+                  );
+
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => dialogBilgi);
+
+                  setState(() {
+                    _loadingVisible = false;
+                    _baslik.clear();
+                  });
+                }
+
+
+              }, textColor: Colors.white, fontSize: 16.0.spByWidth, width: 50.0.w, height: 55.0.h,butonColor: Colors.green,),
             ),
 
           ],

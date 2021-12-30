@@ -9,6 +9,7 @@ class HelpfulModel extends ChangeNotifier {
   String telefon;
   String isim;
   String soyisim;
+  String hakkimda;
   String adres;
   String il;
   String foto;
@@ -37,6 +38,7 @@ class HelpfulModel extends ChangeNotifier {
         password = null,
         isim = map['isim'],
         soyisim = map['soyisim'],
+        hakkimda = map['hakkimda'],
         il = map['il'],
         adres = map['adres'],
         dogumTarihi = (map['dogumTarihi'] as Timestamp).toDate(),
