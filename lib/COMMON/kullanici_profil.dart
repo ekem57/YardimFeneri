@@ -132,24 +132,7 @@ class _KullaniciProfilPageState extends State<KullaniciProfilPage> {
                   ),
                 ],),
                 Divider(),
-                Row(children: <Widget>[
-                  Padding(
-                    padding:  EdgeInsets.only(left: 10.0.w),
-                    child: Text("Meslek:",style: TextStyle(fontSize: 16.0.spByWidth),),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(left: 63.0.w),
-                    child: Container(
-                      width: 180.0.w,
-                      child: Text(
-                        widget.user['meslek'].toString(),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                        style: TextStyle(fontSize: 17.0.spByWidth),
-                      ),
-                    ),
-                  ),
-                ],),
+
                 Divider(),
                 Row(children: <Widget>[
                   Padding(

@@ -100,7 +100,10 @@ class _UyelerCharitiesState extends State<UyelerCharities> {
                                       color: Colors.red,
                                       icon: Icons.delete,
                                       onTap: () async {
-                                        setState(() {
+                                        setState(() async {
+                                          print("çalış");
+                                        await  snapshotUye.data.docs[index].reference.delete();
+                                        await FirebaseFirestore.instance.collection("kurumKatilimİstekleri").doc(_card['userID']).collection("katilimcilar").doc(_cardYonetici['userID']).delete();
 
                                         });
                                       }

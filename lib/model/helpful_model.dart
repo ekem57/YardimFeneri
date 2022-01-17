@@ -23,10 +23,11 @@ class HelpfulModel extends ChangeNotifier {
       'userID': userId,
       'telefon': telefon ?? '00000000000',
       'isim': isim,
+      'hakkimda': "",
       'soyisim': soyisim,
       'il': il,
       'adres': adres,
-      'foto': foto,
+      'foto': 'https://firebasestorage.googleapis.com/v0/b/yardimfeneri.appspot.com/o/logo.png?alt=media&token=f8132b8b-f300-41e8-bc80-9696bd2e2e68',
       'dogumTarihi': dogumTarihi,
     };
   }

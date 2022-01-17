@@ -69,7 +69,6 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
             items: <Widget>[
               Icon(Icons.home, size: 40, color: Theme.of(context).backgroundColor),
               Icon(Icons.date_range, size: 30, color: Theme.of(context).backgroundColor),
-              Icon(Icons.info, size: 30, color: Theme.of(context).backgroundColor),
               Icon(Icons.message, size: 30, color: Theme.of(context).backgroundColor),
               Icon(Icons.person, size: 30, color: Theme.of(context).backgroundColor),
             ],
@@ -113,10 +112,8 @@ class _HelpfulMainNavigationState extends State<HelpfulMainNavigation> {
       case 1:
         return UyelikBasvurusu();
       case 2:
-        return YardimEttigiProjeler();
-      case 3:
         return MesajlarAnasayfa();
-      case 4:
+      case 3:
         return ProfilPageHelpful();
     }
 

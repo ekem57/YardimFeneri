@@ -84,12 +84,12 @@ class _ToplulukTanitimState extends State<ToplulukTanitim> {
                         return snapshot.data.docs.toString() == "[]" ?
                         MyButton(text: "Başvur", onPressed: ()
                         {
-                          _firestoreDBService.kurumKatilmaIstegiButonu(_card, _userModel.user.userId);
+                          _firestoreDBService.kurumKatilmaIstegiButonu(_card, _userModel.user.userId,_userModel.user.foto,_userModel.user.isim+" "+_userModel.user.soyisim,_userModel.user.telefon,"helpful");
                         }, textColor: Colors.white, fontSize: 16.0.spByWidth, width: 240.0.w, height: 40.0.h,butonColor: Colors.green,)
                          : snapshot.data.docs[0]['onay'].toString() == "katilmadi" ?
                         MyButton(text: "Başvur", onPressed: ()
                         {
-                          _firestoreDBService.kurumKatilmaIstegiButonu(_card, _userModel.user.userId);
+                          _firestoreDBService.kurumKatilmaIstegiButonu(_card, _userModel.user.userId,_userModel.user.foto,_userModel.user.isim+" "+_userModel.user.soyisim,_userModel.user.telefon,"helpful");
                         }, textColor: Colors.white, fontSize: 16.0.spByWidth, width: 240.0.w, height: 40.0.h,butonColor: Colors.green,)
                             : snapshot.data.docs[0]['onay'].toString() == "katildi"
                         ? MyButton(text: "Katıldınız", onPressed: (){

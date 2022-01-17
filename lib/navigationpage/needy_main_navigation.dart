@@ -7,7 +7,10 @@ import 'package:yardimfeneri/UI/charities/notapprovedpage.dart';
 import 'package:yardimfeneri/UI/helpful/chat.dart';
 import 'package:yardimfeneri/UI/needy/homepage.dart';
 import 'package:yardimfeneri/UI/needy/mesaj.dart';
+import 'package:yardimfeneri/UI/needy/notapprovedpage.dart';
 import 'package:yardimfeneri/UI/needy/profil.dart';
+import 'package:yardimfeneri/UI/needy/uyeistegi_atma.dart';
+import 'package:yardimfeneri/UI/needy/uyelik_istegi.dart';
 import 'package:yardimfeneri/UI/needy/yardim_talebinde_bulunma.dart';
 import 'package:yardimfeneri/extantion/size_config.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
@@ -64,7 +67,7 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
       child: Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           extendBody: true,
-          body: _needyService.user.hesaponay == true ? Center(child: _getBody(index)) : NotApprovedPageCharities(),
+          body: _needyService.user.hesaponay == true ? Center(child: _getBody(index)) : NotApprovedPageNeedy(),
           bottomNavigationBar:  CurvedNavigationBar(
             key: _bottomNavigationKey,
             index: 0,
@@ -73,6 +76,7 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
               Icon(Icons.home, size: 40, color: Theme.of(context).backgroundColor),
               Icon(Icons.supervised_user_circle_sharp, size: 30, color: Theme.of(context).backgroundColor),
               Icon(Icons.message, size: 30, color: Theme.of(context).backgroundColor),
+              Icon(Icons.person_add, size: 30, color: Theme.of(context).backgroundColor),
               Icon(Icons.person, size: 30, color: Theme.of(context).backgroundColor),
             ],
             color: Theme.of(context).primaryColor,
@@ -117,6 +121,8 @@ class _NeedyMainNavigationState extends State<NeedyMainNavigation> {
       case 2:
         return NeedyChat();
       case 3:
+        return UyelikBasvurusuNeedy();
+      case 4:
         return ProfilPageNeedy();
     }
 

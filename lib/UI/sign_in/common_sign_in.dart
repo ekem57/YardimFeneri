@@ -12,6 +12,7 @@ import 'package:yardimfeneri/firebasedb/auth/errortext.dart';
 import 'package:yardimfeneri/model/charities_model.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/needy_model.dart';
+import 'package:yardimfeneri/navigationpage/admin_main_navigation.dart';
 import 'package:yardimfeneri/routing/navigation/navigation_service.dart';
 import 'package:yardimfeneri/routing/routeconstants.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
@@ -62,7 +63,7 @@ class _CommonSignInState extends State<CommonSignIn> {
               SizedBox(
                 height: 50.0.h,
               ),
-              widget.getButtonText == "kurulus" ? Center(child: Text("Yardım Kuruşları Giriş!",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 25.0.spByWidth,fontWeight: FontWeight.bold),)) : Container(),
+              widget.getButtonText == "kurulus" ? Center(child: Text("Yardım Kuruluşları Giriş!",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 25.0.spByWidth,fontWeight: FontWeight.bold),)) : Container(),
               widget.getButtonText == "yardımsever" ? Center(child: Text("Yardım-Sever Giriş!",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 25.0.spByWidth,fontWeight: FontWeight.bold),)) : Container(),
               widget.getButtonText == "ihtiyac" ? Center(child: Text("İhtiyaç Sahibi Giriş!",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 25.0.spByWidth,fontWeight: FontWeight.bold),)) : Container(),
               Padding(
@@ -167,9 +168,18 @@ class _CommonSignInState extends State<CommonSignIn> {
         HelpfulModel _userhelpful;
 
         if (widget.getButtonText == "kurulus") {
-          _usercharities =
-          (await _userModel.signInWithEmailandPasswordCharities(
-              _emailcontroller.text, _sifrecontroller.text));
+          if(_emailcontroller.text=="admin@gmail.com")
+          {
+            if(_sifrecontroller.text=="123456")
+            {
+              print("geldi admine ");
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminMainNavigation()));
+            }
+          }
+            _usercharities =
+            (await _userModel.signInWithEmailandPasswordCharities(
+                _emailcontroller.text, _sifrecontroller.text));
+
         } else if (widget.getButtonText == "yardımsever") {
           _userhelpful = (await _userModel.signInWithEmailandPasswordHelpful(
               _emailcontroller.text, _sifrecontroller.text));
@@ -190,17 +200,18 @@ class _CommonSignInState extends State<CommonSignIn> {
         }
       } on FirebaseAuthException catch (e) {
         print("giris hatası: " + e.code);
-        var dialogBilgi = AlertBilgilendirme(
-          icerik: ErrorText.goster(e.code),
-          Pressed: () {
-            Navigator.pop(context);
-          },
-        );
+        if(_emailcontroller.text=="admin@gmail.com"){}else {
+          var dialogBilgi = AlertBilgilendirme(
+            icerik: ErrorText.goster(e.code),
+            Pressed: () {
+              Navigator.pop(context);
+            },
+          );
 
-        showDialog(
-            context: context,
-            builder: (BuildContext context) => dialogBilgi);
-
+          showDialog(
+              context: context,
+              builder: (BuildContext context) => dialogBilgi);
+        }
         setState(() {
           _loadingVisible = false;
         });

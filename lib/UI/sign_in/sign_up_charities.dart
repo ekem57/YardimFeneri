@@ -396,6 +396,9 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
             isim: _isimcontroller.text,
             logo: "logo",
             faaliyetalani: _faaliyetalanicontroller.text,
+            faaliyetbelgesi: await uploadDuyuruImage(),
+            adres: _adrescontroller.text,
+            baskan: _baskancontroller.text,
             kurulusTarihi: _dateTime,
             telefon: _telefoncontroller.text,
             hesaponay: false);
@@ -520,12 +523,12 @@ class _SignUpCharitiesState extends State<SignUpCharities> {
     return formatted;
   }
 
-  Future<String> uploadDuyuruImage(String id) async {
+  Future<String> uploadDuyuruImage() async {
     if(_image == null)
       return "";
     String filePath = _image.path;
     String userId = "_modelYonetici.user.userId";
-    String fileName = "${userId}-${id}}.jpg";
+    String fileName = "${userId}-${"id"}}.jpg";
     File file = File(filePath);
     try {
       await firebase_storage.FirebaseStorage.instance.ref('duyuru/$fileName').putFile(file);

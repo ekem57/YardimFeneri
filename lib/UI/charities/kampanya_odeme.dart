@@ -71,11 +71,11 @@ class _KampanyaOdemeState extends State<KampanyaOdeme> {
     // ignore: omit_local_variable_types
     final double paidPrice = 2.1;
 
-
+    print("card:"+cardNumber.toString().replaceAll(" ", ""));
 
     final paymentCard = PaymentCard(
       cardHolderName: 'John Doe',
-      cardNumber: '5406670000000009',
+      cardNumber: cardNumber.toString().replaceAll(" ", ""),
       expireYear: '2030',
       expireMonth: '12',
       cvc: '123',
@@ -163,6 +163,8 @@ class _KampanyaOdemeState extends State<KampanyaOdeme> {
         _reference.set(widget.destek).then((value) async {
           await _referencepost.update({'toplanan_tutar':widget.destek['bagis_miktari']+int.parse(widget.bagis)});
           await _referencebildirim.set(bildirim);
+
+
 
           var dialogBilgi = AlertBilgilendirme(
             icerik: "Yapmış olduğunuz desteklerden dolayı teşekkürler.",

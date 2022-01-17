@@ -235,19 +235,18 @@ class _HomePageHelpfulState extends State<HomePageHelpful>  with SingleTickerPro
                       else if (_card['foto'] != "null" && _card['bicim'].toString() == "yardim") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -372,19 +371,18 @@ class _HomePageHelpfulState extends State<HomePageHelpful>  with SingleTickerPro
                       else if (_card['foto'] == "null" && _card['bicim'].toString() == "post") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -514,19 +512,18 @@ class _HomePageHelpfulState extends State<HomePageHelpful>  with SingleTickerPro
                       else if (_card['foto'] != "null" && _card['bicim'] == "post") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -744,19 +741,18 @@ class _HomePageHelpfulState extends State<HomePageHelpful>  with SingleTickerPro
                       else if (_card['foto'] != "null" && _card['bicim'] == "kampanya") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -900,19 +896,18 @@ class _HomePageHelpfulState extends State<HomePageHelpful>  with SingleTickerPro
                       else if (_card['foto'] == "null" && _card['bicim'].toString() == "kampanya") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -1058,7 +1053,7 @@ class _HomePageHelpfulState extends State<HomePageHelpful>  with SingleTickerPro
 
 
   Future<void>  gri_kalp_tikla(DocumentSnapshot card)  async {
-    CharitiesService _userModel = Provider.of<CharitiesService>(context,listen: false);
+    HelpfulService _userModel = Provider.of<HelpfulService>(context,listen: false);
 
     _firestore.runTransaction((Transaction transaction) async {
       await transaction.update(
@@ -1074,11 +1069,10 @@ class _HomePageHelpfulState extends State<HomePageHelpful>  with SingleTickerPro
     EtkinlikEkle['onay'] = true;
     _firestore.collection("userspost").doc(_userModel.user.userId).collection("katilimci").doc(card.id).set(EtkinlikEkle);
 
-
   }
   Future<void> kirmizi_kalp_tikla(DocumentSnapshot card) async {
 
-    CharitiesService _userModel = Provider.of<CharitiesService>(context,listen:false);
+    HelpfulService _userModel = Provider.of<HelpfulService>(context,listen:false);
 
     _firestore.runTransaction((Transaction transaction) async {
       await transaction.update(

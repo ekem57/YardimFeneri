@@ -234,19 +234,18 @@ class _HomePageNeedyState extends State<HomePageNeedy>  with SingleTickerProvide
                       else if (_card['foto'] != "null" && _card['bicim'].toString() == "yardim") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -513,19 +512,18 @@ class _HomePageNeedyState extends State<HomePageNeedy>  with SingleTickerProvide
                       else if (_card['foto'] != "null" && _card['bicim'] == "post") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -743,19 +741,18 @@ class _HomePageNeedyState extends State<HomePageNeedy>  with SingleTickerProvide
                       else if (_card['foto'] != "null" && _card['bicim'] == "kampanya") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -776,7 +773,7 @@ class _HomePageNeedyState extends State<HomePageNeedy>  with SingleTickerProvide
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: GestureDetector(
                                                     onTap: () {
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) =>ImageViewerPage(assetName: _card['logo'].toString(),)),);
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) =>ImageViewerPage(assetName: _card2['logo'].toString(),)),);
 
                                                     },
                                                     child: Container(

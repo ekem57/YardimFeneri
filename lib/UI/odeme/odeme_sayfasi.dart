@@ -106,10 +106,10 @@ class _PaymentPageState extends State<PaymentPage> {
     final double paidPrice = 2.1;
 
 
-
+    print("kard:"+cardNumber.toString().replaceAll(" ", ""));
     final paymentCard = PaymentCard(
       cardHolderName: 'John Doe',
-      cardNumber: '5406670000000009',
+      cardNumber: cardNumber.toString().replaceAll(" ", ""),
       expireYear: '2030',
       expireMonth: '12',
       cvc: '123',
@@ -181,7 +181,8 @@ class _PaymentPageState extends State<PaymentPage> {
             .collection("charities").doc(_charitiesModel.user.userId).collection("kisiye_yapilan_bagis").doc();
 
         DocumentReference _referencepost = await FirebaseFirestore.instance.collection("anasayfa").doc(widget.destek['yardim_id']);
-        
+        DocumentReference _referencecharities = await FirebaseFirestore.instance.collection("charities").doc(_charitiesModel.user.userId).collection("yardim_destekleri").doc(widget.destek['yardim_id']);
+
         DocumentReference _referencebildirim = await FirebaseFirestore.instance.collection("charities").doc(widget.destek['kurumid'].toString()).collection("bildirimler").doc();
         print("gelen kurumid: "+widget.destek['kurumid'].toString());
         Map<String, dynamic> bildirim = Map();
@@ -195,11 +196,14 @@ class _PaymentPageState extends State<PaymentPage> {
 
         _reference.set(widget.destek).then((value) async {
          await _referencepost.update({'toplanan':widget.destek['bagis_miktari']+int.parse(widget.bagis)});
+         await _referencecharities.update({'toplanan':widget.destek['bagis_miktari']+int.parse(widget.bagis)});
          await _referencebildirim.set(bildirim);
 
           var dialogBilgi = AlertBilgilendirme(
             icerik: "Yapmış olduğunuz desteklerden dolayı teşekkürler.",
             Pressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
               Navigator.pop(context);
             },
           );
@@ -284,7 +288,6 @@ class _PaymentPageState extends State<PaymentPage> {
                 cardHolderName: cardHolderName,
                 cvvCode: cvvCode,
                 showBackView: isCvvFocused,
-                obscureCardNumber: true,
                 obscureCardCvv: true,
               ),
               Expanded(
@@ -294,7 +297,6 @@ class _PaymentPageState extends State<PaymentPage> {
                       CreditCardForm(
                         formKey: formKey,
                         obscureCvv: true,
-                        obscureNumber: true,
                         cardNumberDecoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Kart Numarası',

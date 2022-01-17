@@ -32,7 +32,7 @@ class NeedyModel extends ChangeNotifier {
       'il': il,
       'adres': adres,
       'hakkimda': "Öğrenci",
-      'foto': foto,
+      'foto': "https://firebasestorage.googleapis.com/v0/b/yardimfeneri.appspot.com/o/logo.png?alt=media&token=f8132b8b-f300-41e8-bc80-9696bd2e2e68",
       'dogumTarihi': dogumTarihi,
       'hesapOnay': hesaponay ?? false,
     };

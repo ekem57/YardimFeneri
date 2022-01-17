@@ -29,13 +29,12 @@ class _UyelikBasvurusuState extends State<UyelikBasvurusu> {
           if (!snapshot.hasData) return const Text('Connecting...');
           final int cardLength = snapshot.data.docs.length;
           return new ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+
             itemCount:cardLength,
             itemBuilder: (_, int index) {
               final DocumentSnapshot _card = snapshot.data.docs[index];
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -47,7 +46,7 @@ class _UyelikBasvurusuState extends State<UyelikBasvurusu> {
                       onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context) =>ToplulukTanitim(kurumid: _card['userID'].toString(),)),);
                       },
-                      title: Text(_card['isim'].toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22.0.spByWidth),),
+                      title: Text(_card['isim'].toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0.spByWidth),),
                       leading: GestureDetector(
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) =>ImageViewerPage(assetName: _card['logo'].toString(),)),);

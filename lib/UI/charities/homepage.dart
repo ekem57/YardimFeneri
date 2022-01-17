@@ -98,19 +98,18 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                       if (_card['foto'] == "null" && _card['bicim'].toString() == "yardim") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -239,19 +238,18 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                       else if (_card['foto'] != "null" && _card['bicim'].toString() == "yardim") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -303,7 +301,7 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                                                           alignment: Alignment.centerLeft,
                                                           child: Text(
                                                             _card2['isim'].toString(),
-                                                            style: TextStyle(fontSize: 17.0.spByWidth),
+                                                            style: TextStyle(fontSize: 15.0.spByWidth),
                                                           ),
                                                         ),
 
@@ -349,6 +347,27 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                                 text: _card['icerik'],
                               ),
                             ),
+                            Padding(
+                              padding:
+                              const EdgeInsets.only(top: 10, bottom: 10),
+                              // ignore: missing_return, missing_return, missing_return, missing_return
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) =>ImageViewerPage(assetName: _card['foto'].toString(),)),);
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width - 40,
+                                  height: 220.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(
+                                            _card['foto'].toString())),
+                                  ),
+                                ),
+                              ),
+                            ),
                             SizedBox(height: 10.0.h,),
                             Align(alignment: Alignment.topLeft,child:
                             Padding(
@@ -381,19 +400,18 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                       else if (_card['foto'] == "null" && _card['bicim'].toString() == "post") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:
@@ -753,19 +771,18 @@ class _HomePageCharitiesState extends State<HomePageCharities>  with SingleTicke
                       else if (_card['foto'] != "null" && _card['bicim'] == "kampanya") {
                         child = Column(
                           children: <Widget>[
-                            StreamBuilder<QuerySnapshot>(
+                            StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
-                                  .collection('charities').doc(_card['kurumid']).collection("isim_logo").snapshots(),
+                                  .collection('charities').doc(_card['kurumid']).snapshots(),
                               builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) return const Text('Connecting...');
-                                final int cardLength = snapshot.data.docs.length;
                                 return new ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount:1,
                                   itemBuilder: (_, int index) {
-                                    final DocumentSnapshot _card2 = snapshot.data.docs[index];
+                                    final DocumentSnapshot _card2 = snapshot.data;
 
                                     return  Row(
                                       mainAxisAlignment:

@@ -190,18 +190,7 @@ class _KampanyalarimState extends State<Kampanyalarim>  with SingleTickerProvide
                               text: _card['icerik'],
                             ),
                           ),
-                          SizedBox(height: 10.0.h,),
-                          Align(alignment: Alignment.topLeft,child:
-                          Padding(
-                            padding: EdgeInsets.only(left: 30.0.w),
-                            child: Text("Toplanan: ",style: TextStyle(fontSize: 16.0.spByWidth,fontWeight: FontWeight.bold),),
-                          )),
-                          SizedBox(height: 10.0.h,),
-                          Align(alignment: Alignment.topLeft,child:
-                          Padding(
-                            padding: EdgeInsets.only(left: 30.0.w),
-                            child: Text(_card['toplanan_tutar'].toString()+" ₺",style: TextStyle(fontSize: 16.0.spByWidth,fontWeight: FontWeight.bold),),
-                          )),
+
                           SizedBox(height: 10.0.h,),
                           MyButton(text: _card['tamamlandi'] ? "Kampanyayı Tamamla" : "Kampanyayı Yeniden Aç" , onPressed: ()
                           {
@@ -361,18 +350,7 @@ class _KampanyalarimState extends State<Kampanyalarim>  with SingleTickerProvide
                             ),
                           ),
                           SizedBox(height: 10.0.h,),
-                          Align(alignment: Alignment.topLeft,child:
-                          Padding(
-                            padding: EdgeInsets.only(left: 30.0.w),
-                            child: Text("Toplanan: ",style: TextStyle(fontSize: 16.0.spByWidth,fontWeight: FontWeight.bold),),
-                          )),
-                          SizedBox(height: 10.0.h,),
-                          Align(alignment: Alignment.topLeft,child:
-                          Padding(
-                            padding: EdgeInsets.only(left: 30.0.w),
-                            child: Text(_card['toplanan'].toString()+" ₺",style: TextStyle(fontSize: 16.0.spByWidth,fontWeight: FontWeight.bold),),
-                          )),
-                          SizedBox(height: 10.0.h,),
+
 
                           MyButton(text: _card['tamamlandi'] ? "Desteği Tamamla" : "Desteği Yeniden Aç" , onPressed: ()
                           {

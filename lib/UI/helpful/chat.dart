@@ -4,11 +4,14 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:yardimfeneri/ChattApp/alluserModel-Helpful-Charities.dart';
 import 'package:yardimfeneri/ChattApp/alluserModel.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model.dart';
+import 'package:yardimfeneri/ChattApp/chat_view_model_Helpful_Charities.dart';
 import 'package:yardimfeneri/ChattApp/chat_view_model_Yonetici.dart';
 import 'package:yardimfeneri/ChattApp/mesajKisiSecYonetici.dart';
 import 'package:yardimfeneri/ChattApp/sohbetPage.dart';
+import 'package:yardimfeneri/ChattApp/sohbetPage_Helpful_Charities.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
 import 'package:yardimfeneri/model/helpful_model.dart';
 import 'package:yardimfeneri/model/konusma.dart';
@@ -42,7 +45,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
 
   Widget usersWidget() {
 
-    final _kullanicilarModel = Provider.of<AllUserViewModelHelpful>(context);
+    final _kullanicilarModel = Provider.of<AllUserViewModelHelpful_Charities>(context);
 
     if (_kullanicilarModel.tumKonusma.length> _kullanicilarModel.kullanicilarListesi.length) {
       _kullanicilarModel.refresh();
@@ -51,31 +54,38 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
       });
     }
 
-    return Consumer<AllUserViewModelHelpful>(
-      builder: (context, AllUserViewModelHelpful model, child) {
-        if (model.state == AllUserViewStateHelpful.Busy || _isLoading) {
+    return Consumer<AllUserViewModelHelpful_Charities>(
+      builder: (context, AllUserViewModelHelpful_Charities model, child) {
+        print("model gelen model.tumKonusma.length :"+model.tumKonusma.length.toString());
+        if (model.state == AllUserViewStateHelpful_Charities.Busy || _isLoading) {
           return Center(
             child: CircularProgressIndicator(),
           );
 
-        } else if (model.state == AllUserViewStateHelpful.Loaded) {
+        } else if(model.tumKonusma.length==0)
+        {
+          return _kullaniciYokUi();
+        }
+        else if (model.state == AllUserViewStateHelpful_Charities.Loaded) {
           return RefreshIndicator(
             onRefresh: model.refresh,
             child: ListView.builder(
               controller: _scrollController,
               itemBuilder: (context, index) {
 
-                if (model.kullanicilarListesi.length == 0) {
+                if (model.tumKonusma.length == 0) {
+                  print("0 a girdi");
                   return _kullaniciYokUi();
                 } else if (model.hasMoreLoading && index == model.kullanicilarListesi.length) {
                   return _yeniElemanlarYukleniyorIndicator();
                 }
                 else if (model.tumKonusma.isEmpty) {
+                  print("empty a girdi");
                   return _yeniElemanlarYukleniyorIndicator();
                 }
 
                 else {
-
+                  print("else a girdi");
                   return _userListeElemaniOlustur(index, model.tumKonusma);
                 }
               },
@@ -83,6 +93,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
             ),
           );
         } else {
+          print("cont a girdi");
           return Container();
         }
       },
@@ -93,7 +104,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
 
   Widget _userListeElemaniOlustur(int index ,List<Konusma> konusmalar) {
     final _ogretmenModel = Provider.of<HelpfulService>(context, listen: true);
-    final _tumKullanicilarViewModel = Provider.of<AllUserViewModelHelpful>(context);
+    final _tumKullanicilarViewModel = Provider.of<AllUserViewModelHelpful_Charities>(context);
     var _oankiUser = _tumKullanicilarViewModel.kullanicilarListesi[index];
     print("emree");
 
@@ -111,8 +122,8 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
            Navigator.of(context, rootNavigator: true).push(
               MaterialPageRoute(
                 builder: (context) => ChangeNotifierProvider(
-                  create: (context) => ChatViewModel(currentUser: _ogretmenModel.user, sohbetEdilenUser: _oankiUser),
-                  child: SohbetPageHelpful(fotourl: _oankiUser.foto,userad: _oankiUser.isim,userid: _oankiUser.userId,),
+                  create: (context) => ChatViewModelHelpful_Charities(currentUser: _ogretmenModel.user, sohbetEdilenUser: _oankiUser),
+                  child: SohbetPageHelpful_Charities(fotourl: _oankiUser.logo,userad: _oankiUser.isim,userid: _oankiUser.userId,),
                 ),
               ),
             );
@@ -201,7 +212,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
               color: Colors.red,
               icon: Icons.delete,
               onTap: () async {
-                FirebaseFirestore.instance.collection("needy").doc(_ogretmenModel.user.userId).collection("sohbetler").doc(_oankiUser.userId).delete();
+                FirebaseFirestore.instance.collection("helpful").doc(_ogretmenModel.user.userId).collection("sohbetler").doc(_oankiUser.userId).delete();
               }
           ),
         ),
@@ -247,12 +258,13 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Icon(
-                Icons.supervised_user_circle,
+                Icons.chat,
                 color: Theme.of(context).primaryColor,
                 size: 120,
               ),
               Text(
-                "Henüz Kullanıcı Yok",
+                "Henüz Gelen Mesajınız Yok",
+                textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 36),
               )
             ],
@@ -300,21 +312,7 @@ class _MesajlarAnasayfaState extends State<MesajlarAnasayfa> {
         // status bar brightness
 
       ),
-      floatingActionButton:  Padding(
-        padding: const EdgeInsets.only(bottom: 80),
-        child: FloatingActionButton(
-          backgroundColor: Colors.green,
-          onPressed: () {
 
-            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context) => ChattKisiSecNeedy()),);
-          },
-          child: Icon(
-            Icons.add,
-            size: 30.0.w,
-            color: Colors.black,
-          ),
-        ),
-      ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

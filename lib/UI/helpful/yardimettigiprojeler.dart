@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yardimfeneri/extantion/size_extension.dart';
@@ -34,61 +35,86 @@ class _YardimEttigiProjelerState extends State<YardimEttigiProjeler> {
         // status bar brightness
 
       ),
-      body:  Center(
-        child: Container(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(10),
-                ),
-                charityCard(
-                    charityName: "KIZILAY",
-                    imagePath: "assets/kizilay.png",
-                    campaign: "Bir yardımda sen bulun!",
-                    donation: "500 TL bağışlandı!"
-                ),
-                charityCard(
-                    charityName: "YEŞİLAY",
-                    imagePath: "assets/yesilay.jpg",
-                    campaign: "Bir yardımda sen bulun!",
-                    donation: "500 TL bağışlandı!"
-                ),
-                charityCard(
-                    charityName: "AFAD",
-                    imagePath: "assets/afad.jpg",
-                    campaign: "Bir yardımda sen bulun!",
-                    donation: "500 TL bağışlandı!"
-                ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('helpful').doc(_helpfulService.user.userId).collection("yardimettiklerim").snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshotUye) {
+          if (!snapshotUye.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final int cardLength2 = snapshotUye.data.docs.length;
 
-                charityCard(
-                    charityName: "KIZILAY",
-                    imagePath: "assets/kizilay.png",
-                    campaign: "Bir yardımda sen bulun!",
-                    donation: "500 TL bağışlandı!"
-                ),
-                charityCard(
-                    charityName: "YEŞİLAY",
-                    imagePath: "assets/yesilay.jpg",
-                    campaign: "Bir yardımda sen bulun!",
-                    donation: "500 TL bağışlandı!"
-                ),
-                charityCard(
-                    charityName: "AFAD",
-                    imagePath: "assets/afad.jpg",
-                    campaign: "Bir yardımda sen bulun!",
-                    donation: "500 TL bağışlandı!"
-                ),
-                SizedBox(height: 120,),
+          return cardLength2 ==0  ? _kullaniciYokUi() :ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: cardLength2,
+            itemBuilder: (_, int index) {
+              final DocumentSnapshot _cardYonetici = snapshotUye.data.docs[index];
+              return StreamBuilder<DocumentSnapshot>(
+                stream: FirebaseFirestore.instance.collection('charities').doc(_cardYonetici['userid']).snapshots(),
+                builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  final int cardLength = 1;
 
-              ],
-            ),
+                  return  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: cardLength,
+                    itemBuilder: (_, int index) {
+                      final DocumentSnapshot _card = snapshot.data;
+                      print("Üye işlemleri _card: " + _card.data().toString());
+                      return charityCard(
+                          charityName: _card['isim'],
+                          imagePath: _card['logo'],
+                          campaign: _cardYonetici['kampanya'],
+                          donation: _cardYonetici['yardim_miktari'].toString()+" TL bağışlandı!"
+                      );
+
+                    },
+                  );
+                },
+              );
+            },
+          );
+        },
+      ),
+
+    );
+  }
+  Widget _kullaniciYokUi() {
+    return SingleChildScrollView(
+      physics: AlwaysScrollableScrollPhysics(),
+      child: Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.supervised_user_circle,
+                color: Theme.of(context).primaryColor,
+                size: 120,
+              ),
+              Text(
+                "Katıldığınız Proje Yok",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 36),
+              )
+            ],
           ),
         ),
+        height: MediaQuery.of(context).size.height - 150,
       ),
     );
   }
+
 }
+
 
 Widget charityCard({String charityName, String campaign, String imagePath, String donation}){
   return  Padding(
@@ -99,7 +125,7 @@ Widget charityCard({String charityName, String campaign, String imagePath, Strin
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              offset: Offset(1,1),
+              offset: Offset(0,1),
               blurRadius: 2,
               spreadRadius: 3,
               color: Colors.grey,
@@ -111,10 +137,10 @@ Widget charityCard({String charityName, String campaign, String imagePath, Strin
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: ClipOval(
-              child: Image.network("https://www.marketingturkiye.com.tr/wp-content/uploads/2021/07/temavakfibagis.jpg",
+              child: Image.network(imagePath,
                   height: 100.0.h,
                   width: 100.0.w,
-                  fit: BoxFit.cover
+                  fit: BoxFit.fill
               ),
             ),
           ),
@@ -157,4 +183,5 @@ Widget charityCard({String charityName, String campaign, String imagePath, Strin
       ),
     ),
   );
+
 }

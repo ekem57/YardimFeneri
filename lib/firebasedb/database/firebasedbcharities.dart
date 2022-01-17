@@ -38,8 +38,10 @@ class FirestoreDBServiceCharities {
   }
   
   Future<void> uyekabul(String kurumID,String basvuranuserid,String uyetipi) async {
+    print("kurumid:"+kurumID+" user id: "+basvuranuserid);
    await _firebaseDB.collection("charities").doc(kurumID).collection("uyebasvuru").doc(basvuranuserid).delete();
    await _firebaseDB.collection("charities").doc(kurumID).collection("uyeler").doc(basvuranuserid).set({'uyeid':basvuranuserid,'uyetipi':uyetipi});
+   await _firebaseDB.collection("kurumKatilimİstekleri").doc(basvuranuserid).collection("katilimcilar").doc(kurumID).update({'onay':'katildi'});
   }
 
   Future<void> uyered(String kurumID,String basvuranuserid) async {
@@ -52,18 +54,26 @@ class FirestoreDBServiceCharities {
 
     EtkinlikEkle['kurumid'] = etid;
     EtkinlikEkle['onay'] = "katildi";
-    await _firebaseDB.collection("usersEtkinlik").doc(userid).collection("katilimci").doc(etid).set(EtkinlikEkle);
+    await _firebaseDB.collection("kurumKatilimİstekleri").doc(userid).collection("katilimci").doc(etid).set(EtkinlikEkle);
     await _firebaseDB.collection("users").doc(userid).update({'katilinanetkinliksayisi': FieldValue.increment(1)});
 
     return true;
   }
 
-  Future<bool> kurumKatilmaIstegiButonu(DocumentSnapshot card, String userid) async {
+  Future<bool> kurumKatilmaIstegiButonu(DocumentSnapshot card, String userid,String foto,String isim,String meslek,String uyetipi) async {
     Map<String, dynamic> EtkinlikIstek = Map();
 
     EtkinlikIstek['kurumid'] = card['userID'];
     EtkinlikIstek['onay'] = "onayda";
     EtkinlikIstek['userid'] = userid;
+
+    Map<String, dynamic> Uye = Map();
+
+    Uye['isim'] = isim;
+    Uye['foto'] = foto;
+    Uye['meslek'] = meslek;
+    Uye['uyetipi'] = uyetipi;
+    Uye['userid'] = userid;
 
     await _firebaseDB
         .collection("kurumKatilimİstekleri")
@@ -71,6 +81,10 @@ class FirestoreDBServiceCharities {
         .collection("katilimcilar")
         .doc(card['userID'].toString())
         .set(EtkinlikIstek);
+
+
+    await _firebaseDB.collection('charities').doc(card['userID'].toString()).collection("uyebasvuru").doc(userid)
+        .set(Uye);
 
     return true;
   }
@@ -103,9 +117,9 @@ class FirestoreDBServiceCharities {
     yardim['bicim'] = "yardim";
     yardim['date'] = Timestamp.now();
     yardim['icerik'] = icerik;
-    yardim['foto'] = "null";
+    yardim['foto'] = card['foto'].toString();
     yardim['kurumid'] = kurumid;
-    yardim['yardim_id'] = yardim_id;
+    yardim['yardim_id'] = _reference.id;
     yardim['toplanan'] = 0;
     yardim['userid'] = userid;
     yardim['tamamlandi'] = false;
